@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180021712-1"></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-180021712-1');
+  </script>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <style>
+@font-face {
+    font-family: 'main-font';
+    src: url('/assets/style/fonts/Poppins-Light.ttf');
+  }
+    body {
+      background: rgb(32,33,37);
+      color: white;
+      font-family: 'main-font';
+    }
+    .Message {
+      box-shadow: 2px 2px 6px black;
+      background: #202125;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 20px;
+      border-radius: 100px;
+      font-size: 30px;
+      width: 95%;
+    }
+    .IrParaHome {
+      padding-bottom: 10px;
+      padding-top: 10px;
+      color: white;
+      font-family: 'main-font';
+      border-radius: 30px;
+      background: #202125;
+      box-shadow: 2px 2px 6px black;
+      border: 0px;
+      position: fixed;
+      width: 450px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 85%;
+      font-size: 30px;
+    }
+  </style>
+  <title>essa página não existe!</title>
+  <link rel="icon" href="assets/img/icon.png" type="image/png" />
+</head>
+<body>
+  <div class="Message">
+    <br><br>lamento informar, esta página não foi encontrada (provavelmente esta página que você acessou não existe)<br> <br>
+  </div>
+  <input type="button" value="ir para página inicial!" class="IrParaHome" onclick="IrParaHome()" />
+  <script>
+    function IrParaHome() {
+      window.location = '/'
+    }
+  </script>
+</body>
+</html>

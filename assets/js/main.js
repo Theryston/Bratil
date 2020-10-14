@@ -13,12 +13,12 @@ var minutes = GetTime.getMinutes();
 var seconds = GetTime.getSeconds();
 var url = document.URL
 
-
+/*
 //para programação
 var name = 'Theryston'
 var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
+*/
 
-/*
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
@@ -26,7 +26,7 @@ if (url.match('https')) {
   url = url.replace(/http/gi, 'https')
   window.location = url;
 }
-*/
+
 
 
 window.addEventListener('load', () => {

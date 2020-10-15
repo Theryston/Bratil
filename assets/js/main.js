@@ -27,6 +27,7 @@ if (url.match('https')) {
   window.location = url;
 }
 
+console.log(name)
 
 
 window.addEventListener('load', () => {

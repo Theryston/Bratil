@@ -22,10 +22,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} /*else {
+} else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}*/
+}
 
 console.log(name)
 

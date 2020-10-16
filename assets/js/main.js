@@ -52,7 +52,13 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
     VoiceRecognition.start()
     baitmedia.innerHTML = ``
-    baittext.style.fontSize = '15px'
+
+
+    if ($(document).height() <= 1000) {
+      baittext.style.fontSize = '15px'
+    } else {
+      baittext.style.fontSize = '30px'
+    }
 
     navigator.vibrate(40)
 
@@ -505,9 +511,12 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         minutes}: ${seconds}`
 
       } else if (ClientMessage.match('hora')) {
-
-        baittext.style.fontSize = '90px'
-        baittext.innerHTML = `${hour}: ${minutes}`
+        if ($(document).height() <= 1000) {
+          baittext.style.fontSize = '100px'
+        } else {
+          baittext.style.fontSize = '200px'
+        }
+        baittext.innerHTML = `${hour}:${minutes}`
 
 
       } else if (ClientMessage.match('queimadura') && ClientMessage.match('que') || ClientMessage.match('me') && ClientMessage.match('queimei') || ClientMessage.match('queimou') && ClientMessage.match('se') || ClientMessage.match('se') && ClientMessage.match('queimar') || ClientMessage.match('nos') && ClientMessage.match('queimamos')) {

@@ -1,5 +1,5 @@
 const baitmessage = document.querySelector('.BaitMessage');
-const baitmedia = document.querySelector('.media');
+const baitmedia = document.querySelector('.BaitMedia');
 const baittext = document.querySelector('.text');
 const creditosBox = document.querySelector('.credito-box')
 const creditos = document.querySelector('.creditos')

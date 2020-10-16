@@ -3,6 +3,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
+app.use('/response-chat', express.static('response-chat'));
 app.use('/text_search_content', express.static('text_search_content'));
 
 

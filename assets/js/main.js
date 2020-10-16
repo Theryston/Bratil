@@ -136,7 +136,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       ClickNumber++
 
-      ClientHistoric.innerHTML += `${ClickNumber}°&nbsp;&nbsp;${ClientMessageNoChange}. <br /> <br />`
+      ClientHistoric.innerHTML += `${ClickNumber}ª&nbsp;&nbsp;${ClientMessageNoChange}. <br /> <br />`
 
 
       const RandomNumber = Math.random()

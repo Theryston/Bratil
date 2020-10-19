@@ -405,6 +405,22 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         }
 
 
+      } else if (ClientMessage.match('histórico') && ClientMessage.match('limpa') || ClientMessage.match('histórico') && ClientMessage.match('limpe')) {
+
+        function limphistoric () {
+          ClickNumber = 0
+          ClientHistoric.innerHTML = ''
+          return true
+        }
+
+        if (limphistoric()) {
+          if (RandomNumber <= 0.5) {
+            baittext.innerHTML = 'pronto! já limpei o seu histórico!'
+          } else {
+            baittext.innerHTML = 'pronto!'
+          }
+        }
+
       } else if (ClientMessage.match('histórico')) {
         baitmedia.innerHTML = ``
         baittext.innerHTML = `aqui está o seu histórico! <br /><br />`
@@ -462,7 +478,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = `Ok! fico alegre por saber`
         }
 
-      } else if (ClientMessage.match('como') && ClientMessage.match('você') || ClientMessage.match('como') && ClientMessage.match('vai')) {
+      } else if (ClientMessage.match('como') && ClientMessage.match('você') || ClientMessage.match('como') && ClientMessage.match('vai') || ClientMessage.match('e aí') && ClientMessage.match('como')) {
         baitmedia.innerHTML = ``
         baittext.innerHTML = 'eu estou bem e você?'
 

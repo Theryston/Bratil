@@ -15,8 +15,6 @@ app.get('/termos', function(req, res) {
   res.render('termos');
 });
 
-
-
 app.get('*', function(req, res) {
   res.render('no-rota')
 })

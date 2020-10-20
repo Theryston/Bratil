@@ -27,6 +27,7 @@ if (url.match('https')) {
   window.location = url;
 }
 
+var autores = true
 
 window.addEventListener('load', () => {
   navigator.vibrate(100)
@@ -47,6 +48,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.lang = 'pt-br' || 'en'
   microphone.addEventListener('click', function () {
+
+    creditos.style.display = 'none'
 
     VoiceRecognition.start()
     baitmedia.innerHTML = ``
@@ -108,6 +111,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
                 $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
 
+                  creditos.style.display = 'block'
+
                   let IndexPhoto = Math.floor(Math.random() * 40)
 
                   let IndexRes = Math.floor(Math.random() * res.length)
@@ -147,8 +152,6 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
       const RandomNumber = Math.random()
       console.log('numero aleatorio: ' + RandomNumber)
       console.log('numero do click ' + ClickNumber)
-
-      creditosBox.innerHTML = ''
 
 
       ClientMessage = ClientMessage.replace(/gosto/gi,
@@ -371,7 +374,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(ClientMessage) + '&per_page=200',
           function (fotos) {
             let indice = Math.floor(Math.random() * 200)
-            creditosBox.innerHTML = '<img src="assets/img/txt-pixabay.png" class="creditos">'
+            creditos.style.display = 'block'
+
             baitmedia.innerHTML = '<br><br><img src="' + fotos.hits[indice].largeImageURL + '" class="media"><br><br>'
             if (RandomNumber <= 0.3) {
               baittext.innerHTML = 'aqui esta!'
@@ -386,7 +390,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         setTimeout(() => {
           if (baittext.innerText == 'estou te ouvindo!') {
             baitmedia.innerHTML = ''
-            creditosBox.innerHTML = ''
+            creditos.style.display = 'none'
             if (RandomNumber <= 0.5) {
               baittext.innerHTML = 'infelizmente não encontrei essa foto'
             } else {
@@ -598,6 +602,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
                 $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
 
+                  creditos.style.display = 'block'
+
                   let IndexPhoto = Math.floor(Math.random() * 40)
 
                   let IndexRes = Math.floor(Math.random() * res.length)
@@ -634,7 +640,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
     })
 
-  creditosBox.addEventListener('click',
+  creditos.addEventListener('click',
     function () {
       window.open('https://pixabay.com')
     })

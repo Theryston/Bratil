@@ -21,6 +21,7 @@
     top: -20px;
     left: 2px;
     width: 100px;
+    display: none;
   }
   .ClientHistoric {
     text-align: left;
@@ -81,6 +82,7 @@
     top: -20px;
     left: 2px;
     width: 200px;
+    display: none;
   }
   .ClientHistoric {
     text-align: left;

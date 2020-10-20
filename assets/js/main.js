@@ -609,7 +609,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
               })
             } else {
               baitmedia.innerHTML = ''
-              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa ' + ClientMessageNoChange + ' ' + name
+              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa "' + ClientMessageNoChange + '" ' + name
             }
           }
         })

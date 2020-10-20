@@ -2,16 +2,24 @@
   [
     "00001",
     "pássaro",
+    "pássaros",
+    "passaro",
+    "passaros",
     "passarinho"
   ],
   [
     "00002",
     "cachorro",
-    "cão"
+    "cachorros",
+    "dog",
+    "dogs",
+    "cão",
+    "cãos"
   ],
   [
     "00003",
     "deus",
+    "god",
     "jesus"
   ]
 ]

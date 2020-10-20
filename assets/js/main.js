@@ -22,10 +22,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+} /*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 
 console.log(name)
 
@@ -551,55 +551,40 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       if (DontKnow()) {
 
-        var copiou = ClientMessage;
+        $.getJSON('text_search_content/id.json', function (id) {
 
-        $.getJSON('text_search_content/published_research.json', function (search) {
+          let ClientText = ClientMessage;
 
+          let HaveSearch = -1
 
+          for (let IndexKeyWord = 0; IndexKeyWord < id.length && HaveSearch == -1; IndexKeyWord++) {
 
-          let checarSearch = copiou.indexOf(search)
+            for (let IndexContent = 1; IndexContent < id[IndexKeyWord].length && HaveSearch == -1; IndexContent++) {
 
-          for (i = 0; search.length -1 >= i && checarSearch == -1; i++) {
-            checarSearch = copiou.indexOf(search[i])
+              HaveSearch = id[IndexKeyWord].indexOf(ClientText)
 
-          }
-          // alert(checarSearch)
-          while (copiou.indexOf('.') != -1) {
-            copiou = copiou.replace('.', '')
-          }
+            }
+            if (HaveSearch != -1) {
+              $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function (res) {
 
-          copiou = copiou.replace(copiou.substring(0, checarSearch), '')
+                $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
 
-          while (copiou.indexOf(' ') != -1) {
-            copiou = copiou.replace(copiou.substring(copiou.indexOf(' '), copiou.length), '')
-          }
+                  let IndexPhoto = Math.floor(Math.random() * 40)
 
-          if (checarSearch != -1) {
+                  let IndexRes = Math.floor(Math.random() * res.length)
+                  baitmedia.innerHTML = '<br><br><br> <img src="' + searchPhoto.hits[IndexPhoto].largeImageURL + '" class="media"> <br><br><br>'
+                  baittext.innerHTML = res[IndexRes] + '<br><br><br>'
 
-            let copiouNew = copiou.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                })
 
-
-            $.getJSON('text_search_content/' + copiouNew + '.json', function (searchRes) {
-
-
-              let indiceSearch = Math.floor(Math.random() * searchRes.length)
-
-              $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(copiou) + '&per_page=40', function(searchPhoto) {
-
-                let indice = Math.floor(Math.random() * 40)
-
-                baitmedia.innerHTML = `<br><br><img src="` + searchPhoto.hits[indice].largeImageURL + `" class="media"> <br> <br>`
-                baittext.innerHTML = `${searchRes[indiceSearch]} <br><br><br>`
-
-                creditosBox.innerHTML = '<img src="assets/img/txt-pixabay.png" class="creditos"></a>'
               })
-            })
-          } else {
-            baitmedia.innerHTML = ''
-            baittext.innerHTML = `estou em desenvolvimento,
-            ainda não sei oque significa "${ClientMessageNoChange}" ${name}`
+            } else {
+              baitmedia.innerHTML = ''
+              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa ' + ClientMessageNoChange + ' ' + name
+            }
           }
         })
+
       }
 
       console.log('com alteração: ' + ClientMessage)

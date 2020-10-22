@@ -726,7 +726,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         utterance.text = baittext.innerText
         speechSynthesis.speak(utterance);
       },
-        200)
+        500)
 
     })
 

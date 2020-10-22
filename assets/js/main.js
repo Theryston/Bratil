@@ -416,7 +416,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
             baitmedia.innerHTML = '<br><br><img src="' + fotos.hits[indice].largeImageURL + '" class="media"><br><br>'
             if (RandomNumber <= 0.3) {
-              baittext.innerHTML = 'aqui esta!'
+              baittext.innerHTML = 'aqui está!'
             } else if (RandomNumber <= 0.6) {
               baittext.innerHTML = 'confira essa foto!'
             } else if (RandomNumber <= 1) {
@@ -432,7 +432,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             if (RandomNumber <= 0.5) {
               baittext.innerHTML = 'infelizmente não encontrei essa foto'
             } else {
-              baittext.innerHTML = 'não tenho esta imagem'
+              baittext.innerHTML = 'não tenho está imagem'
             }
           }
 
@@ -545,7 +545,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
       } else if (ClientMessage.match('estou') && ClientMessage.match('bom') || ClientMessage.match('vou') && ClientMessage.match('bom')) {
         if (RandomNumber <= 0.5) {
           baitmedia.innerHTML = ``
-          baittext.innerHTML = `Ah que bom! que esta tudo bem com você`
+          baittext.innerHTML = `Ah que bom! que está tudo bem com você`
         } else {
           baitmedia.innerHTML = ``
           baittext.innerHTML = `Ok! fico alegre por saber`

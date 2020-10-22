@@ -1,3 +1,4 @@
+const utterance = new window.SpeechSynthesisUtterance();
 const baitmessage = document.querySelector('.BaitMessage');
 const baitmedia = document.querySelector('.BaitMedia');
 const baittext = document.querySelector('.text');
@@ -12,6 +13,8 @@ var hour = GetTime.getHours();
 var minutes = GetTime.getMinutes();
 var seconds = GetTime.getSeconds();
 var url = document.URL
+
+utterance.lang = 'pt-BR';
 
 /*
 //para programação
@@ -36,6 +39,11 @@ window.addEventListener('load', () => {
 });
 
 
+window.addEventListener('click', () => {
+  speechSynthesis.cancel();
+  VoiceRecognition.stop();
+})
+
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
@@ -44,14 +52,18 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   VoiceRecognition.addEventListener('start', function() {
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
+
   })
 
   VoiceRecognition.lang = 'pt-br' || 'en'
   microphone.addEventListener('click', function () {
 
+
     creditos.style.display = 'none'
 
-    VoiceRecognition.start()
+    VoiceRecognition.start();
+
+
     baitmedia.innerHTML = ``
 
 
@@ -138,6 +150,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('result',
     function(evt) {
+
+
 
 
       var ClientMessage = evt.results[0][0].transcript.toLowerCase()
@@ -299,14 +313,21 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             }
 
 
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
+
           } else if (ClientMessage.match('você') && ClientMessage.match('mora') || ClientMessage.match('onde') && ClientMessage.match('você')) {
 
             baitmedia.innerHTML = ``
             if (RandomNumber <= 0.5) {
-              baittext.innerHTML = `digamos que eu more nas nuvens!`
+              baittext.innerHTML = `digamos que eu moro nas nuvens!`
             } else {
-              baittext.innerHTML = `eu moro nas nuvens e tenho o poder de estar em vários lugares ao mesmo tempo! incrível não?`
+              baittext.innerHTML = `eu moro nas nuvens e tenho o poder de estar em vários lugares ao mesmo tempo?`
             }
+
+
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
 
           } else if (ClientMessage.match('país') && ClientMessage.match('meu') && ClientMessage.match('você')) {
             if (RandomNumber <= 0.5) {
@@ -316,6 +337,11 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
               baitmedia.innerHTML = ``
               baittext.innerHTML = `gosto muito do ${data.country}`
             }
+
+
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
+
           }
         })
 
@@ -332,6 +358,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = 'muito obridado!'
         }
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('seu') && ClientMessage.match('nome')) {
 
         baitmedia.innerHTML = ''
@@ -342,12 +371,17 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = 'meu nome é Bait'
         }
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('resposta') && ClientMessage.match('automática') || ClientMessage.match('pesquisa') && ClientMessage.match('automática')) {
 
         baitmedia.innerHTML = ''
         baittext.innerHTML = `as resposta automática são respostas baseadas nos textos em que você copiou (em qualquer lugar). quando você clicar no microfone abaixo irei verificar se existe alguma palavra-chave no texto que você copiou, se tiver vou fazer uma pesquisa por ela`
 
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('onde') && ClientMessage.match('foto')) {
 
@@ -358,6 +392,10 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         } else {
           baittext.innerHTML = 'o Pixabay.com é o meu banco de imagens <br><br>'
         }
+
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('foto')) {
         ClientMessage = ClientMessage.replace(/foto/gi, '')
@@ -399,6 +437,13 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           }
         },
           2000)
+
+        setTimeout(() => {
+          utterance.text = baittext.innerText
+          speechSynthesis.speak(utterance);
+        },
+          100)
+
       } else if (ClientMessage.match('copi') && ClientMessage.match('histórico')) {
         var inputHistoric = document.createElement("input");
         inputHistoric.value = ClientHistoric.innerText;
@@ -413,6 +458,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = 'pronto!'
         }
 
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('histórico') && ClientMessage.match('limpa') || ClientMessage.match('histórico') && ClientMessage.match('limpe')) {
 
@@ -430,7 +478,12 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           }
         }
 
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('histórico')) {
+
         baitmedia.innerHTML = ``
         baittext.innerHTML = `aqui está o seu histórico! <br /><br />`
         ClientHistoric.style.display = 'block'
@@ -442,15 +495,15 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         baitmedia.innerHTML = ``
 
         if (RandomNumber <= 0.2) {
-          baittext.innerHTML = `Ok! buscando por ${clientCut}`
+          baittext.innerHTML = `Ok! buscando por ${clientCut} 🕵🏻‍♀️`
         } else if (RandomNumber <= 0.4) {
-          baittext.innerHTML = `Ok! pesquisando por ${clientCut}`
+          baittext.innerHTML = `Ok! pesquisando por ${clientCut} 🕵🏻‍♀️`
         } else if (RandomNumber <= 0.6) {
-          baittext.innerHTML = `pesquisando...`
+          baittext.innerHTML = `pesquisando... 🕵🏻‍♀️`
         } else if (RandomNumber <= 0.8) {
-          baittext.innerHTML = `certo vou pesquisar no Google`
+          baittext.innerHTML = `certo vou pesquisar no Google 🕵🏻‍♀️`
         } else if (RandomNumber <= 1) {
-          baittext.innerHTML = `Ok!`
+          baittext.innerHTML = `Ok! 🕵🏻‍♀️`
         }
         setTimeout(() => {
           window.open('https://www.google.com/search?q=' + clientCut)
@@ -461,6 +514,11 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           }, 100)
         }, 1000)
 
+
+        utterance.text = baittext.innerText.replace(/🕵🏻‍♀️/gi,
+          '')
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('obrigad') || ClientMessage.match('valeu') || ClientMessage.match('ajudou muito')) {
         baitmedia.innerHTML = ``
         if (RandomNumber <= 0.5) {
@@ -470,6 +528,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         }
 
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('bom') && ClientMessage.match('você') && ClientMessage.match('e')) {
         baitmedia.innerHTML = ``
         if (RandomNumber <= 0.5) {
@@ -477,6 +538,10 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         } else {
           baittext.innerHTML = `eu tô muito bem!`
         }
+
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('estou') && ClientMessage.match('bom') || ClientMessage.match('vou') && ClientMessage.match('bom')) {
         if (RandomNumber <= 0.5) {
@@ -487,10 +552,18 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = `Ok! fico alegre por saber`
         }
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('como') && ClientMessage.match('você') || ClientMessage.match('como') && ClientMessage.match('vai') || ClientMessage.match('e aí') && ClientMessage.match('como')) {
+
+
         baitmedia.innerHTML = ``
         baittext.innerHTML = 'eu estou bem e você?'
 
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('oi') || ClientMessage.match('olá')) {
 
@@ -520,6 +593,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         }
 
 
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
       } else if (ClientMessage.match('padrão') || ClientMessage.match('início') || ClientMessage.match('inicial') || ClientMessage.match('hibern')) {
         baittext.innerHTML = `certo,
         indo para o modo inicial`
@@ -528,12 +604,19 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
           baittext.innerHTML = ``
           baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
           navigator.vibrate(100)
-        }, 1000)
+        }, 3000)
+
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('segundos')) {
         baittext.style.fontSize = '80px'
         baittext.innerHTML = `${hour}: ${
         minutes}: ${seconds}`
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('hora')) {
         if ($(document).height() <= 1000) {
@@ -543,6 +626,22 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         }
         baittext.innerHTML = `${hour}:${minutes}`
 
+        utterance.text = 'segundo o seu aparelho é ' + baittext.innerText
+        speechSynthesis.speak(utterance);
+
+      } else if (ClientMessage.match('pare') || ClientMessage.match('parar') || ClientMessage.match('stop') || ClientMessage.match('não fale')) {
+
+        baitmedia.innerHTML = ''
+
+        if (RandomNumber <= 0.5) {
+          baittext.innerHTML = 'já parei'
+        } else {
+          baittext.innerHTML = 'parei'
+        }
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+
 
       } else if (ClientMessage.match('queimadura') && ClientMessage.match('que') || ClientMessage.match('me') && ClientMessage.match('queimei') || ClientMessage.match('queimou') && ClientMessage.match('se') || ClientMessage.match('se') && ClientMessage.match('queimar') || ClientMessage.match('nos') && ClientMessage.match('queimamos')) {
         baitmedia.innerHTML = '<br><br><video poster="assets/img/queimadura_capa.png" src="assets/media/queimadura.mp4" class="media" controls><br>'
@@ -551,6 +650,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         } else {
           baittext.innerHTML = '<br> mantenha a calma. Este video vai te ajudar! <br> <br>'
         }
+
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
 
       } else {
         function DontKnow() {
@@ -619,13 +721,15 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             }
           }
         })
-
       }
 
-      console.log('com alteração: ' + ClientMessage)
-      //  console.log(inputHistoric)
-    })
+      setTimeout(() => {
+        utterance.text = baittext.innerText
+        speechSynthesis.speak(utterance);
+      },
+        200)
 
+    })
 
   VoiceRecognition.addEventListener('error',
     function(error) {

@@ -435,14 +435,13 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
               baittext.innerHTML = 'não tenho esta imagem'
             }
           }
+
+          utterance.text = baittext.innerText
+          speechSynthesis.speak(utterance);
+
         },
           2000)
 
-        setTimeout(() => {
-          utterance.text = baittext.innerText
-          speechSynthesis.speak(utterance);
-        },
-          100)
 
       } else if (ClientMessage.match('copi') && ClientMessage.match('histórico')) {
         var inputHistoric = document.createElement("input");

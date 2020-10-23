@@ -16,7 +16,7 @@ var minutes = GetTime.getMinutes();
 var seconds = GetTime.getSeconds();
 var url = document.URL
 
-utterance.lang = 'pt-BR';
+utterance.lang = 'pt-br';
 
 /*
 //para programação
@@ -27,10 +27,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} /*else {
+} else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}*/
+}
 
 var autores = true
 
@@ -41,13 +41,20 @@ window.addEventListener('load', () => {
 });
 
 
+
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
 
-  VoiceRecognition.addEventListener('start', function() {
+
+  VoiceRecognition.addEventListener('audiostart', function() {
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
+
+  VoiceRecognition.addEventListener('audioend', () => {
+    baittext.innerHTML = ''
+  })
+
 
   VoiceRecognition.lang = 'pt-br' || 'en'
   microphone.addEventListener('click', function () {
@@ -419,21 +426,26 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             console.log(indice)
           })
         setTimeout(() => {
-          if (baittext.innerText == 'estou te ouvindo!') {
+          if (baittext.innerText != '') {
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
+          }
+        },
+          50)
+        setTimeout(() => {
+          if (baittext.innerText == '') {
             baitmedia.innerHTML = ''
             creditos.style.display = 'none'
             if (RandomNumber <= 0.5) {
               baittext.innerHTML = 'infelizmente não encontrei essa foto'
             } else {
-              baittext.innerHTML = 'não tenho está imagem'
+              baittext.innerHTML = 'não tenho esta imagem'
             }
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
           }
-
-          utterance.text = baittext.innerText
-          speechSynthesis.speak(utterance);
-
         },
-          2000)
+          1500)
 
 
       } else if (ClientMessage.match('copi') && ClientMessage.match('histórico')) {
@@ -557,16 +569,16 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         utterance.text = baittext.innerText
         speechSynthesis.speak(utterance);
 
-      } else if (ClientMessage.match('oi') || ClientMessage.match('olá')) {
+      } else if (ClientMessage.match('oi') || ClientMessage.match('ola')) {
 
         baitmedia.innerHTML = ''
 
         if (RandomNumber <= 0.2 && ClickNumber == 1) {
-          baittext.innerHTML = `olá ${name} como você está?`
+          baittext.innerHTML = `Olá ${name} como você está?`
         } else if (RandomNumber <= 0.4 && ClickNumber == 1) {
           baittext.innerHTML = `oi ${name} como vai?`
         } else if (RandomNumber <= 0.6 && ClickNumber == 1) {
-          baittext.innerHTML = `olá! como vai?`
+          baittext.innerHTML = `Olá! como vai?`
         } else if (RandomNumber <= 0.8 && ClickNumber == 1) {
           baittext.innerHTML = `Oi! ${name} como está as coisas?`
         } else if (RandomNumber <= 1 && ClickNumber == 1) {
@@ -575,7 +587,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         } else if (RandomNumber <= 0.2) {
           baittext.innerHTML = `oi ${name}`
         } else if (RandomNumber <= 0.4) {
-          baittext.innerHTML = `Olà!`
+          baittext.innerHTML = `Olá!`
         } else if (RandomNumber <= 0.6) {
           baittext.innerHTML = `Um oi especial para você!`
         } else if (RandomNumber <= 0.8) {

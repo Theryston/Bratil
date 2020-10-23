@@ -18,7 +18,7 @@ var url = document.URL
 
 utterance.lang = 'pt-br';
 utterance.rate = 1.5;
-utterance.pitch = 1.2;
+utterance.pitch = 1.1;
 utterance.volume = 1;
 
 /*

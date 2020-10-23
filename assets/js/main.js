@@ -1,3 +1,5 @@
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var VoiceRecognition = new SpeechRecognition()
 const utterance = new window.SpeechSynthesisUtterance();
 const baitmessage = document.querySelector('.BaitMessage');
 const baitmedia = document.querySelector('.BaitMedia');
@@ -25,10 +27,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+} /*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 
 var autores = true
 
@@ -39,25 +41,16 @@ window.addEventListener('load', () => {
 });
 
 
-window.addEventListener('click', () => {
-  speechSynthesis.cancel();
-  VoiceRecognition.stop();
-})
-
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-  var VoiceRecognition = new SpeechRecognition()
 
   VoiceRecognition.addEventListener('start', function() {
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
-
   })
 
   VoiceRecognition.lang = 'pt-br' || 'en'
   microphone.addEventListener('click', function () {
-
 
     creditos.style.display = 'none'
 
@@ -752,3 +745,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   baitmedia.innerHTML = ''
   baittext.innerHTML = 'infelizmente o seu navegador não suporta a minha tecnologia. use o Google Chrome'
 }
+
+
+window.addEventListener('click', () => {
+  speechSynthesis.cancel();
+})

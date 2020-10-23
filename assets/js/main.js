@@ -17,7 +17,7 @@ var seconds = GetTime.getSeconds();
 var url = document.URL
 
 utterance.lang = 'pt-br';
-utterance.rate = 1.5;
+utterance.rate = 1.3;
 utterance.pitch = 1.1;
 utterance.volume = 1;
 

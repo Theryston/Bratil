@@ -17,7 +17,7 @@ var seconds = GetTime.getSeconds();
 var url = document.URL
 
 utterance.lang = 'pt-br';
-utterance.rate = 2;
+utterance.rate = 1.7;
 
 /*
 //para programação
@@ -720,16 +720,25 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
                 })
 
               })
-            } else {
+
+
+            } else if (IndexKeyWord == id.length - 1) {
+
               baitmedia.innerHTML = ''
-              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa "' + ClientMessageNoChange + '" ' + name
+              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa "' + ClientMessageNoChange + '" '
+
             }
           }
         })
 
-        utterance.text = baittext.innerText
-        speechSynthesis.speak(utterance);
+        setTimeout(() => {
+          utterance.text = baittext.innerText
+          speechSynthesis.speak(utterance);
+        },
+          100)
+
       }
+
 
     })
 

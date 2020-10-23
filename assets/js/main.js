@@ -569,7 +569,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         utterance.text = baittext.innerText
         speechSynthesis.speak(utterance);
 
-      } else if (ClientMessage.match('oi') || ClientMessage.match('ola')) {
+      } else if (ClientMessage.match('oi') || ClientMessage.match('olá')) {
 
         baitmedia.innerHTML = ''
 

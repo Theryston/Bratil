@@ -17,6 +17,7 @@ var seconds = GetTime.getSeconds();
 var url = document.URL
 
 utterance.lang = 'pt-br';
+utterance.rate = 2;
 
 /*
 //para programação
@@ -725,13 +726,10 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             }
           }
         })
-      }
 
-      setTimeout(() => {
         utterance.text = baittext.innerText
         speechSynthesis.speak(utterance);
-      },
-        500)
+      }
 
     })
 

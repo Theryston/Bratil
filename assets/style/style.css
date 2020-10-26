@@ -34,18 +34,22 @@
     position: relative;
   }
   .microphone {
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 150px;
-    padding-right: 150px;
-    border-radius: 30px;
+    border-radius: 80px;
     background: #202125;
     box-shadow: 2px 2px 6px black;
     position: fixed;
-    width: 30px;
+    width: 300px;
+    height: 55px;
     left: 50%;
     transform: translateX(-50%);
-    top: 80%;
+    top: 82%;
+  }
+  #microphone-home {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
   }
   .BaitMessage {
     box-shadow: 2px 2px 6px black;
@@ -95,18 +99,22 @@
     position: relative;
   }
   .microphone {
-    padding-bottom: 15px;
-    padding-top: 15px;
-    padding-left: 220px;
-    padding-right: 220px;
     border-radius: 80px;
     background: #202125;
     box-shadow: 2px 2px 6px black;
     position: fixed;
-    width: 90px;
+    width: 550px;
+    height: 130px;
     left: 50%;
     transform: translateX(-50%);
     top: 90%;
+  }
+  #microphone-home {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
   }
   .BaitMessage {
     box-shadow: 2px 2px 6px black;

@@ -9,6 +9,7 @@ const creditos = document.querySelector('.creditos')
 const microphone = document.querySelector('.microphone');
 var ClientHistoric = document.querySelector('.ClientHistoric');
 var baitalert = document.querySelector('.alert');
+var ImgMicrophone = document.querySelector(' #microphone-home')
 var ClickNumber = 0
 var GetTime = new Date();
 var hour = GetTime.getHours();
@@ -20,6 +21,8 @@ utterance.lang = 'pt-br';
 utterance.rate = 1.3;
 utterance.pitch = 1.1;
 utterance.volume = 1;
+
+
 
 /*
 //para programação
@@ -35,8 +38,6 @@ if (url.match('https')) {
   window.location = url;
 }
 
-var autores = true
-
 window.addEventListener('load', () => {
   navigator.vibrate(100)
   baitalert.play();
@@ -47,19 +48,18 @@ window.addEventListener('load', () => {
 
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
-
-
   VoiceRecognition.addEventListener('audiostart', function() {
+    ImgMicrophone.src = 'assets/img/cut-microphone.png'
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('audioend', () => {
+    ImgMicrophone.src = 'assets/img/microphone.png'
     baittext.innerHTML = ''
+    baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
   })
 
-
-  VoiceRecognition.lang = 'pt-br' || 'en'
   microphone.addEventListener('click', function () {
 
     creditos.style.display = 'none'
@@ -147,8 +147,10 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
       })
     }
 
-  },
-    false)
+  })
+
+
+  VoiceRecognition.lang = 'pt-br' || 'en'
 
 
   VoiceRecognition.addEventListener('result',
@@ -351,6 +353,11 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
       if (ClientMessage.match('termos')) {
 
         window.open('/termos')
+
+        setTimeout(() => {
+          baittext.innerHTML = ``
+          baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+        }, 100)
 
       } else if (ClientMessage.match('seu') && ClientMessage.match('nome') && ClientMessage.match('bonito')) {
         baitmedia.innerHTML = ''
@@ -769,4 +776,5 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
 window.addEventListener('click', () => {
   speechSynthesis.cancel();
+  VoiceRecognition.stop();
 })

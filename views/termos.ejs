@@ -14,6 +14,8 @@
     gtag('config', 'G-Q625Q1PGW6');
   </script>
 
+  <script src="https://kit.fontawesome.com/8f2c15ea36.js" crossorigin="anonymous"></script>
+
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <style>
 @font-face {
@@ -32,22 +34,44 @@
       top: 35%;
       transform: translateY(-35%);
     }
-    .IrParaHome {
+    #IrParaHome {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       padding-bottom: 10px;
       padding-top: 10px;
       color: white;
-      font-family: 'main-font';
-      border-radius: 30px;
       background: #202125;
-      box-shadow: 2px 2px 6px black;
+      font-family: 'main-font';
       border: 0px;
-      position: fixed;
+      font-size: 40px;
+    }
+    .fa-arrow-circle-left {
+      position: absolute;
+      top: 50%;
+      left: 8%;
+      transform: translate(-8%, -50%);
+      font-size: 70px;
+      color: white;
+    }
+    .IrParaHome {
+      border-radius: 30px;
+      box-shadow: 2px 2px 6px black;
+      background: #202125;
       width: 500px;
       height: 100px;
+      position: fixed;
       left: 50%;
       top: 80%;
       transform: translate(-50%, -80%);
-      font-size: 30px;
+    }
+    .IrParaHome:focus {
+      background: #202130;
+      outline: none;
+    }
+    #IrParaHome:focus {
+      outline: none;
     }
   </style>
   <title>termos</title>
@@ -59,8 +83,13 @@
     (como se estivesse entrado no site pela primeira vez).
   </div>
 
+  <div onclick="IrParaHome()" class="IrParaHome">
+    <i class="fas fa-arrow-circle-left"></i>
+    <input type="button" value="voltar" id="IrParaHome" />
+  </div>
 
-  <input type="button" value="voltar" class="IrParaHome" onclick="IrParaHome()" />
+
+
   <script>
     function IrParaHome() {
       window.close();

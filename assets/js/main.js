@@ -37,6 +37,7 @@ if (url.match('https')) {
   url = url.replace(/http/gi, 'https')
   window.location = url;
 }
+//autores = true
 
 window.addEventListener('load', () => {
   navigator.vibrate(100)
@@ -48,106 +49,107 @@ window.addEventListener('load', () => {
 
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
-  VoiceRecognition.addEventListener('audiostart', function() {
+  VoiceRecognition.addEventListener('start', function() {
     ImgMicrophone.src = 'assets/img/cut-microphone.png'
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
 
-  VoiceRecognition.addEventListener('audioend', () => {
+  VoiceRecognition.addEventListener('end', () => {
     ImgMicrophone.src = 'assets/img/microphone.png'
-    baittext.innerHTML = ''
-    baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+
+    if (baittext.innerText == 'estou te ouvindo!') {
+      baittext.innerHTML = ''
+      baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+    } else {}
   })
 
-  microphone.addEventListener('click', function () {
+  microphone.addEventListener('click',
+    function () {
 
-    creditos.style.display = 'none'
+      creditos.style.display = 'none'
 
-    VoiceRecognition.start();
-
-
-    baitmedia.innerHTML = ``
+      VoiceRecognition.start();
 
 
-    if ($(document).height() <= 1000) {
-      baittext.style.fontSize = '15px'
-    } else {
-      baittext.style.fontSize = '30px'
-    }
-
-    navigator.vibrate(40)
-
-    ClientHistoric.style.display = 'none'
-
-    const RandomNumber = Math.random()
-
-    if (autores) {
-      navigator.clipboard.readText().then((text) => {
-        $.getJSON('text_search_content/id.json', function (id) {
-
-          let ClientText = text.toLowerCase();
-
-          let HaveSearch = -1
-
-          let HaveSearchInText = -1
-
-          for (let IndexKeyWord = 0; IndexKeyWord < id.length && HaveSearch == -1; IndexKeyWord++) {
+      baitmedia.innerHTML = ``
 
 
-            let SearchContent = ClientText.indexOf(id[IndexKeyWord])
+      if ($(document).height() <= 1000) {
+        baittext.style.fontSize = '15px'
+      } else {
+        baittext.style.fontSize = '30px'
+      }
 
-            let indexSearchContent = 1
+      navigator.vibrate(40)
 
-            for (let i = 0; id[IndexKeyWord].length > i && SearchContent == -1; i++) {
+      ClientHistoric.style.display = 'none'
 
-              SearchContent = ClientText.indexOf(id[IndexKeyWord][i])
+      const RandomNumber = Math.random()
 
-            }
+      if (autores) {
+        navigator.clipboard.readText().then((text) => {
+          $.getJSON('text_search_content/id.json', function (id) {
 
-            if (SearchContent != -1) {
-              ClientText = ClientText.replace(ClientText.substring(0, SearchContent), '')
+            let ClientText = text.toLowerCase();
+
+            let HaveSearch = -1
+
+            let HaveSearchInText = -1
+
+            for (let IndexKeyWord = 0; IndexKeyWord < id.length && HaveSearch == -1; IndexKeyWord++) {
 
 
-              while (ClientText.indexOf(' ') != -1) {
-                ClientText = ClientText.replace(ClientText.substring(ClientText.indexOf(' '), ClientText.length), '')
+              let SearchContent = ClientText.indexOf(id[IndexKeyWord])
+
+              let indexSearchContent = 1
+
+              for (let i = 0; id[IndexKeyWord].length > i && SearchContent == -1; i++) {
+
+                SearchContent = ClientText.indexOf(id[IndexKeyWord][i])
+
               }
 
-            }
+              if (SearchContent != -1) {
+                ClientText = ClientText.replace(ClientText.substring(0, SearchContent), '')
 
-            for (let IndexContent = 1; IndexContent < id[IndexKeyWord].length && HaveSearch == -1; IndexContent++) {
 
-              HaveSearch = id[IndexKeyWord].indexOf(ClientText)
+                while (ClientText.indexOf(' ') != -1) {
+                  ClientText = ClientText.replace(ClientText.substring(ClientText.indexOf(' '), ClientText.length), '')
+                }
 
-            }
+              }
 
-            if (HaveSearch != -1) {
-              $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function (res) {
+              for (let IndexContent = 1; IndexContent < id[IndexKeyWord].length && HaveSearch == -1; IndexContent++) {
 
-                $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
+                HaveSearch = id[IndexKeyWord].indexOf(ClientText)
 
-                  creditos.style.display = 'block'
+              }
 
-                  let IndexPhoto = Math.floor(Math.random() * 40)
+              if (HaveSearch != -1) {
+                $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function (res) {
 
-                  let IndexRes = Math.floor(Math.random() * res.length)
-                  baitmedia.innerHTML = '<br><br><br> <img src="' + searchPhoto.hits[IndexPhoto].largeImageURL + '" class="media"> <br><br><br>'
-                  baittext.innerHTML = res[IndexRes] + '<br><br><br>'
+                  $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
+
+                    creditos.style.display = 'block'
+
+                    let IndexPhoto = Math.floor(Math.random() * 40)
+
+                    let IndexRes = Math.floor(Math.random() * res.length)
+                    baitmedia.innerHTML = '<br><br><br> <img src="' + searchPhoto.hits[IndexPhoto].largeImageURL + '" class="media"> <br><br><br>'
+                    baittext.innerHTML = res[IndexRes] + '<br><br><br>'
+
+                  })
 
                 })
-
-              })
-            } else {
-              baitmedia.innerHTML = ''
-              baittext.innerHTML = 'estou em desenvolvimento não sei o que significa ' + ClientMessageNoChange + ' ' + name
+              }
             }
-          }
+          })
+
         })
+      }
 
-      })
-    }
-
-  })
+    })
 
 
   VoiceRecognition.lang = 'pt-br' || 'en'

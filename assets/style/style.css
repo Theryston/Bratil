@@ -2,11 +2,13 @@
   font-family: 'main-font';
   src: url('/assets/style/fonts/Poppins-Light.ttf');
 }
+
 * {
   margin: 0px;
   padding: 0px;
 }
-@media screen and (max-height:  1000px) {
+
+@media screen and (max-height: 1000px) {
   body {
     font-family: 'main-font';
     width: 100%;
@@ -15,6 +17,7 @@
     font-size: 15px;
     color: white;
   }
+
   .creditos {
     position: fixed;
     z-index: 10;
@@ -23,16 +26,20 @@
     width: 100px;
     display: none;
   }
+
   .ClientHistoric {
     text-align: left;
     display: none;
   }
+
   .logo {
     width: 150px;
   }
+
   footer {
     position: relative;
   }
+
   .microphone {
     border-radius: 80px;
     background: #202125;
@@ -44,6 +51,7 @@
     transform: translateX(-50%);
     top: 82%;
   }
+
   #microphone-home {
     position: absolute;
     top: 50%;
@@ -51,6 +59,7 @@
     transform: translate(-50%, -50%);
     height: 80%;
   }
+
   .BaitMessage {
     box-shadow: 2px 2px 6px black;
     background: #202125;
@@ -64,9 +73,11 @@
     border-radius: 100px;
     width: 80%;
   }
+
   .BaitMedia {
     width: 100%;
   }
+
   .media {
     width: 40%;
   }
@@ -81,6 +92,7 @@
     font-size: 30px;
     color: white;
   }
+
   .creditos {
     position: fixed;
     top: -20px;
@@ -88,16 +100,20 @@
     width: 200px;
     display: none;
   }
+
   .ClientHistoric {
     text-align: left;
     display: none;
   }
+
   .logo {
     width: 350px;
   }
+
   footer {
     position: relative;
   }
+
   .microphone {
     border-radius: 80px;
     background: #202125;
@@ -109,6 +125,7 @@
     transform: translateX(-50%);
     top: 90%;
   }
+
   #microphone-home {
     position: absolute;
     top: 50%;
@@ -116,6 +133,7 @@
     transform: translate(-50%, -50%);
     height: 100px;
   }
+
   .BaitMessage {
     box-shadow: 2px 2px 6px black;
     background: #202125;
@@ -128,9 +146,11 @@
     border-radius: 200px;
     width: 90%;
   }
+
   .BaitMedia {
     width: 100%;
   }
+
   .media {
     width: 100%;
   }

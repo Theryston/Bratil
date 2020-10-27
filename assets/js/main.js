@@ -65,7 +65,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   })
 
   microphone.addEventListener('click',
-    function () {
+    function() {
 
       creditos.style.display = 'none'
 
@@ -89,7 +89,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       if (autores) {
         navigator.clipboard.readText().then((text) => {
-          $.getJSON('text_search_content/id.json', function (id) {
+          $.getJSON('text_search_content/id.json', function(id) {
 
             let ClientText = text.toLowerCase();
 
@@ -127,7 +127,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
               }
 
               if (HaveSearch != -1) {
-                $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function (res) {
+                $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function(res) {
 
                   $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
 
@@ -152,7 +152,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
     })
 
 
-  VoiceRecognition.lang = 'pt-br' || 'en'
+  VoiceRecognition.lang = 'pt-br';
 
 
   VoiceRecognition.addEventListener('result',
@@ -422,7 +422,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         ClientMessage = ClientMessage.replace(/da/gi, '')
 
         $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(ClientMessage) + '&per_page=200',
-          function (fotos) {
+          function(fotos) {
             let indice = Math.floor(Math.random() * 200)
             creditos.style.display = 'block'
 
@@ -438,25 +438,25 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             console.log(indice)
           })
         setTimeout(() => {
-          if (baittext.innerText != '') {
-            utterance.text = baittext.innerText
-            speechSynthesis.speak(utterance);
-          }
-        },
+            if (baittext.innerText != '') {
+              utterance.text = baittext.innerText
+              speechSynthesis.speak(utterance);
+            }
+          },
           50)
         setTimeout(() => {
-          if (baittext.innerText == '') {
-            baitmedia.innerHTML = ''
-            creditos.style.display = 'none'
-            if (RandomNumber <= 0.5) {
-              baittext.innerHTML = 'infelizmente não encontrei essa foto'
-            } else {
-              baittext.innerHTML = 'não tenho esta imagem'
+            if (baittext.innerText == '') {
+              baitmedia.innerHTML = ''
+              creditos.style.display = 'none'
+              if (RandomNumber <= 0.5) {
+                baittext.innerHTML = 'infelizmente não encontrei essa foto'
+              } else {
+                baittext.innerHTML = 'não tenho esta imagem'
+              }
+              utterance.text = baittext.innerText
+              speechSynthesis.speak(utterance);
             }
-            utterance.text = baittext.innerText
-            speechSynthesis.speak(utterance);
-          }
-        },
+          },
           1500)
 
 
@@ -480,7 +480,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       } else if (ClientMessage.match('histórico') && ClientMessage.match('limpa') || ClientMessage.match('histórico') && ClientMessage.match('limpe')) {
 
-        function limphistoric () {
+        function limphistoric() {
           ClickNumber = 0
           ClientHistoric.innerHTML = ''
           return true
@@ -615,7 +615,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
       } else if (ClientMessage.match('padrão') || ClientMessage.match('início') || ClientMessage.match('inicial') || ClientMessage.match('hibern')) {
         baittext.innerHTML = `certo,
         indo para o modo inicial`
-        setTimeout(()=> {
+        setTimeout(() => {
           baitalert.play();
           baittext.innerHTML = ``
           baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
@@ -678,7 +678,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       if (DontKnow()) {
 
-        $.getJSON('text_search_content/id.json', function (id) {
+        $.getJSON('text_search_content/id.json', function(id) {
 
           let ClientText = ClientMessage;
 
@@ -716,7 +716,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             }
 
             if (HaveSearch != -1) {
-              $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function (res) {
+              $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function(res) {
 
                 $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
 
@@ -743,9 +743,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         })
 
         setTimeout(() => {
-          utterance.text = baittext.innerText
-          speechSynthesis.speak(utterance);
-        },
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
+          },
           500)
 
       }
@@ -766,7 +766,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
     })
 
   creditos.addEventListener('click',
-    function () {
+    function() {
       window.open('https://pixabay.com')
     })
 
@@ -779,4 +779,4 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 window.addEventListener('click', () => {
   speechSynthesis.cancel();
   VoiceRecognition.stop();
-})
+});

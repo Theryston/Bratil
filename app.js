@@ -23,6 +23,4 @@ app.get('*', function(req, res) {
   res.render('no-rota')
 })
 
-app.listen(3000, function () {
-
-});
+app.listen(3000, function() {});

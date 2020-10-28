@@ -19,10 +19,14 @@ header {
   top: 0px;
   height: 100vh;
   width: 100vw;
+  object-fit: cover;
   z-index: 0;
+  transition: all 0.6s;
 }
 
 #background-serach {
+  position: absolute;
+  top: 0px;
   height: 100vh;
   width: 100vw;
   object-fit: cover;
@@ -36,15 +40,16 @@ header {
   transform: translate(-50%, -35%);
   z-index: 3;
 }
+
 #title h1 {
   text-align: center;
-  font-size: 60px;
-}
-#title p {
-  text-align: center;
-  font-size: 35px;
+  font-size: 5em;
 }
 
+#title p {
+  text-align: center;
+  font-size: 2.2em;
+}
 
 #background-pelicula {
   position: absolute;
@@ -53,4 +58,41 @@ header {
   width: 100vw;
   height: 100vh;
   z-index: 2;
+}
+
+#container-search {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  width: 80vw;
+  height: 8em;
+  background: black;
+  border-radius: 5em;
+  transition: all 0.6s;
+}
+
+#text-search {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  height: 90%;
+  width: 80%;
+  transform: translateY(-50%);
+  border: 0px;
+  background: black;
+  font-size: 2.2em;
+}
+.fa-search {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5%;
+  font-size: 4em;
+}
+#text-search:focus {
+ outline: none;
 }

@@ -89,7 +89,7 @@ header {
   top: 50%;
   transform: translateY(-50%);
   right: 5%;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 #text-search:focus {
  outline: none;

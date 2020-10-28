@@ -645,7 +645,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         utterance.text = 'segundo o seu aparelho é ' + baittext.innerText
         speechSynthesis.speak(utterance);
 
-      } else if (ClientMessage.match('pare') || ClientMessage.match('parar') || ClientMessage.match('stop') || ClientMessage.match('não fale')) {
+      } else if (ClientMessage.match('pare ') || ClientMessage.match('parar') || ClientMessage.match('para ') || ClientMessage.match('stop') || ClientMessage.match('não fale') || ClientMessage == 'pare' || ClientMessage == 'para') {
 
         baitmedia.innerHTML = ''
 

@@ -7,7 +7,7 @@ var header = document.querySelector('#header')
 TextSearch.addEventListener('focus', () => {
   header.style.display = 'none'
   section.style.display = 'none'
-  ContainerSearch.style.top = '6em'
+  ContainerSearch.style.top = '3em'
   ContainerSearch.style.width = '95vw'
 });
 TextSearch.addEventListener('focusout', () => {

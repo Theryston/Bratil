@@ -24,5 +24,5 @@ app.get('*', function(req, res) {
 })
 
 app.listen(3000, ()=> {
-  console.log('servidor rodando na porta 3000')
+  console.log('servidor rodando 3000')
 });

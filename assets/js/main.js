@@ -33,10 +33,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+} /*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 autores = true
 
 window.addEventListener('load', () => {
@@ -682,40 +682,17 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
           let ClientText = ClientMessage;
 
-          let HaveSearch = -1
+          let HaveSearch = null
 
-          let HaveSearchInText = -1
+          for (let IndexKeyWord = 0; IndexKeyWord < id.length && !HaveSearch; IndexKeyWord++) {
 
-          for (let IndexKeyWord = 0; IndexKeyWord < id.length && HaveSearch == -1; IndexKeyWord++) {
-
-
-            let SearchContent = ClientText.indexOf(id[IndexKeyWord])
-
-            let indexSearchContent = 1
-
-            for (let i = 0; id[IndexKeyWord].length > i && SearchContent == -1; i++) {
-
-              SearchContent = ClientText.indexOf(id[IndexKeyWord][i])
-
+            for (let i = 0; id[IndexKeyWord].length > i && !HaveSearch; i++) {
+            
+            HaveSearch = ClientText.match(id[IndexKeyWord][i])
+             
             }
 
-            if (SearchContent != -1) {
-              ClientText = ClientText.replace(ClientText.substring(0, SearchContent), '')
-
-
-              while (ClientText.indexOf(' ') != -1) {
-                ClientText = ClientText.replace(ClientText.substring(ClientText.indexOf(' '), ClientText.length), '')
-              }
-
-            }
-
-            for (let IndexContent = 1; IndexContent < id[IndexKeyWord].length && HaveSearch == -1; IndexContent++) {
-
-              HaveSearch = id[IndexKeyWord].indexOf(ClientText)
-
-            }
-
-            if (HaveSearch != -1) {
+            if (HaveSearch) {
               $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function(res) {
 
                 $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {

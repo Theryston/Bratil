@@ -84,6 +84,7 @@ header {
   background: black;
   font-size: 1em;
 }
+
 .fa-search {
   position: absolute;
   top: 50%;
@@ -91,6 +92,7 @@ header {
   right: 5%;
   font-size: 1.8em;
 }
+
 #text-search:focus {
- outline: none;
+  outline: none;
 }

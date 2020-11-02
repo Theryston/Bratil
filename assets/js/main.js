@@ -33,7 +33,7 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-}else {
+} else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
 }
@@ -649,7 +649,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
       } else if (ClientMessage.match('tempo') || ClientMessage.match('temperatura') || ClientMessage.match('clima')) {
 
-        $.getJSON('http://apiadvisor.climatempo.com.br/api/v1/anl/synoptic/locale/BR?token=984000203d9f9830a354a1b2a9e03bd4', (tempo) => {
+        $.getJSON('http://apiadvisor.climatempo.com.br/api/v1/anl/synoptic/locale/BR?token=984000203d9f9830a354a1b2a9e03bd4', function (tempo) {
 
           tempo[0].text = tempo[0].text.replace(/AC/g, 'Acre')
           tempo[0].text = tempo[0].text.replace(/AL/g, 'Alagoas')

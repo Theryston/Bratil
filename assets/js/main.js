@@ -33,11 +33,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-}
-/*else {
+} else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}*/
+}
 //autores = true
 
 window.addEventListener('load', () => {
@@ -648,7 +647,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         utterance.text = baittext.innerText
         speechSynthesis.speak(utterance);
 
-      } else if (ClientMessage.match('tempo') || ClientMessage.match('temperatura') || ClientMessage.match('clima')) {
+      } else if (ClientMessage.match('tempo') || ClientMessage.match('temperatura') || ClientMessage.match('clima') || ClientMessage.match('graus')) {
+        
         navigator.geolocation.getCurrentPosition(function(position) {
 
           $.getJSON('https://api.hgbrasil.com/weather?format=json-cors&key=d4fe89d6&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude, function(tempo) {

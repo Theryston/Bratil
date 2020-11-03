@@ -33,10 +33,11 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+}
+/*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 //autores = true
 
 window.addEventListener('load', () => {
@@ -648,45 +649,19 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('tempo') || ClientMessage.match('temperatura') || ClientMessage.match('clima')) {
+        navigator.geolocation.getCurrentPosition(function(position) {
 
-        $.getJSON('http://apiadvisor.climatempo.com.br/api/v1/anl/synoptic/locale/BR?token=984000203d9f9830a354a1b2a9e03bd4', function (tempo) {
+          $.getJSON('https://api.hgbrasil.com/weather?format=json-cors&key=d4fe89d6&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude, function(tempo) {
 
-          tempo[0].text = tempo[0].text.replace(/AC/g, 'Acre')
-          tempo[0].text = tempo[0].text.replace(/AL/g, 'Alagoas')
-          tempo[0].text = tempo[0].text.replace(/AP/g, 'Amapá')
-          tempo[0].text = tempo[0].text.replace(/AM/g, 'Amazonas')
-          tempo[0].text = tempo[0].text.replace(/BA/g, 'Bahia')
-          tempo[0].text = tempo[0].text.replace(/CE/g, 'Ceará')
-          tempo[0].text = tempo[0].text.replace(/DF/g, 'Distrito Federal')
-          tempo[0].text = tempo[0].text.replace(/ES/g, 'Espírito Santo')
-          tempo[0].text = tempo[0].text.replace(/GO/g, 'Goiás')
-          tempo[0].text = tempo[0].text.replace(/MA/g, 'Maranhão')
-          tempo[0].text = tempo[0].text.replace(/MT/g, 'Mato Grosso')
-          tempo[0].text = tempo[0].text.replace(/MS/g, 'Mato Grosso do Sul')
-          tempo[0].text = tempo[0].text.replace(/MG/g, 'Minas Gerais')
-          tempo[0].text = tempo[0].text.replace(/PA/g, 'Pará')
-          tempo[0].text = tempo[0].text.replace(/PB/g, 'Paraíba')
-          tempo[0].text = tempo[0].text.replace(/PR/g, 'Paraná')
-          tempo[0].text = tempo[0].text.replace(/PE/g, 'Pernambuco')
-          tempo[0].text = tempo[0].text.replace(/PI/g, 'Piauí')
-          tempo[0].text = tempo[0].text.replace(/RR/g, 'Roraima')
-          tempo[0].text = tempo[0].text.replace(/RO/g, 'Rondônia')
-          tempo[0].text = tempo[0].text.replace(/RJ/g, 'Rio de Janeiro')
-          tempo[0].text = tempo[0].text.replace(/RN/g, 'Rio Grande do Norte')
-          tempo[0].text = tempo[0].text.replace(/RS/g, 'Rio Grande do Sul')
-          tempo[0].text = tempo[0].text.replace(/SC/g, 'Santa Catarina')
-          tempo[0].text = tempo[0].text.replace(/SP/g, 'São Paulo')
-          tempo[0].text = tempo[0].text.replace(/SE/g, 'Sergipe')
-          tempo[0].text = tempo[0].text.replace(/TO/g, 'Tocantins')
+            baitmedia.innerHTML = ''
+            baittext.innerHTML = 'agora faz ' + tempo.results.temp + '°' + ' em ' + tempo.results.city
 
+            utterance.text = baittext.innerText
+            speechSynthesis.speak(utterance);
 
-          baitmedia.innerHTML = ''
-          baittext.innerHTML = '<br><br>' + tempo[0].text + '<br><br>';
+          });
 
-          utterance.text = baittext.innerText
-          speechSynthesis.speak(utterance);
-
-        })
+        });
 
       } else {
         function DontKnow() {

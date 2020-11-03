@@ -37,6 +37,7 @@ if (url.match('https')) {
   url = url.replace(/http/gi, 'https')
   window.location = url;
 }
+
 //autores = true
 
 window.addEventListener('load', () => {
@@ -174,8 +175,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         'bom')
       ClientMessage = ClientMessage.replace(/incrível/gi,
         'bom')
-      ClientMessage = ClientMessage.replace(/sensacional/gi,
-        'bom')
+      ClientMessage = ClientMessage.replace(/sensacional/gi, 'bom')
 
       ClientMessage = ClientMessage.replace(/busque no google sobre/gi,
         'pesquisar')
@@ -648,7 +648,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
         speechSynthesis.speak(utterance);
 
       } else if (ClientMessage.match('tempo') || ClientMessage.match('temperatura') || ClientMessage.match('clima') || ClientMessage.match('graus')) {
-        
+
         navigator.geolocation.getCurrentPosition(function(position) {
 
           $.getJSON('https://api.hgbrasil.com/weather?format=json-cors&key=d4fe89d6&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude, function(tempo) {
@@ -688,15 +688,18 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
             if (HaveSearch) {
               $.getJSON('text_search_content/' + id[IndexKeyWord][0] + '.json', function(res) {
 
-                $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]) + '&per_page=40', function(searchPhoto) {
+                $.getJSON('https://pixabay.com/api/?key=18237703-a292f73502f41766dae0f356c&q=' + encodeURIComponent(id[IndexKeyWord][1]), function(searchPhoto) {
 
                   creditos.style.display = 'block'
 
-                  let IndexPhoto = Math.floor(Math.random() * 40)
+                  let IndexPhoto = Math.floor(Math.random() * searchPhoto.hits.length)
 
                   let IndexRes = Math.floor(Math.random() * res.length)
                   baitmedia.innerHTML = '<br><br><br> <img src="' + searchPhoto.hits[IndexPhoto].largeImageURL + '" class="media"> <br><br><br>'
                   baittext.innerHTML = res[IndexRes] + '<br><br><br>'
+
+                  utterance.text = baittext.innerText
+                  speechSynthesis.speak(utterance);
 
                 })
 
@@ -708,15 +711,12 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
               baitmedia.innerHTML = ''
               baittext.innerHTML = 'estou em desenvolvimento não sei o que significa "' + ClientMessageNoChange + '" '
 
+              utterance.text = baittext.innerText
+              speechSynthesis.speak(utterance);
+
             }
           }
         })
-
-        setTimeout(() => {
-            utterance.text = baittext.innerText
-            speechSynthesis.speak(utterance);
-          },
-          500)
 
       }
 

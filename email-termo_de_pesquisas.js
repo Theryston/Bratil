@@ -26,8 +26,8 @@ transporter.sendMail({
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
     * {
-      background: rgb(32, 33, 37);
-      color: white;
+      background: white;
+      color: black;
       margin: 0px;
       padding: 0px;
       font-family: 'Poppins', sans-serif;

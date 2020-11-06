@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
+const handlebars = require('express-handlebars');
 
-app.set('view engine', 'ejs');
+
+//handlebars
+app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
+
+//pastas
 app.use('/assets', express.static('assets'));
 app.use('/response-chat', express.static('response-chat'));
 app.use('/text_search_content', express.static('text_search_content'));
 
-
+//Rotas
 app.get('/', function(req, res) {
   res.render('ia');
 });
@@ -23,6 +29,6 @@ app.get('*', function(req, res) {
   res.render('no-rota')
 })
 
-app.listen(3000, ()=> {
+app.listen(3000, () => {
   console.log('servidor rodando 3000')
 });

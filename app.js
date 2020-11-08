@@ -21,6 +21,10 @@ app.get('/termos', function(req, res) {
   res.render('termos');
 });
 
+app.get('/autores', function(req, res) {
+  res.render('autores');
+});
+
 app.get('/search', function(req, res) {
   res.render('search');
 });

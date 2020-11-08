@@ -1,4 +1,4 @@
-# Bait a mais nova ia.  
+# Bait. Que tal criarmos um novo mundo!?  
 
 ![](assets/img/logo.png)
 =================================================

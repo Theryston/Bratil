@@ -33,10 +33,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+} /*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 
 //autores = true
 
@@ -59,7 +59,7 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   VoiceRecognition.addEventListener('end', () => {
     ImgMicrophone.src = 'assets/img/microphone.png'
 
-    if (baittext.innerText == 'estou te ouvindo!') {
+    if (baittext.innerTect == 'estou te ouvindo!') {
       baittext.innerHTML = ''
       baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
     } else {}
@@ -77,9 +77,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
 
       if ($(document).height() <= 1000) {
-        baittext.style.fontSize = '15px'
+        baittext.style.fontSize = '10pt'
       } else {
-        baittext.style.fontSize = '30px'
+        baittext.style.fontSize = '11pt'
       }
 
       navigator.vibrate(40)
@@ -604,19 +604,17 @@ VoiceRecognition.addEventListener('result',
       speechSynthesis.speak(utterance);
 
     } else if (ClientMessage.match('segundos')) {
-      baittext.style.fontSize = '80px'
-      baittext.innerHTML = `${hour}: ${
-        minutes}: ${seconds}`
+      baittext.style.fontSize = '60pt'
+      baittext.innerHTML = `${hour}:${
+        minutes}:${seconds}`
 
       utterance.text = baittext.innerText
       speechSynthesis.speak(utterance);
 
     } else if (ClientMessage.match('hora')) {
-      if ($(document).height() <= 1000) {
-        baittext.style.fontSize = '100px'
-      } else {
-        baittext.style.fontSize = '200px'
-      }
+      
+        baittext.style.fontSize = '80pt'
+    
       baittext.innerHTML = `${hour}:${minutes}`
 
       utterance.text = 'segundo o seu aparelho é ' + baittext.innerText

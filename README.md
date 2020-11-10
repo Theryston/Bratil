@@ -1,6 +1,6 @@
 # Bait. Que tal criarmos um novo mundo!?  
 
-![](assets/img/logo.png)
+![](/slogans/normal/logo.png)
 =================================================
 -------------------------------------------------
 

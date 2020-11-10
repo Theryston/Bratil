@@ -33,10 +33,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+} /*else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 
 //autores = true
 
@@ -51,17 +51,17 @@ window.addEventListener('load', () => {
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('start', function() {
-    ImgMicrophone.src = 'assets/img/cut-microphone.png'
+    ImgMicrophone.src = 'assets/img/cut-microphone-300.png'
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('end', () => {
-    ImgMicrophone.src = 'assets/img/microphone.png'
+    ImgMicrophone.src = 'assets/img/microphone-200.png'
 
     if (baittext.innerTect == 'estou te ouvindo!') {
       baittext.innerHTML = ''
-      baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+      baitmedia.innerHTML = `<div class="logo"></div>`
     } else {}
   })
 
@@ -335,7 +335,7 @@ VoiceRecognition.addEventListener('result',
 
       setTimeout(() => {
         baittext.innerHTML = ``
-        baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+        baitmedia.innerHTML = ` <div class="logo"></div>`
       }, 100)
 
     } else if (ClientMessage.match('seu') && ClientMessage.match('nome') && ClientMessage.match('bonito')) {
@@ -374,7 +374,7 @@ VoiceRecognition.addEventListener('result',
 
     } else if (ClientMessage.match('onde') && ClientMessage.match('foto')) {
 
-      baitmedia.innerHTML = '<img src="assets/img/txt-pixabay.png" class="logo">'
+      baitmedia.innerHTML = '<div class="LogoarenotourPixabay"></div>'
 
       if (RandomNumber <= 0.5) {
         baittext.innerHTML = 'eu uso o banco de imagem Pixabay.com <br><br>'
@@ -503,7 +503,7 @@ VoiceRecognition.addEventListener('result',
         navigator.vibrate(100)
         setTimeout(() => {
           baittext.innerHTML = ``
-          baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+          baitmedia.innerHTML = ` <div class="logo"></div>`
         }, 100)
       }, 1000)
 
@@ -589,13 +589,13 @@ VoiceRecognition.addEventListener('result',
       utterance.text = baittext.innerText
       speechSynthesis.speak(utterance);
 
-    } else if (ClientMessage.match('padrão') || ClientMessage.match('início') || ClientMessage.match('inicial') || ClientMessage.match('hibern')) {
+    } else if (ClientMessage.match('padrão') || ClientMessage.match('início') || ClientMessage.match('inicial') || ClientMessage.match('hibern') || ClientMessage.match('home')) {
       baittext.innerHTML = `certo,
         indo para o modo inicial`
       setTimeout(() => {
         baitalert.play();
         baittext.innerHTML = ``
-        baitmedia.innerHTML = ` <img src="assets/img/logo.png" alt="" class="logo" />`
+        baitmedia.innerHTML = `<div class="logo"></div>`
         navigator.vibrate(100)
       }, 3000)
 
@@ -635,9 +635,9 @@ VoiceRecognition.addEventListener('result',
 
 
     } else if (ClientMessage.match('queimadura') && ClientMessage.match('que') || ClientMessage.match('me') && ClientMessage.match('queimei') || ClientMessage.match('queimou') && ClientMessage.match('se') || ClientMessage.match('se') && ClientMessage.match('queimar') || ClientMessage.match('nos') && ClientMessage.match('queimamos')) {
-      baitmedia.innerHTML = '<br><br><video poster="assets/img/queimadura_capa.png" src="assets/media/queimadura.mp4" class="media" controls><br>'
+      baitmedia.innerHTML = '<br><br><video poster="assets/img/capa-queimadura-1500.png" src="assets/media/queimadura.mp4" class="media" controls><br>'
       if (RandomNumber <= 0.5) {
-        baittext.innerHTML = '<br> mantenha a calma e siga as instruções do vídeo acima'
+        baittext.innerHTML = '<br> mantenha a calma e siga as instruções do vídeo acima<br><br><br>'
       } else {
         baittext.innerHTML = '<br> mantenha a calma. Este video vai te ajudar! <br> <br>'
       }

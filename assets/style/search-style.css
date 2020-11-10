@@ -35,7 +35,7 @@ header {
   position: absolute;
   top: 32%;
   left: 50%;
-  transform: translate(-50%, -3%);
+  transform: translate(-50%, -32%);
   z-index: 3;
 }
 

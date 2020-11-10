@@ -31,8 +31,22 @@ body {
   display: none;
 }
 
+.LogoarenotourPixabay {
+  content: url(/assets/img/txt-pixabay.png);
+  width: 150px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+}
+
 .logo {
-  width: 130px;
+  content: url(/assets/img/logo-800.png);
+  width: 150px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
 }
 
 footer {
@@ -105,8 +119,22 @@ footer {
     display: none;
   }
 
+  .LogoarenotourPixabay {
+    content: url(/assets/img/txt-pixabay.png);
+    width: 140px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+  }
+
   .logo {
-    width: 145px;
+    content: url(/assets/img/logo-500.png);
+    width: 140px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
   }
 
   footer {

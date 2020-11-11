@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'main-font';
-  src: url('/assets/style/fonts/Poppins-Light.ttf');
+  src: url('/style/fonts/Poppins-Light.ttf');
 }
 
 * {
@@ -32,7 +32,7 @@ body {
 }
 
 .LogoarenotourPixabay {
-  content: url(/assets/img/txt-pixabay.png);
+  content: url(/img/txt-pixabay.png);
   width: 150px;
   position: relative;
   left: 50%;
@@ -41,7 +41,7 @@ body {
 }
 
 .logo {
-  content: url(/assets/img/logo-800.png);
+  content: url(/img/logo-800.png);
   width: 150px;
   position: relative;
   left: 50%;
@@ -120,7 +120,7 @@ footer {
   }
 
   .LogoarenotourPixabay {
-    content: url(/assets/img/txt-pixabay.png);
+    content: url(/img/txt-pixabay.png);
     width: 140px;
     position: relative;
     left: 50%;
@@ -129,7 +129,7 @@ footer {
   }
 
   .logo {
-    content: url(/assets/img/logo-500.png);
+    content: url(/img/logo-500.png);
     width: 140px;
     position: relative;
     left: 50%;

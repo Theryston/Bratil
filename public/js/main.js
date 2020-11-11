@@ -33,10 +33,10 @@ var autores = window.confirm('quer ativar as respostas automáticas? (baseadas n
 if (url.match('https')) {
   var name = window.prompt('qual é seu nome?')
   var autores = window.confirm('quer ativar as respostas automáticas? (baseadas nos textos em que você copiar)')
-} else {
+}/* else {
   url = url.replace(/http/gi, 'https')
   window.location = url;
-}
+}*/
 
 //autores = true
 
@@ -51,13 +51,13 @@ window.addEventListener('load', () => {
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('start', function() {
-    ImgMicrophone.src = 'assets/img/cut-microphone-300.png'
+    ImgMicrophone.src = '/img/cut-microphone-300.png'
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('end', () => {
-    ImgMicrophone.src = 'assets/img/microphone-200.png'
+    ImgMicrophone.src = '/img/microphone-200.png'
 
     if (baittext.innerTect == 'estou te ouvindo!') {
       baittext.innerHTML = ''
@@ -635,7 +635,7 @@ VoiceRecognition.addEventListener('result',
 
 
     } else if (ClientMessage.match('queimadura') && ClientMessage.match('que') || ClientMessage.match('me') && ClientMessage.match('queimei') || ClientMessage.match('queimou') && ClientMessage.match('se') || ClientMessage.match('se') && ClientMessage.match('queimar') || ClientMessage.match('nos') && ClientMessage.match('queimamos')) {
-      baitmedia.innerHTML = '<br><br><video poster="assets/img/capa-queimadura-1500.png" src="assets/media/queimadura.mp4" class="media" controls><br>'
+      baitmedia.innerHTML = '<br><br><video poster="/img/capa-queimadura-1500.png" src="/media/queimadura.mp4" class="media" controls><br>'
       if (RandomNumber <= 0.5) {
         baittext.innerHTML = '<br> mantenha a calma e siga as instruções do vídeo acima<br><br><br>'
       } else {

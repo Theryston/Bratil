@@ -1,16 +1,17 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const path = require("path")
 
 
 //handlebars
-app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 //pastas
-app.use('/assets', express.static('assets'));
-app.use('/response-chat', express.static('response-chat'));
-app.use('/text_search_content', express.static('text_search_content'));
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'text_search_content')))
+
 
 //Rotas
 app.get('/', function(req, res) {

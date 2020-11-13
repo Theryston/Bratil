@@ -30,6 +30,10 @@ app.get('/search', function(req, res) {
   res.render('search');
 });
 
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
 app.get('*', function(req, res) {
   res.render('no-rota')
 })

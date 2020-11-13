@@ -1,0 +1,91 @@
+<title>faça seu login</title>
+<style>
+@font-face {
+    font-family: 'main-font';
+    src: url('/css/fonts/Poppins-Light.ttf');
+  }
+  
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  body {
+    font-family: 'main-font';
+    color: white;
+    background: rgb(32, 33, 37);
+  }
+  .container1 {
+    width: 95%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    box-shadow: 2px 2px 15px black;
+    padding-bottom: 40px;
+  }
+  
+  .card-body {
+    background: rgb(32, 33, 37);
+  }
+  .eye {
+    position: relative;
+    top: 25%;
+    margin-left: 5px;
+  }
+  .senha {
+    display: flex;
+  }
+</style>
+</head>
+<body>
+  <div class="container container1">
+    <h1 class="mt-4 text-center">login</h1>
+     <div class="card mt-4">
+        <div class="card-body">
+          <form method="post">
+            <label class="card-title mt-4" for="email">E-mail: </label>
+            <input id="email" type="text" name="email" placeholder="digite seu email aqui!" class="form-control">
+            <label class="card-title mt-4" for="senha">Senha: </label>
+            <div class="senha">
+               <input id="senha" type="password" name="senha" placeholder="digite sua senha aqui!" class="form-control">
+               <div id="senhaOlho" onclick="ver()"></div>
+            </div>
+            <input type="hidden" name="ip" id="ip">
+            <button class="btn btn-primary mt-4 " type="submit">Fazer login</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <script>
+    var inputIp = document.getElementById('ip');
+    var inputSenha = document.getElementById('senha');
+    var olho = document.getElementById('senhaOlho');
+    
+    function ver() {
+      if (olho.innerHTML.match('slash')) {
+        inputSenha.type = 'password'
+      } else {
+        inputSenha.type = 'text'
+      }
+    }
+    
+    setInterval(() => {
+      if (inputSenha.type == 'password') {
+            olho.innerHTML = '<i  class="far eye fa-eye"></i>'
+          } else {
+            olho.innerHTML = '<i class="far eye fa-eye-slash"></i>'
+          }
+    }, 0)
+    
+    
+    $.ajax({
+      url: "http://ip-api.com/json/?fields=query",
+      dataType: 'json',
+      success: (data) => {
+        inputIp.value = data.query
+      }
+    })
+  </script>
+</body>

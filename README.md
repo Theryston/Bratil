@@ -1,4 +1,5 @@
-# Bait. Que tal criarmos um novo mundo!?  
+# Bait. que tal mudarmos o mundo!?  
+esta é uma IA (inteligência artificial) que está sendo desenvolvida pelo programador Theryston em um momento no qual ele está aprendendo JavaScript e node.js.
 
 ![](/slogans/normal/logo.png)
 =================================================

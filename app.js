@@ -34,6 +34,10 @@ app.get('/login', (req, res) => {
   res.render('login')
 })
 
+app.get('/sitemap', (req, res) => {
+  res.sendfile('./sitemap.xml')
+})
+
 app.get('*', function(req, res) {
   res.render('no-rota')
 })

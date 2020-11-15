@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
 const path = require("path")
+const search = require('./routes/search');
 
 
 //handlebars
@@ -26,10 +27,6 @@ app.get('/autores', function(req, res) {
   res.render('autores');
 });
 
-app.get('/search', function(req, res) {
-  res.render('search');
-});
-
 app.get('/login', (req, res) => {
   res.render('login')
 })
@@ -37,6 +34,10 @@ app.get('/login', (req, res) => {
 app.get('/sitemap', (req, res) => {
   res.sendfile('./sitemaps/sitemap.xml')
 })
+
+app.use('/search', search)
+
+
 
 app.get('*', function(req, res) {
   res.render('no-rota')

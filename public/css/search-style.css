@@ -85,12 +85,19 @@ header {
   font-size: 1em;
 }
 
-.fa-search {
+#button_sub {
+  color: white;
+  background: rgba(0, 0, 0, 0);
+  border: 0px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 5%;
   font-size: 1.8em;
+}
+
+#button_sub:focus {
+  outline: none;
 }
 
 #text-search:focus {

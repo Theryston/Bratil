@@ -5,22 +5,13 @@ esta é uma IA (inteligência artificial) que está sendo desenvolvida pelo prog
 =================================================
 -------------------------------------------------
 
-### um site com Interface simples porém muito inteligente
-![](slogans/printscreen/home-mobile.png)
+### faça login
+![](slogans/printscreen/login-page.png)
 =================================================
 -------------------------------------------------
-
-#### com uma versão tanto para mobile quanto para PC
-
-PC:
+### interface
 ![](slogans/printscreen/home-pc.png)
-![](slogans/printscreen/passaro-pc.png)
-
--------------------------------------------------
-
-MOBILE:
 ![](slogans/printscreen/home-mobile.png)
-![](slogans/printscreen/passaro-mobile.png)
 -------------------------------------------------
 
 #### para este site foi utilizado as cores "rgb(32, 33, 37); rgb(0, 140, 255); rgb(255, 255, 255);"

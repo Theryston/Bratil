@@ -16,28 +16,22 @@ app.use(express.static(path.join(__dirname, 'text_search_content')))
 
 //Rotas
 app.get('/', function(req, res) {
-  res.render('ia');
+  res.render('index');
 });
 
 app.get('/termos', function(req, res) {
   res.render('termos');
 });
 
-app.get('/autores', function(req, res) {
-  res.render('autores');
-});
-
 app.get('/login', (req, res) => {
   res.render('login')
 })
 
+app.use('/search', search)
+
 app.get('/sitemap', (req, res) => {
   res.sendfile('./sitemaps/sitemap.xml')
 })
-
-app.use('/search', search)
-
-
 
 app.get('*', function(req, res) {
   res.render('no-rota')

@@ -3,16 +3,19 @@ var TextSearch = document.querySelector('#text-search')
 var IconSearch = document.querySelector('.fa-search')
 var section = document.querySelector('#section');
 var header = document.querySelector('#header')
+var title = document.querySelector('#title')
 
 TextSearch.addEventListener('focus', () => {
   header.style.display = 'none'
   section.style.display = 'none'
+  title.style.display = 'none'
   ContainerSearch.style.top = '3em'
   ContainerSearch.style.width = '95vw'
 });
 TextSearch.addEventListener('focusout', () => {
-   header.style.display = 'block'
+  header.style.display = 'block'
   section.style.display = 'block'
+  title.style.display = 'flex'
   ContainerSearch.style.top = '50%'
   ContainerSearch.style.width = '80vw'
 })

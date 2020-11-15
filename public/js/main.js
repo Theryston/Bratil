@@ -47,13 +47,13 @@ window.addEventListener('load', () => {
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('start', function() {
-    ImgMicrophone.src = '/img/cut-microphone-300.png'
+    ImgMicrophone.src = '/img/microphone-cut.svg'
     baitmedia.innerHTML = ''
     baittext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('end', () => {
-    ImgMicrophone.src = '/img/microphone-200.png'
+    ImgMicrophone.src = '/img/microphone.svg'
 
     if (baittext.innerTect == 'estou te ouvindo!') {
       baittext.innerHTML = ''

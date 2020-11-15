@@ -41,7 +41,7 @@ body {
 }
 
 .logo {
-  content: url(/img/logo-800.png);
+  content: url(/img/logo.svg);
   width: 150px;
   position: relative;
   left: 50%;
@@ -121,15 +121,6 @@ footer {
 
   .LogoarenotourPixabay {
     content: url(/img/txt-pixabay.png);
-    width: 140px;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%);
-  }
-
-  .logo {
-    content: url(/img/logo-500.png);
     width: 140px;
     position: relative;
     left: 50%;

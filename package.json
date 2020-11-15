@@ -10,8 +10,14 @@
   "author": "Theryston Santos",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
-    "nodemailer": "^6.4.14"
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.4.14",
+    "sequelize": "^6.3.5"
   }
 }

@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -14,9 +14,9 @@ var termo = "cobertor"
 var artigo = "Cobertor ou manta é um utensílio de tecido, usado como roupa de cama, sobre o lençóis, como proteção contra o frio. Funcionam mantendo o calor do corpo, impedindo que se dissipe."
 
 transporter.sendMail({
-  from: "termos de pesquisas da bait <baitthenew@gmail.com>",
-  to: "funktodo2@gmail.com",
-  subject: "Sobre o sua sugestão " + termo,
+  from: "Bait <baitthenew@gmail.com>",
+  to: ["funktodo2@gmail.com"],
+  subject: "mudança no estilo de email",
   html: `
   
 <html>
@@ -66,15 +66,12 @@ transporter.sendMail({
      <br /> <br /> <br /> <br />
     <a />
     <div id="text">
-      <h1>pesquisas&nbsp;da&nbsp;bait</h1>
+      <h1>novos e-mails da bait</h1>
       
       <br /><br />
       
       <p>
-        Certo! Esta sugestão foi aprovada! já está no meu site o seguinte artigo: <br /><br /><br /><br />` + artigo + 
-        `<br /><br /><br /><br />
-        Basta ir até <a href="https://baitnew-com.umbler.net">meu site</a> e dizer 'oque é um ` + termo + `?'
-        <br /><br /><br />
+        a partir de hoje os e-mails em que eu (Bait) te enviarei será neste formado bem mais bonito graças ao meu programador Theryston
       </p>
     </div>
     

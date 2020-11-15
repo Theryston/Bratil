@@ -35,7 +35,7 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/sitemap', (req, res) => {
-  res.sendfile('./sitemap.xml')
+  res.sendfile('./sitemaps/sitemap.xml')
 })
 
 app.get('*', function(req, res) {

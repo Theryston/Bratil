@@ -85,6 +85,11 @@ header {
   font-size: 1em;
 }
 
+.content-card {
+  position: absolute;
+  left: 50%;
+}
+
 #button_sub {
   color: white;
   background: rgba(0, 0, 0, 0);
@@ -102,6 +107,11 @@ header {
 
 #text-search:focus {
   outline: none;
+}
+
+section {
+  position: absolute;
+  top: 105vh;
 }
 
 @media screen and (max-device-width: 900px) {

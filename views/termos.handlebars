@@ -4,6 +4,10 @@
     font-family: 'main-font';
     src: url('/css/fonts/Poppins-Light.ttf');
   }
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
     body {
       background: rgb(32,33,37);
       color: white;
@@ -11,70 +15,38 @@
       text-align: center;
       font-family: 'main-font';
     }
-    .m {
-      position: absolute;
-      top: 35%;
-      transform: translateY(-35%);
-      margin-bottom: 70px;
-    }
-    #IrParaHome {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .IrParaHome {
       padding-bottom: 10px;
       padding-top: 10px;
       color: white;
-      background: #202125;
+      text-shadow: 0px 0px 0px black;
       font-family: 'main-font';
-      border: 0px;
-      font-size: 15px;
-    }
-    .fa-arrow-circle-left {
-      position: absolute;
-      top: 50%;
-      left: 8%;
-      transform: translate(-8%, -50%);
-      font-size: 30px;
-      color: white;
-    }
-    .IrParaHome {
-      border-radius: 30px;
+      border-radius: 10px;
+      background: rgb(0, 140, 255);
       box-shadow: 2px 2px 6px black;
-      background: #202125;
+      border: 0px;
       width: 250px;
       height: 50px;
-      position: fixed;
-      left: 50%;
-      top: 90%;
-      transform: translate(-50%, -80%);
+      font-size: 15px;
     }
     .IrParaHome:focus {
-      background: #202130;
-      outline: none;
-    }
-    #IrParaHome:focus {
       outline: none;
     }
   </style>
   <title>Bait Company - termos de uso</title>
 </head>
 <body>
-  <div class="m">
-    nós pedimos alguns acessos ao seu aparelho e alguns dados seus; porém, a segurança que você tem é que nenhum dos seus dados fornecidos, chegam até o nosso banco de dados; todos ficam disponíveis apenas temporariamente (após você recarregar a página todos os dados são deletados) por isso é até aconselhável você recarregar a página menor número de vezes possível; para evitar ter que estar adicionando os seus dados de novo
-    (como se estivesse entrado no site pela primeira vez).
+  <div class="container">
+    <h1 style="margin-bottom:100px;margin-top:70px;" class="text-center">termos de uso do <a href="/"> Bait Company</a><span style="font-size:25px;">&copy;</span></h1>
+    
+    <div class="mt-4" style="text-align:left;">
+      	os termos irão aqui!!!
+    </div>
   </div>
 
-  <div onclick="IrParaHome()" class="IrParaHome">
-    <i class="fas fa-arrow-circle-left"></i>
-    <input type="button" value="voltar" id="IrParaHome" />
-  </div>
+<form style="margin-top: 100px;"  action="/user/create" method="post">
+  <input id="box-read" type="checkbox" style="margin-bottom:30px;" required> <label for="box-read">eu li e concordo com os termos</label><br>
+    <button type="submit" class="mb-4 IrParaHome">Continuar</button>
+</form>
 
-
-
-  <script>
-    function IrParaHome() {
-      window.close();
-    };
-  </script>
 </body>

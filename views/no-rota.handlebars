@@ -15,14 +15,16 @@
       position: absolute;
       top: 35%;
       transform: translateY(-35%);
+      margin-bottom: 100px;
     }
     .IrParaHome {
       padding-bottom: 10px;
       padding-top: 10px;
       color: white;
+      text-shadow: 0px 0px 0px black;
       font-family: 'main-font';
-      border-radius: 30px;
-      background: #202125;
+      border-radius: 10px;
+      background: rgb(0, 140, 255);
       box-shadow: 2px 2px 6px black;
       border: 0px;
       position: fixed;
@@ -33,19 +35,22 @@
       transform: translate(-50%, -80%);
       font-size: 15px;
     }
+    img {
+      width: 200px;
+    }
+    @media screen and (max-device-width: 900px) {
+      img {
+        width: 400px;
+      }
+    }
   </style>
-  <title>essa página não existe!</title>
+  <title>Bait Company - esta página não existe!</title>
 </head>
 <body>
   <div class="m">
-    Lamento informar esta página não foi encontrada. (esta página que você acessou pertence ao site bait mais ela não existe não existe).
+  <a href="/"><img src="/img/logo-no-rota.svg" alt="logo no-rota"></a><br>
+    Lamento informar esta página não foi encontrada. Muito provavelmente você acessou uma página inexistente clique no Butão abaixo e vá para a página inicial.
   </div>
-
-
-  <input type="button" value="ir para a página inicial!" class="IrParaHome" onclick="IrParaHome()" />
-  <script>
-    function IrParaHome() {
-      window.location = '/'
-    }
-  </script>
+  
+  <a href="/"><button class="IrParaHome">página inicial</button></a>
 </body>

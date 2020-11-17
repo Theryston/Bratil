@@ -5,16 +5,14 @@
     src: url('/css/fonts/Poppins-Light.ttf');
   }
     body {
-      background: rgb(32,33,37);
-      color: white;
+      background: white;
+      color: black;
       font-size: 15px;
       text-align: center;
       font-family: 'main-font';
     }
     .m {
-      position: absolute;
-      top: 35%;
-      transform: translateY(-35%);
+      margin-top: 0px;
       margin-bottom: 100px;
     }
     .no-rota-logo {
@@ -25,15 +23,18 @@
     @media screen and (max-device-width: 900px) {
       .no-rota-logo {
         width: 100vw;
-        margin-bottom: 70px;
+        height: 30vh;
+        object-fit: cover;
+        margin-bottom: 180px;
       }
     }
   </style>
-  <title>Bait Company - esta página não encontrada!</title>
+  <title>Bait Company - 404 página não encontrada!</title>
 </head>
 <body>
   <div class="m">
-  <a href="/"><img class="no-rota-logo" src="/img/logo-no-rota.svg" alt="logo no-rota"></a><br>
+  <a href="/"><img class="no-rota-logo" src="/img/404.svg" alt="logo no-rota"></a><br>
     Lamento informar que esta página não foi encontrada! Você acessou uma página inexistente no site "<a href="/">Bait Company</a>".
     </div>
+    <div style="background:rgb(32,33,37); margin-top:33vh;color:white;">{{>_footer}}</div>
 </body>

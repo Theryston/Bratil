@@ -20,11 +20,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/termos', function(req, res) {
-  res.render('termos');
+  res.render('user/termos');
 });
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('user/login')
 })
 
 app.use('/search', search)
@@ -33,8 +33,12 @@ app.get('/sitemap', (req, res) => {
   res.sendfile('./sitemaps/sitemap.xml')
 })
 
+app.get('/404', (req, res) => {
+  res.render('error/404')
+})
+
 app.get('*', function(req, res) {
-  res.render('no-rota')
+  res.redirect('/404')
 })
 
 app.listen(3000, () => {

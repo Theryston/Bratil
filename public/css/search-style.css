@@ -114,12 +114,27 @@ section {
   top: 105vh;
 }
 
+
+.container-search-illustration {
+  display: flex;
+  justify-content: center;
+}
+
+.search-illustration {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  width: 50vw;
+}
+
 @media screen and (max-device-width: 900px) {
   #title {
-  position: absolute;
-  top: 32%;
-  left: 50%;
-  transform: translate(-50%, -32%);
-  z-index: 3;
-}
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -32%);
+    z-index: 3;
+  }
+  .search-illustration {
+    width: 100vw;
+  }
 }

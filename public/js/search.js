@@ -4,6 +4,7 @@ var IconSearch = document.querySelector('.fa-search')
 var section = document.querySelector('#section');
 var header = document.querySelector('#header')
 var title = document.querySelector('#title')
+var containerSearchIllustration = document.querySelector('.container-search-illustration')
 
 TextSearch.addEventListener('focus', () => {
   header.style.display = 'none'
@@ -18,4 +19,8 @@ TextSearch.addEventListener('focusout', () => {
   title.style.display = 'flex'
   ContainerSearch.style.top = '50%'
   ContainerSearch.style.width = '80vw'
-})
+});
+
+containerSearchIllustration.addEventListener('click', () => {
+  TextSearch.focus()
+});

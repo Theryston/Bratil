@@ -3,6 +3,7 @@ const app = express();
 const handlebars = require('express-handlebars');
 const path = require("path")
 const search = require('./routes/search');
+const user = require('./routes/user');
 
 
 //handlebars
@@ -19,16 +20,6 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/termos', function(req, res) {
-  res.render('user/termos');
-});
-
-app.get('/login', (req, res) => {
-  res.render('user/login')
-})
-
-app.use('/search', search)
-
 app.get('/sitemap', (req, res) => {
   res.sendfile('./sitemaps/sitemap.xml')
 })
@@ -36,6 +27,9 @@ app.get('/sitemap', (req, res) => {
 app.get('/404', (req, res) => {
   res.render('error/404')
 })
+
+app.use('/search', search)
+app.use('/user', user)
 
 app.get('*', function(req, res) {
   res.redirect('/404')

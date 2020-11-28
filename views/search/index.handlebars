@@ -16,12 +16,9 @@
       </label>
     </div>
   </header>
-  <div id="container-search">
-   <form action="/serach" method="post">
-      <input type="text" id="text-search" placeholder="faça sua pesquisa!" required />
-      <button id="button_sub" type="submit"><li class="fas fa-search" ></li></button>
-   </form>
-  </div>
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  {{>search/form}}
+  <div></div>
   <section id="section">
     <div class="container">
       <label for="text-search">

@@ -58,57 +58,6 @@ header {
   z-index: 2;
 }
 
-#container-search {
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 4;
-  width: 80vw;
-  height: 3.5em;
-  background: black;
-  border-radius: 5em;
-  transition: all 0.6s;
-}
-
-#text-search {
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 6%;
-  height: 90%;
-  width: 80%;
-  transform: translateY(-50%);
-  border: 0px;
-  background: black;
-  font-size: 1em;
-}
-
-.content-card {
-  position: absolute;
-  left: 50%;
-}
-
-#button_sub {
-  color: white;
-  background: rgba(0, 0, 0, 0);
-  border: 0px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 5%;
-  font-size: 1.8em;
-}
-
-#button_sub:focus {
-  outline: none;
-}
-
-#text-search:focus {
-  outline: none;
-}
-
 section {
   position: absolute;
   top: 105vh;

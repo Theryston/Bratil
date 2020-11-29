@@ -1,77 +1,136 @@
-  <title>Brati Search - {{question}}</title>
-  <style>
-    @font-face {
-    font-family: 'main-font';
-    src: url('/css/fonts/Poppins-Light.ttf');
-    }
-    * {
-      margin: 0px;
-      padding: 0px;
-      font-family: 'main-font';
-    }
-    body {
-      background: rgb(32,33,37);
-      color: white;
-    }
-  </style>
+		<title>Brati Search - {{question}}</title>
+		<style>
+			@font-face {
+				font-family: 'main-font';
+				src: url('/css/fonts/Poppins-Light.ttf');
+			}
+				* {
+					margin: 0px;
+					padding: 0px;
+					font-family: 'main-font';
+				}
+				body {
+					background: rgb(32,33,37);
+					color: white;
+				}
+				
+			
+				.res {
+					height: auto;
+    			width: auto;
+    			background: linear-gradient(to bottom, white, transparent) !important;
+    
+    			-webkit-background-clip: text !important;
+    			-webkit-text-fill-color: transparent !important;
+				}
+				
+		</style>
 </head>
 <body>
-	
-  <div style="position:absolute; top:50px; left:50%; transform:translateX(-50%);">
-  		{{>search/form}}
-  </div>
-  <div class="container" style="margin-top: 150px;">
-    <hr style="background-color:white;">
-    <h1 style="margin-top:40px; font-size:25pt;" >Veja isso: </h1>
-    <div id="loading" class="text-center">
-      <div class="mt-4 spinner-grow bg-primary"></div>
-    </div>
-    <div id="res" style="margin-top:70px; margin-bottom:100px;">
-      
-    </div>
-  </div>
-  {{>_footer}}
-  <script>
-    var res = document.getElementById('res');
-    var loading = document.getElementById('loading')
-    var searchForm = document.getElementById('searchForm')
-    textSearch = document.getElementById('text-search')
-    
-    {{#if question}}
-    
-    $.getJSON('/search/response/{{question}}', (respon) => {
-      respon.response.forEach((this_response) => {
-        
-        loading.style.display = 'none'
-        
-        res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-        <p>${this_response[0]}</p>
-        <a href="/search/response/${this_response[1]}"><button class="nt-4 btn btn-outline-primary">Veja mais!</button></a>
-        
-        </div></div>`
-        
-      })
-    })
-    {{else}}
-   loading.style.display = 'none'
-    res.innerHTML = `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-        <p>Nenhuma pesquisa foi feita, clique no butão abaixo e faça uma pesquisa agora!</p>
-        <button onclick="document.getElementById('text-search').focus()" class="nt-4 btn btn-outline-primary">Pesquisar agora!</button>
-        
-        </div></div>`
-    	$('#searchForm').submit((form) => {
-      	res.innerHTML = ``
-      	loading.style.display = 'block'
-    		form.preventDefault();
-    		
-    		//getJ
-    		
-     	})
-    {{/if}}
-  </script>
-  
-    <script>
-  	eruda.init()
-  </script>
 
-</body>
+	<div style="position:absolute; top:50px; left:50%; transform:translateX(-50%);">
+		{{>search/form}}
+	</div>
+	<div class="container" style="margin-top: 150px;">
+		<hr style="background-color:white;">
+		<h1 style="margin-top:40px; font-size:25pt;">Veja isso: </h1>
+		<div id="loading" class="text-center">
+			<div class="mt-4 spinner-grow bg-primary"></div>
+		</div>
+		<div id="res" style="margin-top:70px; margin-bottom:100px;">
+
+		</div>
+	</div>
+	{{>_footer}}
+	<script>
+		var res = document.getElementById('res');
+		var loading = document.getElementById('loading')
+		var searchForm = document.getElementById('searchForm')
+		textSearch = document.getElementById('text-search')
+		
+		{{#if question}}
+
+		$.getJSON('/search/response?question={{question}}', (response) => {
+
+			loading.style.display = 'none'
+
+
+			if (response[0].error) {
+
+
+				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+
+				<p>${response[0].error}</p>
+
+				</div></div>`
+			} else {
+
+				response.forEach((this_response) => {
+					
+					this_response.content =  this_response.content.noHTML()
+
+					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+					<p class="res">${this_response.contentSmall}</p>
+					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
+
+					</div></div>`
+
+				})
+			}
+		})
+
+		$('#searchForm').submit((form) => {
+			searchNow(form)
+		}) 
+		
+		{{else}}
+		
+		$('#searchForm').submit((form) => {
+			searchNow(form)
+		})
+		$('#searchForm').submit() 
+		{{/if}}
+
+			function searchNow(form) {
+				loading.style.display = 'none'
+				res.innerHTML = `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+				<p>Nenhuma pesquisa foi feita, clique no butão abaixo e faça uma pesquisa agora!</p>
+				<button onclick="document.getElementById('text-search').focus()" class="mt-4 btn btn-outline-primary">Pesquisar agora!</button>
+
+				</div></div>`
+
+				res.innerHTML = ``
+				loading.style.display = 'block'
+				form.preventDefault();
+
+				$.getJSON('/search/response?question=' + textSearch.value, (response) => {
+
+					loading.style.display = 'none'
+
+								if (response[0].error) {
+
+
+				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+
+				<p>${response[0].error}</p>
+
+				</div></div>`
+			} else {
+
+				response.forEach((this_response) => {
+					
+					this_response.content =  this_response.content.noHTML()
+
+					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+					<p class="res">${this_response.contentSmall}</p>
+					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
+
+					</div></div>`
+
+				})
+			}
+				})
+			}
+
+		</script>
+	</body>

@@ -1,25 +1,61 @@
 const express = require('express');
 const router = express.Router();
-const TermsSearch = require('../models/TermsSearch')
+const Search = require('../models/Search')
 
 
 router.get('/', function(req, res) {
-  res.render('search/index');
+	res.render('search/index');
 });
 
 router.get('/response/page', (req, res) => {
-  res.render('search/response', {
-    question: req.query["question"]
-  })
+	res.render('search/response', {
+		question: req.query["question"]
+	})
 })
 
-router.get('/response/:question', (req, res) => {
-  res.send({
-    response: [
-      ['Lorem ipsum imperdiet ad lobortis hac eleifend scelerisque ipsum fusce, vivamus tincidunt nisi fusce proin nostra habitasse rhoncus ullamcorper, donec sagittis non tempor convallis et quisque tempor. nulla fusce nostra a porta per integer, enim lacus egestas elementum vestibulum sapien porttitor, curae quisque ut quam cras.', 1],
-      ['ante non diam sociosqu erat, dictumst sem elit lorem himenaeos donec rutrum adipiscing tempus sapien. netus dictum quam nulla aptent fermentum faucibus tempus, turpis sagittis sem nullam ad nisi dolor ad, elementum consequat blandit donec ut consectetur. ', 2]
-      ]
-  })
+router.get('/response', (req, res) => {
+	if (req.query["question"] && req.query["question"] != 'test') {
+		res.send([{
+			content: `<h1>teste</h1> 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+
+	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
+
+	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+
+	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+
+	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+
+	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
+
+	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+
+	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+
+	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. `,
+	contentSmall: '	Lorem ipsum quam massa congue eleifend consectetur lacus odio quis risus cras, curae vehicula diam nisl ad non consequat inceptos himenaeos aliquet class, ad malesuada ac nostra ultrices sollicitudin quisque arcu sollicitudin cursus. mauris fames nulla curabitur primis felis habitasse vulputate pulvinar eros quisque libero cubilia, quisque sociosqu posuere libero dui pharetra etiam venenatis leo ipsum hac, eleifend cursus turpis torquent dapibus fringilla vestibulum etiam fringilla platea nec. ullamcorper commodo ac vulputate sit sed mauris mi, ultrices habitant urna ante vitae platea litora mollis, hac pharetra aenean cras platea nibh.',
+			id: 1
+		},
+			{
+				content: `<h1>teste</h1> 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+
+	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
+
+	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+
+	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+
+	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. `,
+	contentSmall: `	Lorem ipsum quam massa congue eleifend consectetur lacus odio quis risus cras, curae vehicula diam nisl ad non consequat inceptos himenaeos aliquet class, ad malesuada ac nostra ultrices sollicitudin quisque arcu sollicitudin cursus. mauris fames nulla curabitur primis felis habitasse vulputate pulvinar eros quisque libero cubilia, quisque sociosqu posuere libero dui pharetra etiam venenatis leo ipsum hac, eleifend cursus turpis torquent dapibus fringilla vestibulum etiam fringilla platea nec. ullamcorper commodo ac vulputate sit sed mauris mi, ultrices habitant urna ante vitae platea litora mollis, hac pharetra aenean cras platea nibh. `,
+				id: 2
+			}])
+	} else {
+		res.send([
+			{
+				error: "Nenhuma pesquisa foi detectada!"
+			}
+		])
+	}
 })
 
 

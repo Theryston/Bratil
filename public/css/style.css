@@ -41,7 +41,7 @@ body {
 }
 
 .logo {
-  content: url(/img/logo.svg);
+  content: url(/img/logo.png);
   width: 150px;
   position: relative;
   left: 50%;
@@ -73,7 +73,7 @@ footer {
   height: 85%;
 }
 
-.BaitMessage {
+.BratilMessage {
   box-shadow: 2px 2px 6px black;
   background: #202125;
   position: absolute;
@@ -87,7 +87,7 @@ footer {
   margin-bottom: 50px;
 }
 
-.BaitMedia {
+.BratilMedia {
   width: 100%;
 }
 
@@ -152,7 +152,7 @@ footer {
     height: 80%;
   }
 
-  .BaitMessage {
+  .BratilMessage {
     box-shadow: 2px 2px 6px black;
     background: #202125;
     position: absolute;
@@ -166,7 +166,7 @@ footer {
     width: 100%;
   }
 
-  .BaitMedia {
+  .BratilMedia {
     width: 100%;
   }
 

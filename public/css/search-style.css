@@ -1,89 +1,102 @@
 @font-face {
-  font-family: 'main-font';
-  src: url('/css/fonts/Poppins-Light.ttf');
+	font-family: 'main-font';
+	src: url('/css/fonts/Poppins-Light.ttf');
 }
 
 * {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 body {
-  font-family: 'main-font';
-  color: white;
-  background: rgb(32, 33, 37);
+	font-family: 'main-font';
+	color: white;
+	background: rgb(32, 33, 37);
+}
+
+.termSearch {
+	height: auto;
+	width: auto;
+	background: linear-gradient(to bottom, white, transparent) !important;
+
+	-webkit-background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+}
+
+hr {
+	background-color: white;
 }
 
 header {
-  position: absolute;
-  z-index: 0;
-  height: 100vh;
-  width: 100vw;
-  transition: all 0.6s;
+	position: absolute;
+	z-index: 0;
+	height: 100vh;
+	width: 100vw;
+	transition: all 0.6s;
 }
 
 #background-serach {
-  position: absolute;
-  top: 0px;
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
-  z-index: 1;
+	position: absolute;
+	top: 0px;
+	height: 100vh;
+	width: 100vw;
+	object-fit: cover;
+	z-index: 1;
 }
 
 #title {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -10%);
-  z-index: 3;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, -10%);
+	z-index: 3;
 }
 
 #title h1 {
-  text-align: center;
-  font-size: 2.5em;
+	text-align: center;
+	font-size: 2.5em;
 }
 
 #title p {
-  text-align: center;
-  font-size: 0.9em;
+	text-align: center;
+	font-size: 0.9em;
 }
 
 #background-pelicula {
-  position: absolute;
-  top: 0px;
-  background: #00000088;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
+	position: absolute;
+	top: 0px;
+	background: #00000088;
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
 }
 
 section {
-  position: absolute;
-  top: 105vh;
+	position: absolute;
+	top: 105vh;
 }
 
 
 .container-search-illustration {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .search-illustration {
-  margin-top: 60px;
-  margin-bottom: 60px;
-  width: 50vw;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	width: 50vw;
 }
 
 @media screen and (max-device-width: 900px) {
-  #title {
-    position: absolute;
-    top: 32%;
-    left: 50%;
-    transform: translate(-50%, -32%);
-    z-index: 3;
-  }
-  .search-illustration {
-    width: 100vw;
-  }
+	#title {
+		position: absolute;
+		top: 32%;
+		left: 50%;
+		transform: translate(-50%, -32%);
+		z-index: 3;
+	}
+	.search-illustration {
+		width: 100vw;
+	}
 }

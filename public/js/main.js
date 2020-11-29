@@ -1,14 +1,14 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var VoiceRecognition = new SpeechRecognition()
 const utterance = new window.SpeechSynthesisUtterance();
-const baitmessage = document.querySelector('.BaitMessage');
-const baitmedia = document.querySelector('.BaitMedia');
-const baittext = document.querySelector('.text');
+const bratilmessage = document.querySelector('.BratilMessage');
+const bratilmedia = document.querySelector('.BratilMedia');
+const bratiltext = document.querySelector('.text');
 const creditosBox = document.querySelector('.credito-box')
 const creditos = document.querySelector('.creditos')
 const microphone = document.querySelector('.microphone');
 var ClientHistoric = document.querySelector('.ClientHistoric');
-var baitalert = document.querySelector('.alert');
+var bratilalert = document.querySelector('.alert');
 var ImgMicrophone = document.querySelector(' #microphone-home')
 
 utterance.lang = 'pt-br';
@@ -21,8 +21,8 @@ VoiceRecognition.lang = 'pt-br';
 
 window.addEventListener('load', () => {
   navigator.vibrate(100)
-  baitalert.play();
-  baittext.innerHTML = ``
+  bratilalert.play();
+  bratiltext.innerHTML = ``
 });
 
 
@@ -31,25 +31,25 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('start', function() {
     ImgMicrophone.src = '/img/microphone-cut.svg'
-    baitmedia.innerHTML = ''
-    baittext.innerHTML = 'estou te ouvindo!'
+    bratilmedia.innerHTML = ''
+    bratiltext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('end', () => {
     ImgMicrophone.src = '/img/microphone.svg'
 
-    if (baittext.innerText == 'estou te ouvindo!') {
-      baittext.innerHTML = ''
-      baitmedia.innerHTML = `<div class="logo"></div>`
+    if (bratiltext.innerText == 'estou te ouvindo!') {
+      bratiltext.innerHTML = ''
+      bratilmedia.innerHTML = `<div class="logo"></div>`
     }
   })
 
   microphone.addEventListener('click', () => {
 
     creditos.style.display = 'none'
-    baitmedia.innerHTML = ``
+    bratilmedia.innerHTML = ``
 
-    if (baittext.innerText == 'estou te ouvindo!') {
+    if (bratiltext.innerText == 'estou te ouvindo!') {
       VoiceRecognition.stop();
     } else {
       VoiceRecognition.start();
@@ -57,9 +57,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
 
     if ($(document).height() <= 1000) {
-      baittext.style.fontSize = '10pt'
+      bratiltext.style.fontSize = '10pt'
     } else {
-      baittext.style.fontSize = '11pt'
+      bratiltext.style.fontSize = '11pt'
     }
 
     navigator.vibrate(40)
@@ -97,11 +97,11 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   VoiceRecognition.addEventListener('error', (error) => {
     const RandomNumber = Math.random()
 
-    baitmedia.innerHTML = ''
+    bratilmedia.innerHTML = ''
     if (RandomNumber <= 0.5) {
-      baittext.innerHTML = 'houve um erro, por favor tente novamente'
+      bratiltext.innerHTML = 'houve um erro, por favor tente novamente'
     } else {
-      baittext.innerHTML = 'desculpe não entendi, por favor tente novamente'
+      bratiltext.innerHTML = 'desculpe não entendi, por favor tente novamente'
     }
 
   })
@@ -112,8 +112,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
     })
 
 } else {
-  baitmedia.innerHTML = ''
-  baittext.innerHTML = 'infelizmente o seu navegador não suporta a minha tecnologia. use o Google Chrome'
+  bratilmedia.innerHTML = ''
+  bratiltext.innerHTML = 'infelizmente o seu navegador não suporta a minha tecnologia. use o Google Chrome'
 }
 
 window.addEventListener('click', () => {

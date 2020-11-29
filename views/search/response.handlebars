@@ -16,7 +16,9 @@
   </style>
 </head>
 <body>
-  <div style="position:absolute; top:50px; left:50%; transform:translateX(-50%);">{{>search/form}}</div>
+  <div style="position:absolute; top:50px; left:50%; transform:translateX(-50%);">
+  		{{>search/form}}
+  </div>
   <div class="container" style="margin-top: 150px;">
     <hr style="background-color:white;">
     <h1 style="margin-top:40px; font-size:25pt;" >Veja isso: </h1>
@@ -32,6 +34,12 @@
   <script>
     var res = document.getElementById('res');
     var loading = document.getElementById('loading')
+    var searchForm = document.getElementById('searchForm')
+    textSearch = document.getElementById('text-search')
+    
+      $('#searchForm').submit((form) => {
+    	form.preventDefault()
+     })
     
     $.getJSON('/search/response', (respon) => {
       respon.response.forEach((this_response) => {
@@ -47,4 +55,5 @@
       })
     })
   </script>
+
 </body>

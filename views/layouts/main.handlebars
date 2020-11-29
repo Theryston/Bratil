@@ -23,22 +23,16 @@
   
     <script src="/js/jquery.js"></script>
     
+      <script src="/node_modules/eruda/eruda.js"></script>
+	<script src="/node_modules/eruda-dom/eruda-dom.js"></script>
+	<script src="/node_modules/eruda-code/eruda-code.js"></script>
     
     <link rel="stylesheet" href="/css/bootstrap.css">
   
   {{{body}}}
   <script src="/js/bootstrap.bundle.js"></script>
-  <script src="/node_modules/eruda/eruda.js"></script>
-	<script src="/node_modules/eruda-dom/eruda-dom.js"></script>
 	<script>
-		let el = document.createElement('div');
-		document.body.appendChild(el);
-	
-		eruda.init({
-	    container: el,
-	    tool: ['console', 'elements']
-		});
-		
 		eruda.add(erudaDom);
+		eruda.add(erudaCode);
 	</script>
 </html>

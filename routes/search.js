@@ -3,7 +3,6 @@ const router = express.Router();
 const Search = require('../models/Search')
 const SearchInDatabase = require('../robots/search/SearchInDatabase')
 
-
 router.get('/', function(req, res) {
 	res.render('search/index');
 });
@@ -15,9 +14,11 @@ router.get('/response/page', (req, res) => {
 })
 
 router.get('/response', (req, res) => {
-	
-		res.send(SearchInDatabase(req.query["question"]))
-	
+	SearchInDatabase(req.query["question"]).then((success) => {
+		res.send(success)
+	}).catch((erro) => {
+		res.send(erro)
+	})
 })
 
 

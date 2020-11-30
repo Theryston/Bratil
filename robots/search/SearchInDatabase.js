@@ -1,48 +1,77 @@
 const SearchInDatabase = (question) => {
-	
-	if (question && typeof question != null && question != undefined) {
-	
-	var test = [{
-			content: `<h1>teste</h1> 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+	const SearchModule = require('../../models/Search')
 
-	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
 
-	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+	return new Promise((resolve, reject) => {
 
-	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+		SearchModule.findAll({
+			raw: true
+		}).then(searches => {
 
-	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+			async	function treatText(text) {
+				if (text && typeof text != null && text != undefined) {
 
-	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
+					text = text.toLowerCase();
 
-	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+					return text.split(' ')
+				} else {
+					return	[{
+						error: "Nenhuma texti foi inserido!"
+					}]
+				}
+			}
 
-	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+			async function searchTitle() {
 
-	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. `,
-	contentSmall: '	Lorem ipsum quam massa congue eleifend consectetur lacus odio quis risus cras, curae vehicula diam nisl ad non consequat inceptos himenaeos aliquet class, ad malesuada ac nostra ultrices sollicitudin quisque arcu sollicitudin cursus. mauris fames nulla curabitur primis felis habitasse vulputate pulvinar eros quisque libero cubilia, quisque sociosqu posuere libero dui pharetra etiam venenatis leo ipsum hac, eleifend cursus turpis torquent dapibus fringilla vestibulum etiam fringilla platea nec. ullamcorper commodo ac vulputate sit sed mauris mi, ultrices habitant urna ante vitae platea litora mollis, hac pharetra aenean cras platea nibh.',
-			id: 1
-		},
-			{
-				content: `<h1>teste</h1> 	Lorem ipsum ad enim integer sollicitudin hac, fermentum nisi tellus imperdiet porttitor, vivamus blandit nec mattis taciti. commodo a iaculis vivamus per himenaeos lobortis, rhoncus proin curae morbi rutrum congue quisque, morbi lacinia hac habitasse at. et morbi netus velit consectetur integer ullamcorper nisi class, pharetra velit curae cursus non molestie non iaculis nam, dictumst donec bibendum laoreet orci venenatis aenean. per vulputate facilisis lorem augue conubia nullam nisl sapien ipsum, imperdiet dictum orci himenaeos egestas vel massa tortor tristique, proin ultrices congue consequat hendrerit magna aliquam senectus. gravida ullamcorper dictum tristique condimentum neque ante primis, sapien molestie posuere lacinia ut eros consequat urna, fermentum leo fringilla senectus maecenas risus. 
+				var questionTreated = await treatText(question)
+				var foundTitle = []
+				var orderTitle
+				var times = 0
+				var foundWord = 0
+				var pasSearchTitle = ''
 
-	Eget ipsum leo tortor diam curae ultrices rutrum, ornare velit dui porta sollicitudin ultrices phasellus bibendum, feugiat vivamus curabitur senectus nisi consequat. et adipiscing eros lobortis vel amet fermentum convallis, pharetra purus metus inceptos facilisis bibendum placerat, elit odio aenean curabitur sollicitudin platea. erat nunc quam sapien mi proin aliquam ultricies cras dictum, curabitur in inceptos sodales accumsan enim varius arcu, consequat in dapibus tortor in justo aliquam congue. sapien laoreet non aptent primis maecenas condimentum malesuada torquent pretium arcu posuere porta ligula enim, quam malesuada risus mi per etiam libero nostra porta arcu potenti adipiscing diam. 
 
-	Vulputate morbi aliquam nostra facilisis phasellus vivamus fusce, integer class fringilla sit mi scelerisque nunc, taciti arcu cras ligula sollicitudin consequat. risus est metus non amet facilisis vel libero nunc, pellentesque aliquet curae semper curabitur tristique fermentum, velit congue luctus malesuada ultrices dictumst fringilla. iaculis elementum lacus sagittis sapien tempus odio himenaeos, elementum quis sagittis auctor blandit at, metus commodo turpis ut egestas diam. imperdiet sagittis neque nec himenaeos non facilisis ligula primis mauris, molestie porttitor mauris phasellus risus aptent class. habitasse elit interdum ligula curabitur quis molestie pretium ad laoreet, ultricies arcu aenean ut urna lobortis venenatis elit nulla, placerat enim vulputate sociosqu egestas pulvinar lectus sapien. 
+				questionTreated.forEach((questionIndex) => {
+					searches.forEach((searchesIndex) => {
+						var titleTreated = searchesIndex.title.toLowerCase().split(' ')
 
-	Fringilla egestas quis tincidunt tempor nam eu quis odio tincidunt mollis id aptent, suspendisse donec vehicula elit nisi maecenas magna ullamcorper cubilia duis euismod. interdum mauris rhoncus metus urna commodo leo posuere vehicula erat, taciti scelerisque taciti lacus bibendum suscipit dictum integer dapibus, aptent pretium inceptos torquent commodo posuere in erat. nisl posuere nostra convallis posuere sagittis taciti eu mattis sociosqu, tristique posuere curabitur feugiat praesent nam lacus nulla, vehicula ante quisque metus cubilia in pulvinar magna. suspendisse nunc commodo lacus a habitant justo malesuada inceptos ornare id, mi eu laoreet dolor rutrum interdum gravida fringilla varius. 
+						if (titleTreated.indexOf(questionIndex) != -1) {
 
-	Quis consectetur pretium cubilia interdum duis feugiat porta, eleifend leo torquent phasellus nisi inceptos ullamcorper, netus congue sodales suscipit auctor cras. dui gravida suscipit odio ultricies dapibus adipiscing praesent lorem habitant eu viverra, ligula blandit diam erat senectus enim vehicula tempus ad volutpat massa, molestie etiam dolor eget donec inceptos ad ligula torquent primis. duis porttitor tempus urna aliquam curabitur ac donec hac arcu, etiam faucibus quis libero lacus nam et. fringilla felis faucibus mi neque blandit lobortis mattis quisque tincidunt, libero tempus curabitur duis lacinia nisl enim. `,
-	contentSmall: `	Lorem ipsum quam massa congue eleifend consectetur lacus odio quis risus cras, curae vehicula diam nisl ad non consequat inceptos himenaeos aliquet class, ad malesuada ac nostra ultrices sollicitudin quisque arcu sollicitudin cursus. mauris fames nulla curabitur primis felis habitasse vulputate pulvinar eros quisque libero cubilia, quisque sociosqu posuere libero dui pharetra etiam venenatis leo ipsum hac, eleifend cursus turpis torquent dapibus fringilla vestibulum etiam fringilla platea nec. ullamcorper commodo ac vulputate sit sed mauris mi, ultrices habitant urna ante vitae platea litora mollis, hac pharetra aenean cras platea nibh. `,
-				id: 2
-			}]
-	
-	return test;
+							foundTitle.forEach((InfoundTitle) => {
+								if (InfoundTitle.response.title == searchesIndex.title) {
+									foundTitle.splice(foundTitle.indexOf(searchesIndex.title), 1)
+								}
+							})
+							foundWord++
+							times++
 
-} else {
-	return [{error: "Nenhuma pesquisa foi detectada!"}]
-}
+							foundTitle.push({
+								response: searchesIndex,
+								foundWord: foundWord
+							})
 
+						}
+					})
+				})
+
+				return foundTitle
+			}
+
+
+			void async function() {
+				var total = await searchTitle()
+				console.log(total)
+			}()
+
+
+
+
+		}).catch(() => {
+			reject([{
+				error: "Houve um erro ao se conectar com o banco de dados!"
+			}])
+		})
+	})
 }
 
 module.exports = SearchInDatabase;

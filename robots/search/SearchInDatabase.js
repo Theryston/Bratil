@@ -11,9 +11,9 @@ const SearchInDatabase = (question) => {
 			async	function treatText(text) {
 				if (text && typeof text != null && text != undefined) {
 
-					text = text.toLowerCase();
+					var textmin = text.toLowerCase();
 
-					return text.split(' ')
+					return textmin.split(' ')
 				} else {
 					return	[{
 						error: "Nenhuma texti foi inserido!"
@@ -21,50 +21,41 @@ const SearchInDatabase = (question) => {
 				}
 			}
 
-			async function searchTitle() {
+			async function searchTitle(array, init, value) {
 
-				var questionTreated = await treatText(question)
-				var foundTitle = []
-				var orderTitle
-				var times = 0
-				var foundWord = 0
-				var pasSearchTitle = ''
-
-
-				questionTreated.forEach((questionIndex) => {
-					searches.forEach((searchesIndex) => {
-						var titleTreated = searchesIndex.title.toLowerCase().split(' ')
-
-						if (titleTreated.indexOf(questionIndex) != -1) {
-
-							foundTitle.forEach((InfoundTitle) => {
-								if (InfoundTitle.response.title == searchesIndex.title) {
-									foundTitle.splice(foundTitle.indexOf(searchesIndex.title), 1)
-								}
-							})
-							foundWord++
-							times++
-
-							foundTitle.push({
-								response: searchesIndex,
-								foundWord: foundWord
-							})
-
-						}
-					})
-				})
-
-				return foundTitle
+				if (array[init]) {
+					if (array[init].title.toLowerCase() == value.toLowerCase()) {
+						return array[init]
+					} else {
+						return searchTitle(array, init+1, value)
+					}
+				} else {
+					return {
+						error: "Não achei nenhuma resposta parece sua pesquisa!"
+					}
+				}
 			}
 
 
+
+			async function orderTheRobotToSearch() {
+				var questionTreated = await treatText(question)
+				var response = []
+				var rusults = ''
+
+				for (let i = 0; i < questionTreated.length; i++) {
+					rusults = await searchTitle(searches, 0, questionTreated[i]);
+					
+					response.push(rusults)
+				}
+
+				return response
+			}
+
 			void async function() {
-				var total = await searchTitle()
-				console.log(total)
+				var res = await orderTheRobotToSearch()
+				console.log(res)
 			}()
-
-
-
 
 		}).catch(() => {
 			reject([{

@@ -13,6 +13,7 @@ app.set('view engine', 'handlebars')
 //pastas
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'text_search_content')))
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 
 
 //Rotas

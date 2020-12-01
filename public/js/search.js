@@ -10,7 +10,6 @@ TextSearch.addEventListener('focus', () => {
   header.style.display = 'none'
   section.style.display = 'none'
   title.style.display = 'none'
-  ContainerSearch.style.top = '3em'
   ContainerSearch.style.width = '95vw'
 });
 TextSearch.addEventListener('focusout', () => {

@@ -55,22 +55,22 @@
 			loading.style.display = 'none'
 
 
-			if (response[0].error) {
+			if (response.message != 'OK') {
 
 
 				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
 
-				<p>${response[0].error}</p>
+				<p>Houve um erro ao fazer sua pesquisa</p>
 
 				</div></div>`
-			} else {
+			} else { 
 
-				response.forEach((this_response) => {
+				response.result.forEach((this_response) => {
 					
 					this_response.content =  this_response.content.noHTML()
 
 					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-					<p class="res">${this_response.contentSmall}</p>
+					<p class="res">${this_response.content}</p>
 					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
 
 					</div></div>`
@@ -107,22 +107,22 @@
 
 					loading.style.display = 'none'
 
-								if (response[0].error) {
+								if (response.message != 'OK') {
 
 
 				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
 
-				<p>${response[0].error}</p>
+				<p>Houve um erro ao fazer sua pesquisa</p>
 
 				</div></div>`
 			} else {
 
-				response.forEach((this_response) => {
+				response.result.forEach((this_response) => {
 					
 					this_response.content =  this_response.content.noHTML()
 
 					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-					<p class="res">${this_response.contentSmall}</p>
+					<p class="res">${this_response.content}</p>
 					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
 
 					</div></div>`

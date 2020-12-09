@@ -24,6 +24,14 @@
     			-webkit-text-fill-color: transparent !important;
 				}
 				
+				#loading {
+					{{#if question}}
+					display: block;
+					{{else}}
+					display: none;
+					{{/if}}
+				}
+				
 		</style>
 </head>
 <body>
@@ -38,7 +46,11 @@
 			<div class="mt-4 spinner-grow bg-primary"></div>
 		</div>
 		<div id="res" style="margin-top:70px; margin-bottom:100px;">
-
+			<div class="mt-4 card">
+				<div class="card-body" style="background:rgb(32,33,37);">
+					<label for="text-search"><p>Você não fez nenhuma pesquisa. Faça sua pesquisa agora!</p></label>
+					</div>
+				</div>
 		</div>
 	</div>
 	{{>_footer}}
@@ -54,6 +66,7 @@
 
 			loading.style.display = 'none'
 
+textSearch.value = "{{question}}"
 
 			if (response.message != 'OK') {
 
@@ -64,7 +77,7 @@
 
 				</div></div>`
 			} else { 
-
+				res.innerHTML = ``
 				response.result.forEach((this_response) => {
 					
 					this_response.content =  this_response.content.noHTML()
@@ -88,6 +101,7 @@
 		$('#searchForm').submit((form) => {
 			searchNow(form)
 		})
+		
 		$('#searchForm').submit() 
 		{{/if}}
 
@@ -101,7 +115,10 @@
 
 				res.innerHTML = ``
 				loading.style.display = 'block'
+
+				if(form != 'null') {
 				form.preventDefault();
+			}
 
 				$.getJSON('/search/response?question=' + textSearch.value, (response) => {
 
@@ -116,7 +133,7 @@
 
 				</div></div>`
 			} else {
-
+				res.innerHTML = ``
 				response.result.forEach((this_response) => {
 					
 					this_response.content =  this_response.content.noHTML()
@@ -131,6 +148,8 @@
 			}
 				})
 			}
-
+		</script>
+		<script>
+			const socket = io()
 		</script>
 	</body>

@@ -4,6 +4,8 @@ const handlebars = require('express-handlebars');
 const path = require("path")
 const search = require('./routes/search');
 const user = require('./routes/user');
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
 
 //handlebars
@@ -36,6 +38,8 @@ app.get('*', function(req, res) {
   res.redirect('/404')
 })
 
-app.listen(3000, () => {
-  console.log('servidor rodando 3000')
+const port = 3000
+
+http.listen(port, () => {
+  console.log('servidor rodando na porta: '+port)
 });

@@ -24,6 +24,14 @@
     			-webkit-text-fill-color: transparent !important;
 				}
 				
+				#loading {
+					{{#if question}}
+					display: block;
+					{{else}}
+					display: none;
+					{{/if}}
+				}
+				
 		</style>
 </head>
 <body>
@@ -38,99 +46,20 @@
 			<div class="mt-4 spinner-grow bg-primary"></div>
 		</div>
 		<div id="res" style="margin-top:70px; margin-bottom:100px;">
-
+			<div class="mt-4 card">
+				<div class="card-body" style="background:rgb(32,33,37);">
+					<label for="text-search"><p>Você não fez nenhuma pesquisa. Faça sua pesquisa agora!</p></label>
+					</div>
+				</div>
 		</div>
 	</div>
 	{{>_footer}}
 	<script>
-		var res = document.getElementById('res');
-		var loading = document.getElementById('loading')
-		var searchForm = document.getElementById('searchForm')
 		textSearch = document.getElementById('text-search')
-		
 		{{#if question}}
-
-		$.getJSON('/search/response?question={{question}}', (response) => {
-
-			loading.style.display = 'none'
-
-
-			if (response.message != 'OK') {
-
-
-				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-
-				<p>Houve um erro ao fazer sua pesquisa</p>
-
-				</div></div>`
-			} else { 
-
-				response.result.forEach((this_response) => {
-					
-					this_response.content =  this_response.content.noHTML()
-
-					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-					<p class="res">${this_response.content}</p>
-					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
-
-					</div></div>`
-
-				})
-			}
-		})
-
-		$('#searchForm').submit((form) => {
-			searchNow(form)
-		}) 
-		
-		{{else}}
-		
-		$('#searchForm').submit((form) => {
-			searchNow(form)
-		})
-		$('#searchForm').submit() 
+		textSearch.value = "{{question}}"
+		socket.emit('searchValue', textSearch.value)
 		{{/if}}
-
-			function searchNow(form) {
-				loading.style.display = 'none'
-				res.innerHTML = `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-				<p>Nenhuma pesquisa foi feita, clique no butão abaixo e faça uma pesquisa agora!</p>
-				<button onclick="document.getElementById('text-search').focus()" class="mt-4 btn btn-outline-primary">Pesquisar agora!</button>
-
-				</div></div>`
-
-				res.innerHTML = ``
-				loading.style.display = 'block'
-				form.preventDefault();
-
-				$.getJSON('/search/response?question=' + textSearch.value, (response) => {
-
-					loading.style.display = 'none'
-
-								if (response.message != 'OK') {
-
-
-				res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-
-				<p>Houve um erro ao fazer sua pesquisa</p>
-
-				</div></div>`
-			} else {
-
-				response.result.forEach((this_response) => {
-					
-					this_response.content =  this_response.content.noHTML()
-
-					res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-					<p class="res">${this_response.content}</p>
-					<a href="/search/response/${this_response.id}"><button class="mt-4 btn btn-outline-primary">Continuar lendo!</button></a>
-
-					</div></div>`
-
-				})
-			}
-				})
-			}
-
-		</script>
+	</script>
+	<script src="/js/response.js"></script>
 	</body>

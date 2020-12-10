@@ -67,7 +67,6 @@ const SearchInDatabase = (question) => {
 					attributes: ['title', 'content']
 				})
 			}
-		
 
 			const response = async () => {
 				let dbTratedRes = await dbTrated()

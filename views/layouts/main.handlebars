@@ -26,7 +26,12 @@
   <script src="/node_modules/eruda/eruda.js"></script>
 	<script src="/node_modules/eruda-dom/eruda-dom.js"></script>
 	<script src="/node_modules/eruda-code/eruda-code.js"></script>
-	
+	<script src="/socket/socket.io.js"></script>
+	<script>
+		const socket = io()
+	</script>
+
+
 	    <script>
       String.prototype.noHTML = function() {
           return this.replace(/<.*?>/g, '');
@@ -38,6 +43,7 @@
   {{{body}}}
   <script src="/js/bootstrap.bundle.js"></script>
 	<script>
+		eruda.init()
 		eruda.add(erudaDom);
 		eruda.add(erudaCode);
 	</script>

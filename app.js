@@ -6,10 +6,13 @@ const search = require('./routes/search');
 const user = require('./routes/user');
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
+const SearchInDatabase = require('./robots/search/SearchInDatabase')
 
 
 //handlebars
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
+app.engine('handlebars', handlebars({
+	defaultLayout: 'main'
+}))
 app.set('view engine', 'handlebars')
 
 //pastas
@@ -20,26 +23,36 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 
 //Rotas
 app.get('/', function(req, res) {
-  res.render('index');
+	res.render('index');
 });
 
 app.get('/sitemap', (req, res) => {
-  res.sendfile('./sitemaps/sitemap.xml')
+	res.sendfile('./sitemaps/sitemap.xml')
 })
 
 app.get('/404', (req, res) => {
-  res.render('error/404')
+	res.render('error/404')
 })
 
 app.use('/search', search)
 app.use('/user', user)
 
 app.get('*', function(req, res) {
-  res.redirect('/404')
+	res.redirect('/404')
+})
+
+io.on('connection', (socket) => {
+	socket.on('searchValue', (searchValue) => {
+		SearchInDatabase(searchValue).then((response) => {
+			socket.emit('responseToSearch', response)
+		}).catch((error) => {
+			socket.emit('responseToSearch', error)
+		})
+	})
 })
 
 const port = 3000
 
 http.listen(port, () => {
-  console.log('servidor rodando na porta: '+port)
+	console.log('servidor rodando na porta: '+port)
 });

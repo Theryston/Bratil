@@ -25,7 +25,9 @@
     "sequelize": "^6.3.5",
     "socket.io": "^3.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Theryston/Bratil.git"
@@ -33,5 +35,10 @@
   "bugs": {
     "url": "https://github.com/Theryston/Bratil/issues"
   },
-  "homepage": "https://github.com/Theryston/Bratil#readme"
+  "homepage": "https://github.com/Theryston/Bratil#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

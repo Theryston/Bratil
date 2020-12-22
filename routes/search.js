@@ -8,9 +8,15 @@ router.get('/', function(req, res) {
 });
 
 router.get('/response/page', (req, res) => {
-	res.render('search/response', {
-		question: req.query["question"]
-	})
+	var question = req.query["question"]
+
+	if (question) {
+		res.render('search/response', {
+			question: question
+		})
+	} else {
+		res.redirect('/search')
+	}
 })
 
 router.get('/response', (req, res) => {

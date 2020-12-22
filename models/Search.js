@@ -5,6 +5,10 @@ const Search = db.sequelize.define('searches', {
     type: db.Sequelize.STRING,
     allowNull: false
   },
+  main: {
+  	type: db.Sequelize.TEXT,
+  	allowNull: false
+  },
   content: {
     type: db.Sequelize.TEXT,
     allowNull: false

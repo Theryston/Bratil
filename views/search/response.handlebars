@@ -48,7 +48,7 @@
 		<div id="res" style="margin-top:70px; margin-bottom:100px;">
 			<div class="mt-4 card">
 				<div class="card-body" style="background:rgb(32,33,37);">
-					<label for="text-search"><p>Você não fez nenhuma pesquisa. Faça sua pesquisa agora!</p></label>
+					<label for="text-search"><p>Você não fez nenhuma pesquisa. Faça sua pesquisa clicando aqui!</p></label>
 					</div>
 				</div>
 		</div>
@@ -56,10 +56,8 @@
 	{{>_footer}}
 	<script>
 		textSearch = document.getElementById('text-search')
-		{{#if question}}
 		textSearch.value = "{{question}}"
 		socket.emit('searchValue', textSearch.value)
-		{{/if}}
 	</script>
 	<script src="/js/response.js"></script>
 	</body>

@@ -20,6 +20,28 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'text_search_content')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 
+//socket.io
+app.use((req, res, next) => {
+	const ruoter = req.path
+
+	io.on('connection', (socket) => {
+		
+		//socket.io search
+		if (ruoter.match('/search') !== null) {
+			socket.on('searchValue', (searchValue) => {
+				SearchInDatabase(searchValue).then((response) => {
+					socket.emit('responseToSearch', response)
+				}).catch((error) => {
+					socket.emit('responseToSearch', error)
+				})
+			})
+		}
+		
+		//outros sockets
+		
+	})
+	next()
+})
 
 //Rotas
 app.get('/', function(req, res) {
@@ -39,16 +61,6 @@ app.use('/user', user)
 
 app.get('*', function(req, res) {
 	res.redirect('/404')
-})
-
-io.on('connection', (socket) => {
-	socket.on('searchValue', (searchValue) => {
-		SearchInDatabase(searchValue).then((response) => {
-			socket.emit('responseToSearch', response)
-		}).catch((error) => {
-			socket.emit('responseToSearch', error)
-		})
-	})
 })
 
 const port = 3000

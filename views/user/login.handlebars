@@ -1,4 +1,4 @@
-<title>Bratil Company - faça seu login</title>
+<title>Bratil - faça seu login</title>
 <style>
 @font-face {
     font-family: 'main-font';
@@ -14,21 +14,14 @@
     color: white;
     background: rgb(32, 33, 37);
   }
-  .container1 {
-    width: 95%;
+  .container {
+  	width: 95%;
+    box-shadow: 2px 2px 15px black;
+    padding: 10px 10px 40px 10px;
     margin-top: 50px;
     margin-bottom: 50px;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -35%);
-    box-shadow: 2px 2px 15px black;
-    padding-bottom: 40px;
   }
   
-  .card-body {
-    background: rgb(32, 33, 37);
-  }
   .eye {
     position: relative;
     top: 25%;
@@ -37,13 +30,23 @@
   .senha {
     display: flex;
   }
+  @media screen and (max-device-width: 900px) {
+  	.container {
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	width: 95%;
+  	transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 15px black;
+    padding: 10px 10px 40px 10px;
+    margin: 0px;
+  }
+  }
 </style>
 </head>
 <body>
-  <div class="container container1">
-      <h5 class="mt-4 text-center">Conecte-se a sua conta Bratil </h5>
-     <div class="card mt-4">
-        <div class="card-body">
+  <div class="container">
+      	<h5 class="mt-4 text-center">Conecte-se a sua conta Bratil </h5>
           <form method="post">
             <label class="card-title mt-4" for="email">E-mail: </label>
             <input required id="email" type="email" name="email" placeholder="digite seu email aqui!" class="form-control">
@@ -53,13 +56,10 @@
                <div id="senhaOlho" onclick="ver()"></div>
             </div>
             <input type="hidden" name="ip" id="ip">
-            <button class="btn btn-primary mt-4 " type="submit">Fazer login</button>
+            <br />
+            <br />
+            <button class="BratilButton" type="submit">Fazer login</button>
           </form>
-        </div>
-      </div>
-  </div>
-  <div style="margin-top:100vh;">
-    {{>_footer}}
   </div>
   <script>
     var inputIp = document.getElementById('ip');

@@ -15,29 +15,12 @@
       text-align: center;
       font-family: 'main-font';
     }
-    .IrParaHome {
-      padding-bottom: 10px;
-      padding-top: 10px;
-      color: white;
-      text-shadow: 0px 0px 0px black;
-      font-family: 'main-font';
-      border-radius: 10px;
-      background: rgb(0, 140, 255);
-      box-shadow: 2px 2px 6px black;
-      border: 0px;
-      width: 250px;
-      height: 50px;
-      font-size: 15px;
-    }
-    .IrParaHome:focus {
-      outline: none;
-    }
   </style>
-  <title>Bratil Company - termos de uso</title>
+  <title>Bratil - termos de uso</title>
 </head>
 <body>
   <div class="container">
-    <h1 style="margin-bottom:100px;margin-top:70px;" class="text-center">termos de uso do <a href="/"> Bratil Company</a><span style="font-size:25px;">&copy;</span></h1>
+    <h1 style="margin-bottom:100px;margin-top:70px;" class="text-center">termos de uso da <span style="color:rgb(0, 140, 255);">Bratil</span></h1>
     
     <div class="mt-4" style="text-align:left;">
       	os termos irão aqui!!!<br>
@@ -51,12 +34,12 @@
 
 	Vehicula placerat arcu quisque tempus mi sagittis donec pretium sit sagittis, facilisis molestie id vehicula maecenas aliquam at conubia integer, litora ullamcorper turpis velit suscipit odio primis venenatis aliquam. libero enim pulvinar lobortis consectetur eget blandit phasellus, per eleifend ad senectus imperdiet ad aenean massa, semper tincidunt aptent netus nunc porta. litora eleifend ornare tortor ac fames suscipit, lacus leo augue nulla erat sagittis donec, aliquet interdum maecenas bibendum non. adipiscing vivamus senectus non iaculis bibendum hac ante suscipit arcu, libero porta pulvinar phasellus lectus netus cubilia nec ut, dapibus mollis bibendum aptent lacinia sollicitudin quis accumsan. 
     </div>
+    
+    <form style="margin-top: 100px;"  action="/user/create" method="post">
+  		<button type="submit" class="mb-4 BratilButton">Concordo continuar</button>
+		</form>
+		
   </div>
-
-<form style="margin-top: 100px;"  action="/user/create" method="post">
-  <input id="box-read" type="checkbox" style="margin-bottom:30px;" required> <label for="box-read">eu li e concordo com os termos</label><br>
-    <button type="submit" class="mb-4 IrParaHome">Continuar</button>
-</form>
 
 <div style="margin-top:100px;">
   {{>_footer}}

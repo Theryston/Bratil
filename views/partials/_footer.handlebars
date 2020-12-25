@@ -1,8 +1,62 @@
-<hr style="background:white; width:100vw;">
-<footer style="display:flex; justify-content:center;">
-  <small style="text-align:center;">
-    <a href="/">
-   <img width="100vw" src="/img/icon.svg" alt="icone do Bratil"></a><br>
-    Bratil&copy; <br>
-  Este site foi criado pelo Web developer <a href="https://github.com/Theryston">Theryston</a></small>
+<footer>
+	<div class="container dropUp">
+		<div class="ArrowContainer">
+			<i class="fas btndropUp fa-angle-up" id="ArrowToTop"></i>
+		</div>
+	</div>
+	<style>
+		.dropUp {
+			color:rgb(0, 140, 255);
+			position: absolute;
+			height: 50px;
+			width: 100%;
+		}
+		
+		.ArrowContainer {
+			display: flex;
+			justify-content: center;
+		}
+		
+		.btndropUp {
+			animation: dropUp 3s;
+			animation-iteration-count: infinite;
+			font-size: 30pt;
+			/*position: absolute;
+			bottom: 40px;*/
+		}
+		
+		@keyframes dropUp {
+			0% {
+				position: absolute;
+				bottom: -10px;
+				opacity: 0%;
+			}
+			50% {
+				opacity: 100%;
+			}
+			100% {
+				position: absolute;
+				bottom: 40px;
+				opacity: 0%;
+			}
+		}
+	</style>
+	<script>
+		const btndropUp = document.querySelector('.btndropUp')
+		const dropUp = document.querySelector('.dropUp')
+		const ArrowContainer = document.querySelector('.ArrowContainer')
+		
+		dropUp.addEventListener('touchmove', () => {
+			targetFooter()
+		})
+		
+		dropUp.addEventListener('mouseover', () => {
+			targetFooter()
+		})
+		
+		function targetFooter() {
+			console.log('ok')
+		}
+		
+	</script>
 </footer>

@@ -104,16 +104,14 @@
 		if (!FooterIsOpen) {
 			FooterIsOpen = true
 
-			var TutorialFooterClose = Cookies.get('TutorialFooterClose')
+			var TutorialFooterClose = localStorage.getItem('TutorialFooterClose')
 			containerFooter.style.top = '0px'
 
-			if (!TutorialFooterClose) {
+			if (TutorialFooterClose == null) {
 				setTimeout(() => {
 					const confirm = window.confirm(`Tutorial: clique em qualquer lugar da tela (des deque não seje um link) para que o rodapé feche!`)
 					if (confirm) {
-						Cookies.set('TutorialFooterClose', true, {
-							expires: 1000000
-						})
+						localStorage.setItem('TutorialFooterClose', true)
 					}
 				},
 					1200)

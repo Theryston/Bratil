@@ -19,7 +19,7 @@ setInterval(() => {
 
 
 
-textSearch.addEventListener('keydown', () => {
+textSearch.addEventListener('keyup', (event) => {
 	socket.emit('searchValue', textSearch.value)
 })
 

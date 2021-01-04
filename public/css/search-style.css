@@ -42,6 +42,7 @@ header {
 	width: 100vw;
 	object-fit: cover;
 	z-index: 1;
+	
 }
 
 #title {
@@ -65,12 +66,21 @@ header {
 #background-pelicula {
 	position: absolute;
 	top: 0px;
+	background: /*rgb(0, 140, 255)*/rgba(0,0,0,0.6);
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+}
+/*
+#background-pelicula2 {
+	position: absolute;
+	top: 0;
 	background: rgba(0,0,0,0.6);
 	width: 100vw;
 	height: 100vh;
 	z-index: 2;
 }
-
+*/
 section {
 	position: absolute;
 	top: 105vh;

@@ -4,6 +4,16 @@
 </head>
 
 <body>
+	{{>_alert}}
+	{{#if error_msg}}
+<script>
+	BratilAlert({
+		title: 'erro:',
+		body: `{{error_msg}}`,
+		button: 'OK, não tem problema!'
+	})
+</script>
+{{/if}}
   <header id="header">
     <div id="container-background-serach">
       <img src="/img/background.svg" alt="" id="background-serach">

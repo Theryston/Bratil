@@ -1,4 +1,13 @@
 {{>_alert}}
+{{#if error_msg}}
+<script>
+	BratilAlert({
+		title: 'erro:',
+		body: `{{error_msg}}`,
+		button: 'OK, não tem problema!'
+	})
+</script>
+{{/if}}
 		<title>Brati Search - {{question}}</title>
 		<style>
 			@font-face {

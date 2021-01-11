@@ -37,7 +37,7 @@ socket.on('responseToSearch', (responseToSearch) => {
 			<h2 style="font-size:18pt;">${this_response.title}</h2>
 			<hr style="background:white;">
 			<p class="res">${this_response.main}</p>
-			<a href="/search/response/${this_response.id}"><button class="mt-4 BratilButton">Veja mais</button></a>
+			<a href="/search/term/${this_response.id}?title=${this_response.title}"><button class="mt-4 BratilButton">Veja mais</button></a>
 
 			</div></div>`
 

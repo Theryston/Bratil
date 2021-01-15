@@ -1,0 +1,107 @@
+<title>{{term.title}} - Bratil Search</title>
+</head>
+<body>
+	<style>
+@font-face {
+		font-family: 'main-font';
+		src: url('/css/fonts/Poppins-Light.ttf');
+	}
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: 'main-font';
+		}
+		body {
+			background: rgb(32,33,37);
+			color: white;
+		}
+		
+		.switch-container {
+			z-index: 5;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 50px;
+			height: 50px;
+			background: rgb(32,33,37);
+			box-shadow: 1px 1px 10px black;
+			border-radius: 100%;
+		}
+		
+		#switch {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 30px;
+			height: 10px;
+			appearance: none;
+			background: white;
+			border-radius: 20px;
+			transition: .2s;
+			outline: none;
+		}
+		
+		#switch:checked {
+			background: rgb(0, 140, 255);
+		}
+		
+	</style>
+	<div class="switch-container">
+		<input onclick="ChangeSwitch()" id="switch" type="checkbox">
+	</div>
+	{{>_alert}}
+	<div style="position:absolute; top:50px; left:50%; transform:translateX(-50%);">
+		{{>search/form}}
+	</div>
+	<div class="container" style="margin-top: 150px;">
+		
+		<hr style="background-color:white;">
+		<h1 style="float:left; font-size:25pt;">{{term.title}}</h1><br /><br />
+		<div id="contentText" class="contentText mt-3 mb-5"></div>
+		
+	</div>
+	
+	{{>_footer}}
+	
+	<script>
+	var InputSwitch = document.getElementById('switch')
+	var contentText = document.getElementById('contentText')
+	
+	if (localStorage.getItem('SummarizeSearch') == null || localStorage.getItem('SummarizeSearch') == 'false') {
+		InputSwitch.checked = false
+		SummarizeOrNot()
+	} else {
+		InputSwitch.checked = true
+		SummarizeOrNot()
+	}
+	
+		if(localStorage.getItem('TutorialSummarizeSearch') == null) {
+			BratilAlert({
+				title: 'tutorial:',
+				body: `Está sem tempo? Marque a caixinha no canto superior esquerdo da sua tela, para ler uma versão resumida.`,
+				button: 'Ok, obrigado pela dica!'
+			})
+		}
+		BratilAlertAgreed().then(() => {
+			localStorage.setItem('TutorialSummarizeSearch', true)
+		}).catch(() => {
+			localStorage.setItem('TutorialSummarizeSearch', true)
+		})
+		
+		function ChangeSwitch() {
+			localStorage.setItem('SummarizeSearch', InputSwitch.checked)
+			
+			SummarizeOrNot()
+			
+		}
+		
+		function SummarizeOrNot() {
+			if (InputSwitch.checked) {
+				contentText.innerHTML = `{{{term.main}}}`	
+			} else {
+				contentText.innerHTML = `{{{term.content}}}`
+			}
+		}
+	</script>
+</body>

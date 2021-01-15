@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Search = require('../models/Search')
 const SearchInDatabase = require('../robots/search/SearchInDatabase')
-//const flash = require("connect-flash")
 
 router.get('/', function(req, res) {
 	res.render('search/index');
@@ -36,14 +35,12 @@ router.get('/term/:id', (req, res) => {
 		if (id != null || id != undefined) {
 			Search.findByPk(id).then((term) => {
 				if (term) {
-					res.send(`
-						<h1>${term.title}</h1>
-						<hr />
-						<p>${term.content}</p>
-					`)
+					res.render('search/term', {
+						term: term.dataValues
+					})
 				} else {
 					if (title != undefined) {
-						req.flash('error_msg', 'Não foi possível encontrar o termo de busca mais, fizemos uma pesquisa relacionada a ele.')
+						req.flash('error_msg', 'Não foi possível encontrar o termo de busca, mais fizemos uma pesquisa relacionada a ele.')
 						res.redirect('/search/response/page?question='+title)
 					} else {
 						req.flash('error_msg', 'Desculpe, não foi possível encontrar o termo de busca.')
@@ -55,7 +52,7 @@ router.get('/term/:id', (req, res) => {
 			})
 		} else {
 			if (title != undefined) {
-				req.flash('error_msg', 'Não foi possível encontrar o termo de busca mais, fizemos uma pesquisa relacionada a ele.')
+				req.flash('error_msg', 'Não foi possível encontrar o termo de busca, mais fizemos uma pesquisa relacionada a ele.')
 				res.redirect('/search/response/page?question='+title)
 			} else {
 				req.flash('error_msg', 'Desculpe, não foi possível encontrar o termo de busca.')
@@ -64,7 +61,7 @@ router.get('/term/:id', (req, res) => {
 		}
 	} else {
 		if (title != undefined) {
-			req.flash('error_msg', 'Não foi possível encontrar o termo de busca mais, fizemos uma pesquisa relacionada a ele.')
+			req.flash('error_msg', 'Não foi possível encontrar o termo de busca, mais fizemos uma pesquisa relacionada a ele.')
 			res.redirect('/search/response/page?question='+title)
 		} else {
 			req.flash('error_msg', 'Desculpe, não foi possível encontrar o termo de busca.')

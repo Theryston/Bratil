@@ -34,10 +34,10 @@ socket.on('responseToSearch', (responseToSearch) => {
 			this_response.content = this_response.content.noHTML()
 
 			res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-			<h2 style="font-size:18pt;">${this_response.title}</h2>
+			<h2 style="font-size:18pt;">${this_response.title.noHTML()}</h2>
 			<hr style="background:white;">
-			<p class="res">${this_response.main}</p>
-			<a href="/search/term/${this_response.id}?title=${this_response.title}"><button class="mt-4 BratilButton">Veja mais</button></a>
+			<p class="res">${this_response.main.noHTML()}</p>
+			<a href="/search/term/${this_response.id}?title=${this_response.title.noHTML()}"><button class="mt-4 BratilButton">Veja mais</button></a>
 
 			</div></div>`
 
@@ -63,7 +63,7 @@ textSearch.addEventListener('focusout', () => {
 		if (found === false) {
 			loading.style.display = 'none'
 			res.innerHTML = `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
-			<label for="text-search"><p>Desculpe! Não encontrei nenhuma resposta para sua pesquisa. Experimente pesquisar com tags (ex: programação).</p></label>
+			<label for="text-search"><p>Desculpe! Não encontrei nenhuma resposta para sua pesquisa. Experimente pesquisar com palavras-chave.</p></label>
 			</div></div>`
 		}
 	},

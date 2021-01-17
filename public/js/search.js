@@ -5,23 +5,60 @@ var IconSearch = document.querySelector('.fa-search')
 var section = document.querySelector('#section');
 var header = document.querySelector('#header')
 var title = document.querySelector('#title')
-var containerSearchIllustration = document.querySelector('.container-search-illustration')
+var autocomplete = document.querySelector('#autocomplete')
+var AutocompleteText = document.querySelector('#AutocompleteText')
+var found = false
 
 TextSearch.addEventListener('focus', () => {
-  header.style.display = 'none'
-  section.style.display = 'none'
-  title.style.display = 'none'
+	//setTimeout(function() {
+	autocomplete.style.display = "block"
+	header.style.display = 'none'
+	section.style.display = 'none'
+	title.style.display = 'none'
 	ContainerFormSearch.style.top = '20%'
-  ContainerSearch.style.width = '95vw'
+	ContainerSearch.style.width = '95vw'
+	//}, 1000);
 });
 TextSearch.addEventListener('focusout', () => {
-  header.style.display = 'block'
-  section.style.display = 'block'
-  title.style.display = 'flex'
-  ContainerFormSearch.style.top = '50%'
-  ContainerSearch.style.width = '80vw'
+	setTimeout(function() {
+		autocomplete.style.display = "none"
+		header.style.display = 'block'
+		section.style.display = 'block'
+		title.style.display = 'flex'
+		ContainerFormSearch.style.top = '50%'
+		ContainerSearch.style.width = '80vw'
+	}, 1000);
 });
 
-containerSearchIllustration.addEventListener('click', () => {
-  TextSearch.focus()
-});
+TextSearch.addEventListener('keyup', (event) => {
+	socket.emit('searchValue', TextSearch.value)
+})
+
+socket.on('responseToSearch', (responseToSearch) => {
+	if (!responseToSearch[0].error) {
+		found = true
+		AutocompleteText.innerHTML = ''
+
+		responseToSearch.forEach((this_response) => {
+			AutocompleteText.innerHTML += `
+			<li>
+			<a href="/search/response/page?question=${this_response.title}">
+			<li class="fas fa-search"></li>
+			${this_response.title}
+			</a>
+			<a target="_blank" href="/search/term/${this_response.id}?title=${this_response.title}">
+			<i class="fas fa-external-link-alt"></i>
+			</a>
+			</li>
+			<hr>`
+		})
+	} else {
+		AutocompleteText.innerHTML = `
+		<li>
+		<i class="fas fa-exclamation-circle"></i>
+		${responseToSearch[0].error}
+		<hr>
+		</li>
+		`
+	}
+})

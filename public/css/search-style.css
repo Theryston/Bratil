@@ -27,6 +27,38 @@ hr {
 	background-color: white;
 }
 
+#autocomplete {
+	margin: 200px 15px 0px 15px;
+	display: none;
+}
+
+#AutocompleteText {
+	list-style: none;
+}
+
+#AutocompleteText a {
+	text-decoration: none;
+	color: white;
+}
+
+#AutocompleteText .fa-search {
+	/*margin-top: 15px;*/
+	font-size: 18pt;
+	color: rgb(0, 140, 255);
+	margin-right: 10px;
+}
+
+#AutocompleteText .fa-external-link-alt {
+	float: right;
+	color: rgb(0, 140, 255);
+}
+
+#AutocompleteText .fa-exclamation-circle {
+	font-size: 18pt;
+	color: red;
+	margin-right: 10px;
+}
+
 header {
 	position: absolute;
 	z-index: 0;
@@ -84,6 +116,7 @@ header {
 section {
 	position: absolute;
 	top: 105vh;
+	width: 100vw;
 }
 
 

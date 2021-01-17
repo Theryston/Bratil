@@ -46,7 +46,7 @@ const SearchInDatabase = (question, searches) => {
 
 			if (response.length === 0) {
 				reject([{
-					error: "Desculpe! Não encontrei nenhuma resposta para sua pesquisa. Experimente pesquisar com tags (ex: programação)."
+					error: "Desculpe! Não encontrei nenhuma resposta para sua pesquisa. Experimente pesquisar com palavras-chaves"
 				}])
 			} else {
 				resolve(response)

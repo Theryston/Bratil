@@ -1,0 +1,43 @@
+	<title> Bratil - Usuário conectado com sucesso!</title>
+	<style>
+		@font-face {
+	    font-family: 'main-font';
+	    src: url('/css/fonts/Poppins-Light.ttf');
+	  }
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		body {
+			font-family: 'main-font';
+			color: white;
+			background: rgb(32,33,37);
+		}
+		
+		.fa-check-circle {
+			color: rgb(0,170,255);
+			font-size: 70pt;
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="container text-center">
+		<i class="fas fa-check-circle"></i>
+		<h1>Você foi conectado com sucesso!</h1>
+		<p>Seu email e senha estavam corretos e você fez login com sua conta.</p>
+		<a href="/user/profile"><button class="BratilButton mt-4">Acessar meu perfil</button></a>
+	</div>
+	<script>
+		let time = 60*60*24*365*4
+		document.cookie = 'token_login={{token}}; max-age='+time
+
+		if ('{{redirect}}' != 'false') {
+		window.location = '{{redirect}}'
+		}
+		
+	</script>
+</body>

@@ -9,9 +9,28 @@ const io = require('socket.io')(http)
 const url = require('url')
 const SearchInDatabase = require('./robots/search/SearchInDatabase')
 const SearchModule = require('./models/Search')
+const UserModule = require('./models/User')
 const session = require("express-session");
 const flash = require("connect-flash")
+const bcrypt = require('bcryptjs')
+const bodyParser = require('body-parser')
 
+/*
+var salt = bcrypt.genSaltSync(10)
+var hash = bcrypt.hashSync('ur87Yi6JgHuNUFF', salt)
+
+UserModule.create({
+	name: 'Theryston Santos',
+	email: 'funktodo2@gmail.com',
+	password: hash,
+	branch: 1
+})
+*/
+
+app.use(bodyParser.urlencoded({
+	extended: false
+}))
+app.use(bodyParser.json())
 
 //handlebars
 app.engine('handlebars', handlebars({
@@ -30,6 +49,7 @@ app.use(flash())
 app.use((req, res, next) => {
 	res.locals.success_msg = req.flash("success_msg")
 	res.locals.error_msg = req.flash("error_msg")
+	res.locals.token_login = req.flash("token_login")
 	next()
 })
 

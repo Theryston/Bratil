@@ -9,7 +9,8 @@ const creditos = document.querySelector('.creditos')
 const microphone = document.querySelector('.microphone');
 var ClientHistoric = document.querySelector('.ClientHistoric');
 var bratilalert = document.querySelector('.alert');
-var ImgMicrophone = document.querySelector(' #microphone-home')
+var ImgMicrophone = document.querySelector('#microphone-home')
+var InputSwitch = document.querySelector('#switch')
 
 utterance.lang = 'pt-br';
 utterance.rate = 1.4;
@@ -20,12 +21,23 @@ VoiceRecognition.lang = 'pt-br';
 
 
 window.addEventListener('load', () => {
-  navigator.vibrate(100)
-  bratilalert.play();
-  bratiltext.innerHTML = ``
+	navigator.vibrate(100)
+	bratilalert.play();
+	bratiltext.innerHTML = ``
 });
 
 
+if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+	InputSwitch.addEventListener('change', (req, res) => {
+		if (InputSwitch.checked) {
+			VoiceRecognition.start();
+		} else {
+			VoiceRecognition.stop();
+		}
+	})
+}
+
+/*
 
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
@@ -120,3 +132,4 @@ window.addEventListener('click', () => {
   speechSynthesis.cancel();
   VoiceRecognition.stop();
 });
+*/

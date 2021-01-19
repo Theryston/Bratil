@@ -1,0 +1,118 @@
+	<title>Faça login em sua conta Bratil</title>
+	<style>
+		@font-face {
+	    font-family: 'main-font';
+	    src: url('/css/fonts/Poppins-Light.ttf');
+	  }
+	  
+		body {
+			font-family: 'main-font';
+			background: rgb(32,33,37);
+			color: white;
+		}
+		
+		.container-form {
+			border: 1px rgb(0, 140, 255) solid;
+			padding: 20px;
+			border-radius: 20px;
+		}
+		
+		.container {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+		
+		h1 {
+			font-size: 25pt;
+		}
+		
+		.form-control {
+			box-shadow: 2px 2px 6px black;
+			border-radius: 8px;
+			border: none;
+			outline: none;
+			color: #333;
+		}
+		
+		.password {
+			width: 100%;
+			font-size: 15pt;
+			position: relative;
+		}
+		
+		.eye {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #111;
+			right: 5px;
+		}
+		
+	</style>
+</head>
+<body>
+{{>_alert}}
+{{#if error_msg}}
+<script>
+	BratilAlert({
+		title: 'erro:',
+		body: `{{error_msg}}`,
+		button: 'OK, não tem problema!'
+	})
+</script>
+{{/if}}
+	<div class="container">
+		<div class="container-form">
+			<h1 class="mb-5">Insira os dados abaixo:</h1>
+			<form method="post" action="/user/login">
+				<label for="email">E-mail:</label>
+				<input id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
+				<label for="password">Senha: </label>
+				<div class="password">
+					<input placeholder="digite aqui a sua senha" id="password" type="password" class="form-control" name="password" required>
+					<input type="hidden" id="redirect" name="redirect">
+					<div class="EyeContainer">
+						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
+					</div>
+				</div>
+				<button type="submit" class="BratilButton mt-5">Fazer login</button>
+			</form>
+		</div>
+	</div>
+	<script>
+		const eye = document.querySelector('.eye')
+		const EyeContainer = document.querySelector('.EyeContainer')
+		const password = document.querySelector('#password')
+		const redirect = document.querySelector('#redirect')
+		var PasswordVisible = false
+		var URL = document.URL
+		var URLC = URL.replace('http://', '').replace('https://', '')
+		var router = URLC.replace(URLC.substring(0,URLC.indexOf('/')), '')
+		
+		
+		if (router == '/user/login') {
+			router = false
+		}
+		
+		redirect.value = router;
+		
+		function EyeFunc() {
+			eye.innerHTML = ``
+			
+			if (!PasswordVisible) {
+				EyeContainer.innerHTML = `<i onclick="EyeFunc()" class="far eye fa-eye-slash"></i>`
+				password.type = 'text'
+				PasswordVisible = true
+			} else {
+				EyeContainer.innerHTML = `<i onclick="EyeFunc()" class="far eye fa-eye"></i>`
+				password.type = 'password'
+				PasswordVisible = false
+			}
+			
+			console.log(eye.classList.contains('fa-eye'))
+		}
+		
+	</script>
+</body>

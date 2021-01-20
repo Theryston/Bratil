@@ -18,7 +18,7 @@
 		}
 		
 		.container {
-			margin-top: 70px;
+			margin-top: 50px;
 		}
 		
 		h1 {
@@ -61,10 +61,12 @@
 </script>
 {{/if}}
 	<div class="container">
-		<h1 class="mb-4">Fazer login:</h1>
+		<h1 class="mb-4">Crie sua conta:</h1>
 		<div class="container-form">
 			<h1 class="mb-5">Insira os dados abaixo:</h1>
-			<form method="post" action="/user/login">
+			<form method="post" action="/user/create">
+				<label for="name">Nome:</label>
+				<input id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
 				<label for="email">E-mail:</label>
 				<input id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
 				<label for="password">Senha: </label>
@@ -75,10 +77,10 @@
 						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
 					</div>
 				</div>
-				<button type="submit" class="BratilButton mt-5">Fazer login</button>
+				<button type="submit" class="BratilButton mt-5">Criar conta</button>
 			</form>
 		</div>
-		<a href="/user/create"><button type="button" class="mt-5 BratilButton">Não tenho uma conta, criar agora!</button></a>
+		<a href="/user/login"><button type="button" class="mt-5 BratilButton">Já tenho uma conta, fazer login!</button></a>
 	</div>
 	{{>_footer}}
 	<script>

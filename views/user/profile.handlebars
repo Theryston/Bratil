@@ -1,4 +1,125 @@
+	<title>Bratil - Perfil do usuário {{user.name}}</title>
+	<style>
+		@font-face {
+	    font-family: 'main-font';
+	    src: url('/css/fonts/Poppins-Light.ttf');
+	  }
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		body {
+			font-family: 'main-font';
+			color: white;
+			background: rgb(32,33,37);
+		}
+		
+		.fa-smile {
+			color: rgb(0,170,255);
+			font-size: 70pt;
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+		
+		.welcome {
+			font-size: 25pt;
+		}
+		
+		.dataP {
+			/*font-size: 15pt;*/
+		}
+		
+		.card-h2 {
+			font-size: 15pt;
+		}
+		
+		hr {
+			background: white;
+		}
+		
+		.fa-sign-out-alt {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 18pt;
+			color: rgb(0,170,255);
+		}
+		
+	</style>
 </head>
 <body>
-	<h1>Certo!</h1>
+{{>_alert}}
+{{#if error_msg}}
+<script>
+	BratilAlert({
+		title: 'erro:',
+		body: `{{error_msg}}`,
+		button: 'OK, não tem problema!'
+	})
+</script>
+{{/if}}
+	<div class="container text-center">
+		<a href="/user/logout"><i class="fas fa-sign-out-alt"></i></a>
+		<i class="fas fa-smile"></i>
+		<h1 class="welcome mb-4">Bem-vindo {{user.name}}</h1>
+		<p class="dataP">Esta é o seu perfil de usuário:</p>
+		
+		<div class="card">
+			<div class="card-body">
+				<h2 class="card-h2">Dados pessoais:</h2>
+				<hr>
+				<p>nome: {{user.name}}</p>
+				<p>E-mail: {{user.email}}</p>
+				<p>Senha: {{user.password}}</p>
+			<a href="/user/edit"><button class="mt-3 BratilButton">Editar dados</button></a>
+			</div>
+		</div>
+		
+		<button onclick="DeleteAccount()" class="BratilButton mt-4" style="background:red;">Apagar minha conta</button>
+		
+	</div>
+	<div style="margin-top:120px;">
+		{{>_footer}}
+	</div>
+	<script>
+		function DeleteAccount() {
+			BratilAlert({
+				title: 'Excluir conta',
+				body: 'Você realmente deseja excluir sua conta? Todos os dados vinculados a sua conta da Bratil serão apagados. Caso você realmente queira click no butão abaixo, caso não queira click em qualquer lugar ao redor deste pop-up!',
+				button: 'Sim, quero excluir minha conta!'
+			})
+			
+			BratilAlertAgreed().then(() => {
+				fetch('http://localhost:3000/user/delete?cookie='+encodeURIComponent(document.cookie), { method: 'DELETE' }).then(async (data) => {
+					
+					data = await data.json()
+					
+					if (data.OK) {
+						BratilAlert({
+							title: 'Conta excluida',
+							body: data.message,
+							button: 'Certo, obrigado!'
+						})
+						setTimeout(() => {
+							window.location = '/'
+						}, 2000)
+					} else {
+						BratilAlert({
+							title: 'Erro:',
+							body: data.message,
+							button: 'Certo, não tem problema!'
+						})
+					}
+				}).catch((error) => {
+					BratilAlert({
+							title: 'Erro:',
+							body: 'Houve um erro desconhecido ao excluir sua conta!',
+							button: 'Certo, não tem problema!'
+						})
+				})
+			})
+			
+		}
+	</script>
 </body>

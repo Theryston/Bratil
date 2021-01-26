@@ -36,8 +36,6 @@
     background: rgba(0, 0, 0, 0);
     border: 0px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     right: 5%;
     font-size: 1.8em;
   }
@@ -47,9 +45,9 @@
   	border: 0px;
   	color: red;
   	position: absolute;
-  	top: 50%;
+  	top: 40%;
   	left: 3%;
-  	transform: translateY(-50%);
+  	transform: translateY(-40%);
   	display: none;
   }
   
@@ -67,9 +65,9 @@
 </style>
 <div id="container-search">
   <form onsubmit="FormSent(event)" id="searchForm" action="/search/response/page" method="get">
-  	<button type="reset" id="cleanInputSearch"><i class="fas fa-times-circle"></i></button>
+  	<button type="reset" id="cleanInputSearch"><i class="bi bi-x-circle"></i></button>
     <input autocomplete="off" type="search" id="text-search" placeholder="faça sua pesquisa!" name="question" required />
-    <button id="button_sub" type="submit"><li class="fas fa-search" ></li></button>
+    <button id="button_sub" type="submit"><i class="bi bi-search"></i></button>
   </form>
 </div>
 <script>

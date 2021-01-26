@@ -1,0 +1,86 @@
+<title>administração de usuarios - Bratil</title>
+<style>
+	@font-face {
+	   font-family: 'main-font';
+	   src: url('/css/fonts/Poppins-Light.ttf');
+	 }
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+		
+  body {
+  	background: rgb(32,33,37);
+  	color: white;
+  	font-family: 'main-font';
+  }
+  
+  th {
+  	color: white;
+  }
+  
+  td {
+  	color: white;
+  }
+  
+  .table-container {
+  	display: flex;
+  	overflow-x: auto;
+  }
+  
+</style>
+</head>
+<body>
+	{{>_alert}}
+	{{>user/_profile}}
+	<div class="container">
+		<h1 style="font-size:25pt;" class="text-center mt-5 mb-5">administração de usuários da Bratil</h1>
+	
+		<a href="/user/create"><button class="mb-5 BratilButton">Novo usuário</button></a>
+		
+		<div class="table-container">
+			<table class="table table-bordered mt-2">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>E-mail</th>
+						<th>Branch</th>
+						<th>ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each users}}
+						<tr id="LineInList{{@index}}">
+							<td>{{this.id}}</td>
+							<td>{{this.name}}</td>
+							<td>{{this.email}}</td>
+							<td class="BranchCode" onkeyup="update(event, this, {{this.id}})" contenteditable>{{this.branch}}</td>
+							<td><button onclick="DeleteAccount(this, {{this.id}}, {{@index}})" class="BratilButton" style="background:red; min-width:100px;">Excluir</button></td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script>
+		function update(event, input, id) {
+			socket.emit('UpdateUserBranchCode', {id: id, code: Number(input.innerText)})
+		}
+	</script>
+	<script>
+		function DeleteAccount(input, id, index) {
+			var LineInList = document.getElementById('LineInList'+index)
+			BratilAlert({
+				title: 'Excluir conta',
+				body: 'Você realmente deseja excluir está conta?',
+				button: 'Sim, quero excluir está conta!'
+			})
+			
+			BratilAlertAgreed().then(() => {
+				socket.emit('DeleteUserAccount', id)
+				LineInList.style.display = 'none'
+		})
+	}
+	</script>
+</body>

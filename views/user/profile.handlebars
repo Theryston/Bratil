@@ -15,11 +15,11 @@
 			background: rgb(32,33,37);
 		}
 		
-		.fa-smile {
+		.welcome-to-profile {
 			color: rgb(0,170,255);
-			font-size: 70pt;
+			height: 200px;
 			margin-top: 50px;
-			margin-bottom: 50px;
+			margin-bottom: 25px;
 		}
 		
 		.welcome {
@@ -38,13 +38,22 @@
 			background: white;
 		}
 		
-		.fa-sign-out-alt {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			font-size: 18pt;
-			color: rgb(0,170,255);
-		}
+	.exit-container {
+		z-index: 10;
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		width: 45px;
+		height: 45px;
+		background: rgb(32,33,37);
+		box-shadow: 1px 1px 10px black;
+		border-radius: 100%;
+	}
+	
+	.exit-container .bi-box-arrow-right {
+		color: rgb(0,140,255);
+		font-size: 18pt;
+	}
 		
 	</style>
 </head>
@@ -60,9 +69,14 @@
 </script>
 {{/if}}
 	<div class="container text-center">
-		<a href="/user/logout"><i class="fas fa-sign-out-alt"></i></a>
-		<i class="fas fa-smile"></i>
-		<h1 class="welcome mb-4">Bem-vindo {{user.name}}</h1>
+		<div class="exit-container text-center">
+			<a href="/user/logout">
+				<i class="bi bi-box-arrow-right"></i>
+			</a>
+		</div>
+		
+		<img class="welcome-to-profile" src="/img/welcome.png">
+		<h1 class="welcome mb-4">Bem-vindo {{user.name}}!</h1>
 		<p class="dataP">Esta é o seu perfil de usuário:</p>
 		
 		<div class="card">

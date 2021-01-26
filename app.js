@@ -4,6 +4,7 @@ const handlebars = require('express-handlebars');
 const path = require("path")
 const search = require('./routes/search');
 const user = require('./routes/user');
+const admin = require('./routes/admin');
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 const url = require('url')
@@ -14,6 +15,7 @@ const session = require("express-session");
 const flash = require("connect-flash")
 const bcrypt = require('bcryptjs')
 const bodyParser = require('body-parser')
+const axios = require('axios')
 
 /*
 var salt = bcrypt.genSaltSync(10)
@@ -59,9 +61,12 @@ app.use(express.static(path.join(__dirname, 'text_search_content')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 
 //socket.io
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 	const ruoter = url.parse(socket.handshake.headers.referer).pathname
-
+	const EmitedUrl = url.parse(socket.handshake.headers.referer)
+	const cookie = socket.handshake.headers.cookie
+	var login = await axios(EmitedUrl.protocol+'//'+EmitedUrl.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data
 
 	//socket.io search
 	if (ruoter.match('/search') !== null) {
@@ -80,8 +85,50 @@ io.on('connection', (socket) => {
 		})
 	}
 
-	//outros sockets
+	if (!login.error) {
+		if (login.user.branch == 1 || login.user.branch == 4) {
+			socket.on('UpdateUserBranchCode', (BranchCode) => {
+				if (BranchCode.code != 1) {
+					if (BranchCode.code != '' || BranchCode.code == 0) {
+						if (!isNaN(BranchCode.code)) {
+							UserModule.findOne({
+								where: {
+									id: BranchCode.id
+								}
+							}).then((user) => {
+								if (user.branch != 1) {
+									UserModule.update({
+										branch: BranchCode.code
+									}, {
+										where: {
+											id: BranchCode.id
+										}
+									})
+								}
+							})
+						}
+					}
+				}
+			})
 
+			socket.on('DeleteUserAccount', async (id) => {
+				var user = await UserModule.findOne({
+					where: {
+						id: id
+					},
+					raw: true
+				})
+
+				if (user.branch != 1) {
+					UserModule.destroy({
+						where: {
+							id: id
+						}
+					})
+				}
+			})
+		}
+	}
 })
 
 //Rotas
@@ -99,6 +146,7 @@ app.get('/404', (req, res) => {
 
 app.use('/search', search)
 app.use('/user', user)
+app.use('/admin', admin)
 
 app.get('*', function(req, res) {
 	res.redirect('/404')

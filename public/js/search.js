@@ -43,7 +43,7 @@ socket.on('responseToSearch', (responseToSearch) => {
 			AutocompleteText.innerHTML += `
 			<li>
 			<a href="/search/response/page?question=${this_response.title}">
-			<li class="fas fa-search"></li>
+			<i class="bi bi-search" style="color:rgb(0, 140, 255); font-size: 18pt; margin-right: 10px;"></i>
 			${this_response.title}
 			</a>
 			<a target="_blank" href="/search/term/${this_response.id}?title=${this_response.title}">

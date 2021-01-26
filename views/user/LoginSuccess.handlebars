@@ -25,6 +25,7 @@
 	</style>
 </head>
 <body>
+	{{>user/_profile}}
 	<div class="container text-center">
 		<i class="fas fa-check-circle"></i>
 		<h1>Você foi conectado com sucesso!</h1>
@@ -33,10 +34,12 @@
 	</div>
 	<script>
 		let time = 60*60*24*365*4
-		document.cookie = 'token_login={{token}}; max-age='+time
+		document.cookie = 'token_login={{token}};path=/;max-age='+time
 
 		if ('{{redirect}}' != 'false') {
-		window.location = '{{redirect}}'
+			setTimeout(() => {
+				window.location = '{{redirect}}'
+			}, 1000)
 		}
 		
 	</script>

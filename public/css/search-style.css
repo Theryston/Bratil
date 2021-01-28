@@ -41,12 +41,12 @@ hr {
 	color: white;
 }
 
-#AutocompleteText .fa-external-link-alt {
+#AutocompleteText .bi-arrow-up-right {
 	float: right;
 	color: rgb(0, 140, 255);
 }
 
-#AutocompleteText .fa-exclamation-circle {
+#AutocompleteText .bi-bug {
 	font-size: 18pt;
 	color: red;
 	margin-right: 10px;

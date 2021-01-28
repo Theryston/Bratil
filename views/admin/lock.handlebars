@@ -1,4 +1,4 @@
-	<title> Bratil - Usuário conectado com sucesso!</title>
+	<title> Bratil - Página restrita!</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -36,16 +36,25 @@
 	var code = '{{code}}'
 	code = code.split(',')
 	
-	{{#each code}}
+	if (code.length == 1) {
 		void async function() {
-			 let DataBranch = await fetch('/admin/branch/api/{{this}}')
-			 DataBranch = await DataBranch.json()
-			if ({{this}} == code[code.length-1]) {
-				ContentText.innerText += ' ou '+DataBranch.name+'.'
-			} else {
-				ContentText.innerText += ' '+DataBranch.name+','
-			}
+			let DataBranch = await fetch('/admin/branch/{{code}}/api')
+			DataBranch = await DataBranch.json()
+			
+			ContentText.innerText += ' '+DataBranch.name+'.'
 		}()
-	{{/each}}
+	} else {
+		{{#each code}}
+			void async function() {
+				 let DataBranch = await fetch('/admin/branch/{{this}}/api')
+				 DataBranch = await DataBranch.json()
+				 if ({{this}} == code[code.length-1]) {
+					ContentText.innerText += ' ou '+DataBranch.name+'.'
+				} else {
+					ContentText.innerText += ' '+DataBranch.name+','
+				}
+			}()
+		{{/each}}
+	}
 	</script>
 </body>

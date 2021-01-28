@@ -1,0 +1,40 @@
+	<title> Bratil - Senha redefinida com sucesso!</title>
+	<style>
+		@font-face {
+	    font-family: 'main-font';
+	    src: url('/css/fonts/Poppins-Light.ttf');
+	  }
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		body {
+			font-family: 'main-font';
+			color: white;
+			background: rgb(32,33,37);
+		}
+		
+		.fa-check-circle {
+			color: rgb(0,170,255);
+			font-size: 70pt;
+			margin-top: 50px;
+			margin-bottom: 50px;
+		}
+		
+	</style>
+</head>
+<body>
+	{{>user/_profile}}
+	<div class="container text-center">
+		<i class="fas fa-check-circle"></i>
+		<h1>Senha redefinida!</h1>
+		<p>Sua senha foi redefinida com sucesso!</p>
+		<a href="/user/profile"><button class="BratilButton mt-4">Fazer login!</button></a>
+	</div>
+	<script>
+		setTimeout(() => {
+			window.location = '/user/profile'
+		}, 1000)
+	</script>
+</body>

@@ -20,3 +20,17 @@
 	}
 	
 </style>
+<script>
+	var ProfileContainer = document.querySelector('.profile-container')
+	
+	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
+		UserRaw.json().then(user => {
+			if (!user.error) {
+				if (user.user.gender == 'female') {
+					ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
+				}
+			}
+		})
+	})
+
+</script>

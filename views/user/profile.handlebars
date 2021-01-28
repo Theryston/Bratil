@@ -26,8 +26,8 @@
 			font-size: 25pt;
 		}
 		
-		.dataP {
-			/*font-size: 15pt;*/
+		h2 {
+			font-size: 20pt;
 		}
 		
 		.card-h2 {
@@ -54,7 +54,46 @@
 		color: rgb(0,140,255);
 		font-size: 18pt;
 	}
-		
+	
+	section hr {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	
+	#BlackTheme {
+		width: 50px;
+		height: 20px;
+		appearance: none;
+		background: white;
+		border-radius: 20px;
+		transition: all .2s;
+		outline: none;
+		position: relative;
+		float: right;
+	}
+	
+	#BlackTheme:checked {
+		background: rgb(0, 140, 255);
+	}
+	
+	#BlackTheme:before {
+		position: absolute;
+		content: '';
+		left: 0px;
+		width: 20px;
+		height: 20px;
+		border-radius: 20px;
+		background: white;
+		box-shadow: 1px 0px 10px black;
+	}
+	
+	#BlackTheme:checked:before {
+		box-shadow: -1px 0px 10px black;
+		position: absolute;
+		left: 100%;
+		transform: translateX(-100%);
+	}
+	
 	</style>
 </head>
 <body>
@@ -76,27 +115,55 @@
 		</div>
 		
 		<img class="welcome-to-profile" src="/img/welcome.png">
-		<h1 class="welcome mb-4">Bem-vindo {{user.name}}!</h1>
-		<p class="dataP">Esta é o seu perfil de usuário:</p>
+		<h1 class="welcome mb-5">Bem-vindo {{user.name}}!</h1>
 		
-		<div class="card">
-			<div class="card-body">
-				<h2 class="card-h2">Dados pessoais:</h2>
-				<hr>
-				<p>nome: {{user.name}}</p>
-				<p>E-mail: {{user.email}}</p>
-				<p>Senha: {{user.password}}</p>
-			<a href="/user/edit"><button class="mt-3 BratilButton">Editar dados</button></a>
-			</div>
-		</div>
+		{{#if user.branch}}
+			<a href="{{branch.router}}">
+				<button class="BratilButton mt-4">Página de administração</button>
+			</a>
+		{{/if}}
 		
 		<button onclick="DeleteAccount()" class="BratilButton mt-4" style="background:red;">Apagar minha conta</button>
 		
 	</div>
+	<section class="container mt-5">
+		<div id="UserData">
+			<form>
+				<h2 class="mb-3">Usuário:</h2>
+				<label for="name">Nome:</label>
+				<input  value="{{user.name}}" id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
+				<label for="email">E-mail:</label>
+				<input value="{{user.email}}" id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
+				<label for="gender">Seu gênero:</label>
+				<select name="gender" id="gender" class="form-control">
+					<option value="male">masculino</option>
+					<option value="female">feminino</option>
+				</select><br>
+				<a href="/user/forgot">Redefinir senha</a>
+				<button onclick="UpdateProfile()" type="button" class="BratilButton mt-4">Salvar</button>
+			</form>
+		</div>
+		<hr>
+		<!--
+		<div id="SiteData">
+			<h2 class="mb-3">Site:</h2>
+			<label for="BlackTheme">Tema escuro</label>
+			<p style="font-size:5pt;">ative ou desative a cor </p>
+			<input type="checkbox" id="BlackTheme">
+		</div>
+		-->
+	</section>
+	
 	<div style="margin-top:120px;">
 		{{>_footer}}
 	</div>
 	<script>
+	var name = document.getElementById('name')
+	var email = document.getElementById('email')
+	var gender = document.getElementById('gender')
+	 
+	console.log(gender.options)
+	
 		function DeleteAccount() {
 			BratilAlert({
 				title: 'Excluir conta',
@@ -105,7 +172,7 @@
 			})
 			
 			BratilAlertAgreed().then(() => {
-				fetch('http://localhost:3000/user/delete?cookie='+encodeURIComponent(document.cookie), { method: 'DELETE' }).then(async (data) => {
+				fetch('/user/delete?cookie='+encodeURIComponent(document.cookie), { method: 'DELETE' }).then(async (data) => {
 					
 					data = await data.json()
 					
@@ -134,6 +201,19 @@
 				})
 			})
 			
+		}
+		
+		function UpdateProfile() {
+			
+			BratilAlert({
+				title: 'Atualizar conta',
+				body: 'Você realmente deseja salvar as atualizações que você fez na sua conta?',
+				button: 'Sim, eu quero!'
+			})
+			
+			BratilAlertAgreed().then(() => {
+				socket.emit('UpdateMyUserAcount', {gender: gender.value, email: email.value, name: name.value})
+			})
 		}
 	</script>
 </body>

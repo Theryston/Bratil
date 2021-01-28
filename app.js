@@ -16,6 +16,7 @@ const flash = require("connect-flash")
 const bcrypt = require('bcryptjs')
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const fs = require('fs')
 
 /*
 var salt = bcrypt.genSaltSync(10)
@@ -24,6 +25,7 @@ var hash = bcrypt.hashSync('ur87Yi6JgHuNUFF', salt)
 UserModule.create({
 	name: 'Theryston Santos',
 	email: 'funktodo2@gmail.com',
+	gender: 'male',
 	password: hash,
 	branch: 1
 })
@@ -54,6 +56,10 @@ app.use((req, res, next) => {
 	res.locals.token_login = req.flash("token_login")
 	next()
 })
+
+setTimeout(() => {
+	fs.writeFileSync('./tokens/reset_password.json', '[]')
+}, 1000*60*10)
 
 //pastas
 app.use(express.static(path.join(__dirname, 'public')))
@@ -128,7 +134,25 @@ io.on('connection', async (socket) => {
 				}
 			})
 		}
+
+		socket.on('UpdateMyUserAcount',
+			async (user) => {
+				var UserCreated = await UserModule.findOne({
+					where: {
+						email: user.email
+					}})
+
+				if (!UserCreated || UserCreated.id == login.user.id) {
+					UserModule.update({
+						...user
+					}, {
+						where: {
+							id: login.user.id
+						}})
+				}
+			})
 	}
+
 })
 
 //Rotas

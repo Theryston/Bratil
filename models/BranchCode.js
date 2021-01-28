@@ -5,6 +5,10 @@ const BranchCode = db.sequelize.define('branchcodes', {
 		type: db.Sequelize.STRING,
 		allowNull: false
 	},
+	router: {
+		type: db.Sequelize.STRING,
+		allowNull: false
+	},
 	code: {
 		type: db.Sequelize.INTEGER,
 		allowNull: false

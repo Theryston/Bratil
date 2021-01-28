@@ -47,7 +47,7 @@ socket.on('responseToSearch', (responseToSearch) => {
 			${this_response.title}
 			</a>
 			<a target="_blank" href="/search/term/${this_response.id}?title=${this_response.title}">
-			<i class="fas fa-external-link-alt"></i>
+			<i class="bi bi-arrow-up-right"></i>
 			</a>
 			</li>
 			<hr>`
@@ -55,7 +55,7 @@ socket.on('responseToSearch', (responseToSearch) => {
 	} else {
 		AutocompleteText.innerHTML = `
 		<li>
-		<i class="fas fa-exclamation-circle"></i>
+		<i class="bi bi-bug"></i>
 		${responseToSearch[0].error}
 		<hr>
 		</li>

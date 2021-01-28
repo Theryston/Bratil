@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 const UserModule = require('../models/User')
 const crypto = require('crypto');
 const axios = require('axios')
+const nodemailer = require('../e-mail/nodemailer')
 const UserLogin = require('../authentications/UserLogin')
 
 router.get('/login', async (req, res) => {
@@ -74,10 +75,13 @@ router.get('/profile', UserLogin, async (req, res) => {
 	const cookie = req.headers.cookie
 	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
 	login = login.data;
+	var  branch = await axios(req.protocol+'://'+req.headers.host+'/admin/branch/'+login.user.branch+'/api')
+	branch = branch.data
 
 	res.render('user/profile',
 		{
-			user: login.user
+			user: login.user,
+			branch
 		})
 
 })
@@ -150,6 +154,7 @@ router.post('/create', (req, res) => {
 	var email = req.body.email
 	var name = req.body.name
 	var password = req.body.password
+	var gender = req.body.gender
 
 	if (!email) {
 		req.flash('error_msg', 'Há algo de errado com o e-mail')
@@ -166,6 +171,17 @@ router.post('/create', (req, res) => {
 		res.redirect('/user/create')
 	}
 
+	if (!gender) {
+		req.flash('error_msg', 'Há algo de errado com o seu gênero')
+		res.redirect('/user/create')
+	}
+
+	if (gender != 'male' && gender != 'female') {
+		req.flash('error_msg', 'Há algo de errado com o seu gênero')
+		res.redirect('/user/create')
+	}
+
+
 	UserModule.findOne({
 		where: {
 			email: email
@@ -178,6 +194,7 @@ router.post('/create', (req, res) => {
 			UserModule.create({
 				email: email,
 				name: name,
+				gender: gender,
 				password: hash
 			}).then((user) => {
 				crypto.randomBytes(20, (errror, buf) => {
@@ -268,13 +285,134 @@ router.get('/logout', UserLogin, async (req, res) => {
 		}
 
 		if (found) {
-			tokens.splice(index)
+			var RedirectLink = req.query["redirectlink"]
+			tokens.splice(index, 1)
 			tokens = JSON.stringify(tokens)
 			fs.writeFileSync('./tokens/login.json', tokens)
-			res.redirect('/')
+			if (RedirectLink) {
+				res.redirect(RedirectLink)
+			} else {
+				res.redirect('/')
+			}
 		}
-		
+
 	}
+})
+
+router.get('/forgot', async (req, res) => {
+	res.render('user/forgot')
+})
+
+router.post('/forgetting', UserLogin, async (req, res) => {
+	var cookie = req.headers.cookie
+	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data;
+
+
+	crypto.randomBytes(6, (errror, buf) => {
+		var token = buf.toString('hex').substring(0, 6)
+		token = token.toUpperCase()
+
+
+		var tokens = fs.readFileSync('./tokens/reset_password.json', 'utf-8')
+		tokens = JSON.parse(tokens)
+
+		tokens.push({
+			token: token,
+			user: login.user.id
+		})
+
+		var SaveToken = JSON.stringify(tokens)
+		fs.writeFileSync('./tokens/reset_password.json', SaveToken)
+
+		nodemailer.transporter.sendMail({
+			from: "Bratil <baitthenew@gmail.com>",
+			to: login.user.email,
+			subject: "Redefinir sua senha da Bratil!",
+			html: `
+			<div style="background:rgb(0,140,255); padding:20px; font-family:arial; border-radius:10px; color: white;">
+			<h1>aqui está o token para redefinir sua senha: </h1>
+
+			<p style="display:inline; margin-top:100px;">
+			Token: <strong>${token}</strong>
+			</p>
+			</div>
+			`
+
+		})
+	})
+
+	var RenderEmail = login.user.email.replace(login.user.email.substring(1, login.user.email.indexOf('@')), '*********')
+
+	res.render('user/forgetting', {
+		email: RenderEmail
+	})
+})
+
+router.post('/reset', UserLogin, async (req, res) => {
+	var InputToken = req.body.token
+	var tokens = fs.readFileSync('./tokens/reset_password.json', 'utf-8')
+	tokens = JSON.parse(tokens)
+	var found = false
+	var times = 0
+
+	tokens.forEach(token => {
+		times++
+		if (InputToken == token.token) {
+			found = true
+			res.render('user/reset')
+		} else if (times == tokens.length-1 && !found) {
+			req.flash('error_msg', 'Nos enviamos outro token para você, pois oque você digitou estava inválido!')
+			res.redirect('/user/forgot')
+		}
+	})
+})
+
+router.post('/resetting', UserLogin, async (req, res) => {
+	var cookie = req.headers.cookie
+	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data;
+	var password = req.body.password
+	var password2 = req.body.password2
+
+	if (password == password2) {
+		var salt = bcrypt.genSaltSync(10)
+		var hash = bcrypt.hashSync(password, salt)
+
+		UserModule.update({
+			password: hash
+		}, {
+			where: {
+				id: login.user.id
+			}
+		}).then(() => {
+
+			var tokens_login = fs.readFileSync('./tokens/login.json', 'utf-8')
+			tokens_login = JSON.parse(tokens_login)
+			var index = 0
+			var indexes = []
+
+			for (let i = 0; i < tokens_login.length; i++) {
+				if (tokens_login[i].user == login.user.id) {
+					tokens_login.splice(i, 1)
+				}
+			}
+
+			var SaveToken = JSON.stringify(tokens_login)
+			fs.writeFileSync('./tokens/login.json', SaveToken)
+
+			res.redirect('/user/resetsuccess')
+
+		})
+	} else {
+		req.flash('error_msg', 'As senhas não eram idênticas')
+		res.redirect('/user/forgot')
+	}
+
+})
+
+router.get('/resetsuccess', (req, res) => {
+	res.render('user/ResetSuccess')
 })
 
 module.exports = router;

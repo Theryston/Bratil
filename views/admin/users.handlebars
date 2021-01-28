@@ -1,4 +1,4 @@
-<title>administração de usuarios - Bratil</title>
+<title>Administração de usuarios - Bratil</title>
 <style>
 	@font-face {
 	   font-family: 'main-font';
@@ -34,7 +34,7 @@
 	{{>_alert}}
 	{{>user/_profile}}
 	<div class="container">
-		<h1 style="font-size:25pt;" class="text-center mt-5 mb-5">administração de usuários da Bratil</h1>
+		<h1 style="font-size:25pt;" class="text-center mt-5 mb-5">Administração de usuários da Bratil</h1>
 	
 		<a href="/user/create"><button class="mb-5 BratilButton">Novo usuário</button></a>
 		
@@ -45,6 +45,7 @@
 						<th>Id</th>
 						<th>Nome</th>
 						<th>E-mail</th>
+						<th>gênero</th>
 						<th>Branch</th>
 						<th>ações</th>
 					</tr>
@@ -55,6 +56,7 @@
 							<td>{{this.id}}</td>
 							<td>{{this.name}}</td>
 							<td>{{this.email}}</td>
+							<td>{{this.gender}}</td>
 							<td class="BranchCode" onkeyup="update(event, this, {{this.id}})" contenteditable>{{this.branch}}</td>
 							<td><button onclick="DeleteAccount(this, {{this.id}}, {{@index}})" class="BratilButton" style="background:red; min-width:100px;">Excluir</button></td>
 						</tr>

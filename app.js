@@ -135,8 +135,8 @@ io.on('connection', async (socket) => {
 			})
 		}
 
-		socket.on('UpdateMyUserAcount',
-			async (user) => {
+		socket.on('UpdateMyUserAcount', async (user) => {
+			console.log(user.name)
 				var UserCreated = await UserModule.findOne({
 					where: {
 						email: user.email

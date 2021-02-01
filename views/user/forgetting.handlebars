@@ -43,7 +43,7 @@
 	<div class="container text-center mb-5">
 		<i class="fas fa-check-circle"></i>
 		<h1>2ª passo</h1>
-		<p>Nós enviámos um e-mail para {{email}} com um token. Dígite o token abaixo e click no butão "redefinir senha ".</p>
+		<p>Nós enviámos um e-mail para {{email}} com um token. Dígite o token abaixo.</p>
 		</div>
 		<div class="container">
 			<hr>
@@ -52,6 +52,7 @@
 		<form action="/user/reset" method="post">
 			<label for="token">Token:</label>
 			<input type="text" autocomplete="off" class="form-control" id="token" name="token" placeholder="digite aqui o token que te enviamos!">
+			<input type="hidden" value="{{EmailUser}}" name="email">
 			<button type="submit" class="BratilButton mt-4">Próximo passo</button>
 		</form>
 	</div>

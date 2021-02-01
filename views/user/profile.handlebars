@@ -131,7 +131,7 @@
 			<form>
 				<h2 class="mb-3">Usuário:</h2>
 				<label for="name">Nome:</label>
-				<input  value="{{user.name}}" id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
+				<input value="{{user.name}}" id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
 				<label for="email">E-mail:</label>
 				<input value="{{user.email}}" id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
 				<label for="gender">Seu gênero:</label>
@@ -158,12 +158,6 @@
 		{{>_footer}}
 	</div>
 	<script>
-	var name = document.getElementById('name')
-	var email = document.getElementById('email')
-	var gender = document.getElementById('gender')
-	 
-	console.log(gender.options)
-	
 		function DeleteAccount() {
 			BratilAlert({
 				title: 'Excluir conta',
@@ -184,7 +178,7 @@
 						})
 						setTimeout(() => {
 							window.location = '/'
-						}, 2000)
+						}, 1000)
 					} else {
 						BratilAlert({
 							title: 'Erro:',
@@ -212,7 +206,13 @@
 			})
 			
 			BratilAlertAgreed().then(() => {
-				socket.emit('UpdateMyUserAcount', {gender: gender.value, email: email.value, name: name.value})
+				var name = document.getElementById('name')
+				var email = document.getElementById('email')
+				var gender = document.getElementById('gender')
+				
+				var DataToSend = {name: name.value, email: email.value, gender: gender.value}
+				socket.emit('UpdateMyUserAcount', DataToSend)
+				document.querySelector('.welcome').innerText = 'Bem-vindo '+name.value+'!'
 			})
 		}
 	</script>

@@ -158,6 +158,15 @@
 		{{>_footer}}
 	</div>
 	<script>
+		var gender = document.querySelector('#gender')
+		//alert(gender.options.length)
+		for (let i = 0; i < gender.options.length; i++) {
+			if (gender.options[i].value == '{{user.gender}}') {
+				gender.options[i].selected = true
+			}
+		}
+		
+		
 		function DeleteAccount() {
 			BratilAlert({
 				title: 'Excluir conta',

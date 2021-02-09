@@ -9,25 +9,28 @@
 		position: fixed;
 		top: 5px;
 		right: 5px;
+		width: 50px;
+		height: 50px;
 	}
 
 	.user-icon-profile {
-		box-shadow: 0px 0px 10px inset rgb(0,140,255);
-		border-radius: 5px;
-		width: 47px;
-		height: 47px;
+		filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.469));
+		height: 100%;
+		width: 100%;
 		object-fit: cover;
 	}
 	
 </style>
 <script>
 	var ProfileContainer = document.querySelector('.profile-container')
+	var UserIconProfile = document.querySelector('.user-icon-profile')
 	
 	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
 		UserRaw.json().then(user => {
 			if (!user.error) {
 				if (user.user.gender == 'female') {
-					ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
+					//ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
+					UserIconProfile.src = '/img/profile_female.png'
 				}
 			}
 		})

@@ -1,4 +1,4 @@
-<title>Administração de usuarios - Bratil</title>
+<title>Administração de usuarios - Mycroway</title>
 <style>
 	@font-face {
 	   font-family: 'main-font';
@@ -34,9 +34,9 @@
 	{{>_alert}}
 	{{>user/_profile}}
 	<div class="container">
-		<h1 style="font-size:25pt;" class="text-center mt-5 mb-5">Administração de usuários da Bratil</h1>
+		<h1 style="font-size:25pt;" class="text-center mt-5 mb-5">Administração de usuários da Mycroway</h1>
 	
-		<a href="/user/create"><button class="mb-5 BratilButton">Novo usuário</button></a>
+		<a href="/user/create"><button class="mb-5 MycrowayButton">Novo usuário</button></a>
 		
 		<div class="table-container">
 			<table class="table table-bordered mt-2">
@@ -58,7 +58,7 @@
 							<td>{{this.email}}</td>
 							<td>{{this.gender}}</td>
 							<td class="BranchCode" onkeyup="update(event, this, {{this.id}})" contenteditable>{{this.branch}}</td>
-							<td><button onclick="DeleteAccount(this, {{this.id}}, {{@index}})" class="BratilButton" style="background:red; min-width:100px;">Excluir</button></td>
+							<td><button onclick="DeleteAccount(this, {{this.id}}, {{@index}})" class="MycrowayButton" style="background:red; min-width:100px;">Excluir</button></td>
 						</tr>
 					{{/each}}
 				</tbody>
@@ -73,13 +73,13 @@
 	<script>
 		function DeleteAccount(input, id, index) {
 			var LineInList = document.getElementById('LineInList'+index)
-			BratilAlert({
+			MycrowayAlert({
 				title: 'Excluir conta',
 				body: 'Você realmente deseja excluir está conta?',
 				button: 'Sim, quero excluir está conta!'
 			})
 			
-			BratilAlertAgreed().then(() => {
+			MycrowayAlertAgreed().then(() => {
 				socket.emit('DeleteUserAccount', id)
 				LineInList.style.display = 'none'
 		})

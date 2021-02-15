@@ -1,4 +1,4 @@
-	<title>Faça crei em sua conta Bratil</title>
+	<title>Crie uma conta na Mycroway</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -53,7 +53,7 @@
 {{>_alert}}
 {{#if error_msg}}
 <script>
-	BratilAlert({
+	MycrowayAlert({
 		title: 'erro:',
 		body: `{{error_msg}}`,
 		button: 'OK, não tem problema!'
@@ -82,10 +82,10 @@
 						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
 					</div>
 				</div>
-				<button type="submit" class="BratilButton mt-5">Criar conta</button>
+				<button type="submit" class="MycrowayButton mt-5">Criar conta</button>
 			</form>
 		</div>
-		<a href="/user/login"><button type="button" class="mt-5 BratilButton">Já tenho uma conta, fazer login!</button></a>
+		<a href="/user/login"><button type="button" class="mt-5 MycrowayButton">Já tenho uma conta, fazer login!</button></a>
 	</div>
 	{{>_footer}}
 	<script>

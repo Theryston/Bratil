@@ -110,7 +110,7 @@ footer {
 	height: 85%;
 }
 
-.BratilMessage {
+.MycrowayMessage {
 	box-shadow: 2px 2px 6px black;
 	background: #202125;
 	position: absolute;
@@ -124,7 +124,7 @@ footer {
 	margin-bottom: 50px;
 }
 
-.BratilMedia {
+.MycrowayMedia {
 	width: 100%;
 }
 
@@ -189,7 +189,7 @@ footer {
 		height: 80%;
 	}
 
-	.BratilMessage {
+	.MycrowayMessage {
 		box-shadow: 2px 2px 6px black;
 		background: #202125;
 		position: absolute;
@@ -203,7 +203,7 @@ footer {
 		width: 100%;
 	}
 
-	.BratilMedia {
+	.MycrowayMedia {
 		width: 100%;
 	}
 

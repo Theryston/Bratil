@@ -1,4 +1,4 @@
-<title>{{term.title}} - Bratil Search</title>
+<title>{{term.title}} - Mycroway Search</title>
 </head>
 <body>
 	<style>
@@ -77,13 +77,13 @@
 	}
 	
 		if(localStorage.getItem('TutorialSummarizeSearch') == null) {
-			BratilAlert({
+			MycrowayAlert({
 				title: 'tutorial:',
 				body: `Está sem tempo? Marque a caixinha no canto superior esquerdo da sua tela, para ler uma versão resumida.`,
 				button: 'Ok, obrigado pela dica!'
 			})
 		}
-		BratilAlertAgreed().then(() => {
+		MycrowayAlertAgreed().then(() => {
 			localStorage.setItem('TutorialSummarizeSearch', true)
 		}).catch(() => {
 			localStorage.setItem('TutorialSummarizeSearch', true)

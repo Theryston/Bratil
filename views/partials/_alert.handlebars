@@ -3,7 +3,7 @@
 		<h1 class="text-center AlertTitle mb-4"></h1>
 		<div class="text-center AlertText"></div>
 		<div class="alertFooter mt-4">
-			<button class="alertFooterBtn BratilButton"></button>
+			<button class="alertFooterBtn MycrowayButton"></button>
 		</div>
 	</div>
 </div>
@@ -78,7 +78,7 @@
 			'AlertIsOpen')
 	}
 
-	const BratilAlertAgreed = () => {
+	const MycrowayAlertAgreed = () => {
 		return new Promise((resolve, reject) => {
 			AlertContainer.addEventListener('click',
 				(event) => {
@@ -98,7 +98,7 @@
 	}
 
 
-	function BratilAlert(content) {
+	function MycrowayAlert(content) {
 
 		if (content.body == undefined) {
 			content.body = ''

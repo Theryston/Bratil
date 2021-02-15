@@ -1,4 +1,4 @@
-	<title>Faça login em sua conta Bratil</title>
+	<title>Faça login em sua conta da Mycroway</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -53,7 +53,7 @@
 {{>_alert}}
 {{#if error_msg}}
 <script>
-	BratilAlert({
+	MycrowayAlert({
 		title: 'erro:',
 		body: `{{error_msg}}`,
 		button: 'OK, não tem problema!'
@@ -76,10 +76,10 @@
 					</div>
 				</div>
 				<a href="/user/forgot">Esqueci minha senha!</a>
-				<button type="submit" class="BratilButton mt-5">Fazer login</button>
+				<button type="submit" class="MycrowayButton mt-5">Fazer login</button>
 			</form>
 		</div>
-		<a href="/user/create"><button type="button" class="mt-5 BratilButton">Não tenho uma conta, criar agora!</button></a>
+		<a href="/user/create"><button type="button" class="mt-5 MycrowayButton">Não tenho uma conta, criar agora!</button></a>
 	</div>
 	{{>_footer}}
 	<script>

@@ -1,4 +1,4 @@
-	<title>Bratil - Perfil do usuário {{user.name}}</title>
+	<title>Mycroway - Perfil do usuário {{user.name}}</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -23,7 +23,12 @@
 		}
 		
 		.welcome {
-			font-size: 25pt;
+			display: flex;
+		}
+		
+		.UserName {
+			/*font-size: 15pt;*/
+			margin-top: auto;
 		}
 		
 		h2 {
@@ -70,6 +75,7 @@
 		outline: none;
 		position: relative;
 		float: right;
+		bottom: 50px;
 	}
 	
 	#BlackTheme:checked {
@@ -94,36 +100,60 @@
 		transform: translateX(-100%);
 	}
 	
+	.user-icon-profile {
+		/*filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.469));*/
+		height: 50px;
+		width: 50px;
+		object-fit: cover;
+	}
+	
+	.navbar-profile  a:visited {
+		color: white;
+	}
+	
 	</style>
 </head>
 <body>
 {{>_alert}}
 {{#if error_msg}}
 <script>
-	BratilAlert({
+	MycrowayAlert({
 		title: 'erro:',
 		body: `{{error_msg}}`,
 		button: 'OK, não tem problema!'
 	})
 </script>
 {{/if}}
-	<div class="container text-center">
+	
+	<div class="navbar-profile" style="width:100vw; height:50px; background: rgb(0, 140, 255);">
+		<h1 class="text-left" style="position:relative; top:50%; transform:translateY(-50%); margin-left:10px; font-family:'font-medium'; font-size:12pt;">
+			<a href="/">
+			<img style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.469));" src="/img/logo.png" width="50px">	Mycroway
+			</a>
+		</h1>
+		<div style="background:white; width:1.5px; height:50px; position:absolute; top:0px; left:160px;"></div>
+		<a href="/user/logout" style="padding:500px;">
+			<div style="font-family:'font-medium'; font-size:18pt; float:right; margin-top:-80px; margin-right:10px;">
+					<i class="bi bi-box-arrow-right"></i>
+			</div>
+		</a>
+	</div>
+	<div class="container mt-4">
+		<!--
 		<div class="exit-container text-center">
 			<a href="/user/logout">
 				<i class="bi bi-box-arrow-right"></i>
 			</a>
 		</div>
+		-->
 		
-		<img class="welcome-to-profile" src="/img/welcome.png">
-		<h1 class="welcome mb-5">Bem-vindo {{user.name}}!</h1>
-		
-		{{#if user.branch}}
-			<a href="{{branch.router}}">
-				<button class="BratilButton mt-4">Página de administração</button>
-			</a>
-		{{/if}}
-		
-		<button onclick="DeleteAccount()" class="BratilButton mt-4" style="background:red;">Apagar minha conta</button>
+		<!--<img class="welcome-to-profile" src="/img/welcome.png">-->
+		<div class="welcome">
+			<img class="user-icon-profile" src="/img/profile_male.png"> 
+			<p class="UserName">
+				{{user.name}}
+			</p>
+		</div>
 		
 	</div>
 	<section class="container mt-5">
@@ -140,21 +170,31 @@
 					<option value="female">feminino</option>
 				</select><br>
 				<a href="/user/forgot">Redefinir senha</a>
-				<button onclick="UpdateProfile()" type="button" class="BratilButton mt-4">Salvar</button>
+				<button onclick="UpdateProfile()" type="button" class="MycrowayButton mt-4">Salvar</button>
 			</form>
 		</div>
 		<hr>
 		<!--
 		<div id="SiteData">
-			<h2 class="mb-3">Site:</h2>
-			<label for="BlackTheme">Tema escuro</label>
-			<p style="font-size:5pt;">ative ou desative a cor </p>
+			<label for="BlackTheme" style="font-size:18pt;">Tema escuro</label>
+			<p style="font-size:10pt; width:82%;">
+				Não gostou da cor de fundo? você pode facilmente mudar a cor de fundo desativando ou ativando o modo escuro. 
+			</p>
 			<input type="checkbox" id="BlackTheme">
 		</div>
+		<hr>
 		-->
+		
+		{{#if user.branch}}
+		<a href="{{branch.router}}">
+			<button class="MycrowayButton mt-4">Página de administração</button>
+		</a>
+		{{/if}}
+		
+		<button onclick="DeleteAccount()" class="MycrowayButton mt-4" style="background:red;">Apagar minha conta</button>
 	</section>
 	
-	<div style="margin-top:120px;">
+	<div style="margin-top:30px;">
 		{{>_footer}}
 	</div>
 	<script>
@@ -168,19 +208,19 @@
 		
 		
 		function DeleteAccount() {
-			BratilAlert({
+			MycrowayAlert({
 				title: 'Excluir conta',
-				body: 'Você realmente deseja excluir sua conta? Todos os dados vinculados a sua conta da Bratil serão apagados. Caso você realmente queira click no butão abaixo, caso não queira click em qualquer lugar ao redor deste pop-up!',
+				body: 'Você realmente deseja excluir sua conta? Todos os dados vinculados a sua conta da Mycroway serão apagados. Caso você realmente queira click no butão abaixo, caso não queira click em qualquer lugar ao redor deste pop-up!',
 				button: 'Sim, quero excluir minha conta!'
 			})
 			
-			BratilAlertAgreed().then(() => {
+			MycrowayAlertAgreed().then(() => {
 				fetch('/user/delete?cookie='+encodeURIComponent(document.cookie), { method: 'DELETE' }).then(async (data) => {
 					
 					data = await data.json()
 					
 					if (data.OK) {
-						BratilAlert({
+						MycrowayAlert({
 							title: 'Conta excluida',
 							body: data.message,
 							button: 'Certo, obrigado!'
@@ -189,14 +229,14 @@
 							window.location = '/'
 						}, 1000)
 					} else {
-						BratilAlert({
+						MycrowayAlert({
 							title: 'Erro:',
 							body: data.message,
 							button: 'Certo, não tem problema!'
 						})
 					}
 				}).catch((error) => {
-					BratilAlert({
+					MycrowayAlert({
 							title: 'Erro:',
 							body: 'Houve um erro desconhecido ao excluir sua conta!',
 							button: 'Certo, não tem problema!'
@@ -208,21 +248,34 @@
 		
 		function UpdateProfile() {
 			
-			BratilAlert({
+			MycrowayAlert({
 				title: 'Atualizar conta',
 				body: 'Você realmente deseja salvar as atualizações que você fez na sua conta?',
 				button: 'Sim, eu quero!'
 			})
 			
-			BratilAlertAgreed().then(() => {
+			MycrowayAlertAgreed().then(() => {
 				var name = document.getElementById('name')
 				var email = document.getElementById('email')
 				var gender = document.getElementById('gender')
 				
 				var DataToSend = {name: name.value, email: email.value, gender: gender.value}
 				socket.emit('UpdateMyUserAcount', DataToSend)
-				document.querySelector('.welcome').innerText = 'Bem-vindo '+name.value+'!'
+				document.querySelector('.UserName').innerText = name.value
 			})
 		}
+		
+		var UserIconProfile = document.querySelector('.user-icon-profile')
+	
+		fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
+			UserRaw.json().then(user => {
+				if (!user.error) {
+					if (user.user.gender == 'female') {
+						UserIconProfile.src = '/img/profile_female.png'
+					}
+				}
+			})
+		})
+	
 	</script>
 </body>

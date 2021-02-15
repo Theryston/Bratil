@@ -1,14 +1,14 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var VoiceRecognition = new SpeechRecognition()
 const utterance = new window.SpeechSynthesisUtterance();
-const bratilmessage = document.querySelector('.BratilMessage');
-const bratilmedia = document.querySelector('.BratilMedia');
-const bratiltext = document.querySelector('.text');
+const Mycrowaymessage = document.querySelector('.MycrowayMessage');
+const Mycrowaymedia = document.querySelector('.MycrowayMedia');
+const Mycrowaytext = document.querySelector('.text');
 const creditosBox = document.querySelector('.credito-box')
 const creditos = document.querySelector('.creditos')
 const microphone = document.querySelector('.microphone');
 var ClientHistoric = document.querySelector('.ClientHistoric');
-var bratilalert = document.querySelector('.alert');
+var Mycrowayalert = document.querySelector('.alert');
 var ImgMicrophone = document.querySelector('#microphone-home')
 var InputSwitch = document.querySelector('#switch')
 
@@ -22,8 +22,8 @@ VoiceRecognition.lang = 'pt-br';
 
 window.addEventListener('load', () => {
 	navigator.vibrate(100)
-	bratilalert.play();
-	bratiltext.innerHTML = ``
+	Mycrowayalert.play();
+	Mycrowaytext.innerHTML = ``
 });
 
 
@@ -43,25 +43,25 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
   VoiceRecognition.addEventListener('start', function() {
     ImgMicrophone.src = '/img/microphone-cut.svg'
-    bratilmedia.innerHTML = ''
-    bratiltext.innerHTML = 'estou te ouvindo!'
+    Mycrowaymedia.innerHTML = ''
+    Mycrowaytext.innerHTML = 'estou te ouvindo!'
   })
 
   VoiceRecognition.addEventListener('end', () => {
     ImgMicrophone.src = '/img/microphone.svg'
 
-    if (bratiltext.innerText == 'estou te ouvindo!') {
-      bratiltext.innerHTML = ''
-      bratilmedia.innerHTML = `<div class="logo"></div>`
+    if (Mycrowaytext.innerText == 'estou te ouvindo!') {
+      Mycrowaytext.innerHTML = ''
+      Mycrowaymedia.innerHTML = `<div class="logo"></div>`
     }
   })
 
   microphone.addEventListener('click', () => {
 
     creditos.style.display = 'none'
-    bratilmedia.innerHTML = ``
+    Mycrowaymedia.innerHTML = ``
 
-    if (bratiltext.innerText == 'estou te ouvindo!') {
+    if (Mycrowaytext.innerText == 'estou te ouvindo!') {
       VoiceRecognition.stop();
     } else {
       VoiceRecognition.start();
@@ -69,9 +69,9 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
 
     if ($(document).height() <= 1000) {
-      bratiltext.style.fontSize = '10pt'
+      Mycrowaytext.style.fontSize = '10pt'
     } else {
-      bratiltext.style.fontSize = '11pt'
+      Mycrowaytext.style.fontSize = '11pt'
     }
 
     navigator.vibrate(40)
@@ -109,11 +109,11 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
   VoiceRecognition.addEventListener('error', (error) => {
     const RandomNumber = Math.random()
 
-    bratilmedia.innerHTML = ''
+    Mycrowaymedia.innerHTML = ''
     if (RandomNumber <= 0.5) {
-      bratiltext.innerHTML = 'houve um erro, por favor tente novamente'
+      Mycrowaytext.innerHTML = 'houve um erro, por favor tente novamente'
     } else {
-      bratiltext.innerHTML = 'desculpe não entendi, por favor tente novamente'
+      Mycrowaytext.innerHTML = 'desculpe não entendi, por favor tente novamente'
     }
 
   })
@@ -124,8 +124,8 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
     })
 
 } else {
-  bratilmedia.innerHTML = ''
-  bratiltext.innerHTML = 'infelizmente o seu navegador não suporta a minha tecnologia. use o Google Chrome'
+  Mycrowaymedia.innerHTML = ''
+  Mycrowaytext.innerHTML = 'infelizmente o seu navegador não suporta a minha tecnologia. use o Google Chrome'
 }
 
 window.addEventListener('click', () => {

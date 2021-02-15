@@ -1,4 +1,4 @@
-	<title> Bratil - esqueci minha senha!!</title>
+	<title> Mycroway - esqueci minha senha!!</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -33,7 +33,7 @@
 	{{>_alert}}
 	{{#if error_msg}}
 <script>
-	BratilAlert({
+	MycrowayAlert({
 		title: 'erro:',
 		body: `{{error_msg}}`,
 		button: 'OK, não tem problema!'
@@ -55,7 +55,7 @@
 			<label for="password2">Repita a senha:</label>
 			<input type="password" autocomplete="off" class="form-control" id="password2" name="password2" placeholder="digite aqui sua senha novamente!"><br>
 			<input type="hidden" value="{{EmailUser}}" name="email">
-			<button type="submit" class="BratilButton mt-4">Redefinir senha</button>
+			<button type="submit" class="MycrowayButton mt-4">Redefinir senha</button>
 		</form>
 	</div>
 </body>

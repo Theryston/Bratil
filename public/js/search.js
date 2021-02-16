@@ -7,16 +7,22 @@ var header = document.querySelector('#header')
 var title = document.querySelector('#title')
 var autocomplete = document.querySelector('#autocomplete')
 var AutocompleteText = document.querySelector('#AutocompleteText')
+var MycrowayNavbar = document.querySelector('.MycrowayNavbar')
 var found = false
+var TopsContainerFormSearch = []
 
 TextSearch.addEventListener('focus', () => {
 	//setTimeout(function() {
 	autocomplete.style.display = "block"
 	header.style.display = 'none'
 	section.style.display = 'none'
-	title.style.display = 'none'
+	//title.style.display = 'none'
+	MycrowayNavbar.style.display = 'none'
+	//alert(ContainerFormSearch.offsetTop)
+	TopsContainerFormSearch.push(ContainerFormSearch.offsetTop+'px')
 	ContainerFormSearch.style.top = '20%'
 	ContainerSearch.style.width = '95vw'
+	//document.body.style.background = 'rgb(32, 33, 37)'
 	//}, 1000);
 });
 TextSearch.addEventListener('focusout', () => {
@@ -24,9 +30,11 @@ TextSearch.addEventListener('focusout', () => {
 		autocomplete.style.display = "none"
 		header.style.display = 'block'
 		section.style.display = 'block'
-		title.style.display = 'flex'
-		ContainerFormSearch.style.top = '50%'
+		MycrowayNavbar.style.display = 'block'
+		//title.style.display = 'flex'
+		ContainerFormSearch.style.top = TopsContainerFormSearch[0]
 		ContainerSearch.style.width = '80vw'
+		//document.body.style.background = 'rgb(0,80,128)'
 	}, 1000);
 });
 
@@ -62,3 +70,16 @@ socket.on('responseToSearch', (responseToSearch) => {
 		`
 	}
 })
+/*
+var scrollY = [100]
+window.onscroll = (event) => {
+
+	if (window.pageYOffset > 100) {
+		document.body.style.background = 'rgb(32, 33, 37)'
+	} else {
+		document.body.style.background = 'rgb(0,80,128)'
+	}
+	//alert('ok')
+
+	scrollY.push(window.scrollY)
+}*/

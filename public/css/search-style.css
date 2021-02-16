@@ -11,20 +11,22 @@
 body {
 	font-family: 'main-font';
 	color: white;
+	transition: all .5s;
 	background: rgb(32, 33, 37);
+	/*background: rgb(0,80,128);*/
 }
 
 .termSearch {
 	height: auto;
 	width: auto;
-	background: linear-gradient(to bottom, white, transparent) !important;
+	background: linear-gradient(tobottom,white, transparent) !important;
 
 	-webkit-background-clip: text !important;
 	-webkit-text-fill-color: transparent !important;
 }
 
 hr {
-	background-color: white;
+	background: white;
 }
 
 #autocomplete {
@@ -60,22 +62,25 @@ header {
 	transition: all 0.6s;
 }
 
-#background-serach {
+#background-serach-logo {
 	position: absolute;
 	top: 0px;
-	height: 100vh;
-	width: 100vw;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 300px;
+	width: 300px;
 	object-fit: cover;
-	z-index: 1;
-	
+	z-index: 4;
+	display: none;
 }
 
 #title {
 	position: absolute;
-	top: 10%;
+	top: 10;
 	left: 50%;
 	transform: translate(-50%, -10%);
 	z-index: 3;
+	display: block;
 }
 
 #title h1 {
@@ -91,24 +96,22 @@ header {
 #background-pelicula {
 	position: absolute;
 	top: 0px;
-	background: /*rgb(0, 140, 255)*/rgba(0,0,0,0.6);
+	background: rgb(32,33,37);
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	z-index: 2;
 }
-/*
-#background-pelicula2 {
+
+#ContainerFormSearch {
 	position: absolute;
-	top: 0;
-	background: rgba(0,0,0,0.6);
-	width: 100vw;
-	height: 100vh;
-	z-index: 2;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, -70%);
 }
-*/
+
 section {
 	position: absolute;
-	top: 105vh;
+	top: 100vh;
 	width: 100vw;
 }
 
@@ -131,8 +134,35 @@ section {
 		left: 50%;
 		transform: translate(-50%, -32%);
 		z-index: 3;
+		display: none;
 	}
 	.search-illustration {
 		width: 100vw;
 	}
+
+	#background-serach-logo {
+		position: absolute;
+		top: 0px;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 300px;
+		width: 300px;
+		object-fit: cover;
+		z-index: 4;
+		display: block;
+	}
+
+	section {
+		position: absolute;
+		top: 70vh;
+		width: 100vw;
+	}
+
+	#ContainerFormSearch {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
 }

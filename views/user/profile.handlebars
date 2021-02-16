@@ -1,4 +1,4 @@
-	<title>Mycroway - Perfil do usuário {{user.name}}</title>
+	<title>conta da Mycroway - {{user.name}}</title>
 	<style>
 		@font-face {
 	    font-family: 'main-font';
@@ -107,7 +107,7 @@
 		object-fit: cover;
 	}
 	
-	.navbar-profile  a:visited {
+	.MycrowayNavbar  a:visited {
 		color: white;
 	}
 	
@@ -125,19 +125,22 @@
 </script>
 {{/if}}
 	
-	<div class="navbar-profile" style="width:100vw; height:50px; background: rgb(0, 140, 255);">
-		<h1 class="text-left" style="position:relative; top:50%; transform:translateY(-50%); margin-left:10px; font-family:'font-medium'; font-size:12pt;">
-			<a href="/">
+	<div class="MycrowayNavbar" style="width:100vw; height:50px; background: rgb(0, 140, 255);">
+	<h1 class="text-left" style="position:relative; top:50%; transform:translateY(-50%); margin-left:10px; font-family:'font-medium'; font-size:12pt;">
+		<a href="/">
 			<img style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.469));" src="/img/logo.png" width="50px">	Mycroway
-			</a>
-		</h1>
-		<div style="background:white; width:1.5px; height:50px; position:absolute; top:0px; left:160px;"></div>
-		<a href="/user/logout" style="padding:500px;">
-			<div style="font-family:'font-medium'; font-size:18pt; float:right; margin-top:-80px; margin-right:10px;">
-					<i class="bi bi-box-arrow-right"></i>
+		</a>
+	</h1>
+	<div style="background:white; width:1.5px; height:50px; position:absolute; top:0px; left:175px;"></div>
+
+	<div style="font-family:'font-medium'; font-size:18pt; float:right; margin-top:-57px;">
+		<a href="/user/logout">
+			<div style="position: absolute; right: 15px;" class="logout-container">
+				<i class="bi bi-box-arrow-right"></i>
 			</div>
 		</a>
 	</div>
+</div>
 	<div class="container mt-4">
 		<!--
 		<div class="exit-container text-center">

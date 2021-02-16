@@ -6,23 +6,107 @@
 	</h1>
 	<div style="background:white; width:1.5px; height:50px; position:absolute; top:0px; left:175px;"></div>
 
-	<div style="font-family:'font-medium'; font-size:11pt; float:right; margin-top:-63px; margin-right:0px;">
+	<div onclick="DropDown()" class="PagesDrop">
+		...
+	</div>
+
+	<div style="font-family:'font-medium'; font-size:11pt; float:right; margin-top:-58.5px; margin-right:0px;">
 		{{>user/_profile}}
 	</div>
+</div>
+<div class="PagesOnNavbar">
+	<ul style="list-style:none;">
+		<hr>
+		<a href="/search">
+			<li>Search</li>
+		</a>
+		<hr>
+	</ul>
 </div>
 <style>
 	.MycrowayNavbar  a:visited {
 		color: white;
 	}
-	
+
 	.profile-container {
 		position: relative;
-		width: 50px;
-		height: 50px;
+		/*width: 40px;
+		height: 40px;*/
 	}
-	
+
 	.user-icon-profile {
 		filter: drop-shadow(0px 0px 0px);
 	}
-	
+
+	.PagesDrop {
+		position: absolute;
+		left: 195px;
+		top: -15px;
+		height: 100%;
+		font-size: 30pt;
+	}
+
+	.PagesOnNavbar {
+		width: 240px;
+		background: white;
+		min-height: 100px;
+		border-radius: 5px;
+		padding: 12px;
+		color: #333;
+		margin-left: 163px;
+		margin-top: 5px;
+		position: absolute;
+		z-index: 10;
+		box-shadow: 0px 0px 15px black;
+		font-family: 'font-medium';
+		display: none;
+		font-size: 11pt;
+	}
+
+	.PagesOnNavbar a:visited {
+		color: #333;
+	}
+
+	.PagesOnNavbar a:link {
+		color: #333;
+	}
+
+	.PagesOnNavbar:before {
+		content: '';
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		left: 33px;
+		top: -10px;
+		background: white;
+		-webkit-transform: rotate(45deg);
+	}
+
 </style>
+<script>
+	var PagesOnNavbar = document.querySelector('.PagesOnNavbar')
+	var URL = document.URL
+	var URLC = URL.replace('http://', '').replace('https://', '')
+	var router = URLC.replace(URLC.substring(0, URLC.indexOf('/')), '')
+
+	function	DropDown() {
+		setTimeout(() => {
+			PagesOnNavbar.style.display = 'block'
+		}, 1)
+	}
+
+	window.addEventListener('click', () => {
+		if (PagesOnNavbar.style.display == 'block') {
+			PagesOnNavbar.style.display = 'none'
+		}
+	})
+
+	var lis = PagesOnNavbar.getElementsByTagName('li')
+
+	for (let i = 0; i < lis.length; i++) {
+		if (router.indexOf(lis[i].innerText.toLowerCase()) != -1 && router.indexOf(lis[i].innerText.toLowerCase()) != 0) {
+			lis[i].style.color = 'rgb(0,140,255)'
+		}
+	}
+
+</script>

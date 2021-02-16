@@ -29,6 +29,7 @@
 		.UserName {
 			/*font-size: 15pt;*/
 			margin-top: auto;
+			margin-left: 10px;
 		}
 		
 		h2 {
@@ -105,6 +106,7 @@
 		height: 50px;
 		width: 50px;
 		object-fit: cover;
+		border-radius: 100%;
 	}
 	
 	.MycrowayNavbar  a:visited {
@@ -278,6 +280,8 @@
 					if (user.user.gender == 'female') {
 						UserIconProfile.src = '/img/profile_female.png'
 					}
+				} else {
+					UserIconProfile.src = '/img/user_avatar.png'
 				}
 			})
 		})

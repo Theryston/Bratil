@@ -9,8 +9,8 @@
 		position: fixed;
 		top: 5px;
 		right: 5px;
-		width: 50px;
-		height: 50px;
+		width: 40px;
+		height: 40px;
 	}
 
 	.user-icon-profile {
@@ -18,13 +18,15 @@
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
+		border-radius: 100%;
 	}
-	
+
 </style>
 <script>
+
 	var ProfileContainer = document.querySelector('.profile-container')
 	var UserIconProfile = document.querySelector('.user-icon-profile')
-	
+
 	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
 		UserRaw.json().then(user => {
 			if (!user.error) {
@@ -32,6 +34,8 @@
 					//ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
 					UserIconProfile.src = '/img/profile_female.png'
 				}
+			} else {
+				UserIconProfile.src = '/img/user_avatar.png'
 			}
 		})
 	})

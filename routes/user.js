@@ -458,4 +458,8 @@ router.get('/resetsuccess', (req, res) => {
 	res.render('user/ResetSuccess')
 })
 
+router.get('/photo', (req, res) => {
+	res.render('user/photo')
+})
+
 module.exports = router;

@@ -16,11 +16,14 @@ TextSearch.addEventListener('focus', () => {
 	autocomplete.style.display = "block"
 	header.style.display = 'none'
 	section.style.display = 'none'
-	//title.style.display = 'none'
 	MycrowayNavbar.style.display = 'none'
-	//alert(ContainerFormSearch.offsetTop)
-	TopsContainerFormSearch.push(ContainerFormSearch.offsetTop+'px')
-	ContainerFormSearch.style.top = '20%'
+	if (window.innerWidth < window.innerHeight) {
+		title.style.display = 'none'
+		ContainerFormSearch.style.top = '20%'
+	} else {
+		title.style.display = 'none'
+		ContainerFormSearch.style.top = '50%'
+	}
 	ContainerSearch.style.width = '95vw'
 	//document.body.style.background = 'rgb(32, 33, 37)'
 	//}, 1000);
@@ -31,15 +34,22 @@ TextSearch.addEventListener('focusout', () => {
 		header.style.display = 'block'
 		section.style.display = 'block'
 		MycrowayNavbar.style.display = 'block'
-		//title.style.display = 'flex'
-		ContainerFormSearch.style.top = TopsContainerFormSearch[0]
+		if (window.innerWidth < window.innerHeight) {
+			title.style.display = 'none'
+			ContainerFormSearch.style.top = '50%'
+		} else {
+			title.style.display = 'block'
+			ContainerFormSearch.style.top = '70%'
+		}
 		ContainerSearch.style.width = '80vw'
 		//document.body.style.background = 'rgb(0,80,128)'
-	}, 1000);
+	},
+		1000);
 });
 
 TextSearch.addEventListener('keyup', (event) => {
-	socket.emit('searchValue', TextSearch.value)
+	socket.emit('searchValue',
+		TextSearch.value)
 })
 
 socket.on('responseToSearch', (responseToSearch) => {

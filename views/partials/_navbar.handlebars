@@ -21,6 +21,10 @@
 			<li>Search</li>
 		</a>
 		<hr>
+		<a href="/mai">
+			<li>M.A.I.</li>
+		</a>
+		<hr>
 	</ul>
 </div>
 <style>
@@ -102,9 +106,8 @@
 	})
 
 	var lis = PagesOnNavbar.getElementsByTagName('li')
-
 	for (let i = 0; i < lis.length; i++) {
-		if (router.indexOf(lis[i].innerText.toLowerCase()) != -1 && router.indexOf(lis[i].innerText.toLowerCase()) != 0) {
+		if (router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != -1 && router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != 0) {
 			lis[i].style.color = 'rgb(0,140,255)'
 		}
 	}

@@ -22,13 +22,15 @@ VoiceRecognition.lang = 'pt-br';
 
 window.addEventListener('load', () => {
 	navigator.vibrate(100)
-	Mycrowayalert.play();
+	VoiceRecognition.start();
+	InputSwitch.checked = true
+	//Mycrowayalert.play();
 	Mycrowaytext.innerHTML = ``
 });
 
 
 if (window.SpeechRecognition || window.webkitSpeechRecognition) {
-	InputSwitch.addEventListener('change', (req, res) => {
+	InputSwitch.addEventListener('click', () => {
 		if (InputSwitch.checked) {
 			VoiceRecognition.start();
 		} else {
@@ -36,6 +38,14 @@ if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 		}
 	})
 }
+VoiceRecognition.addEventListener('result', (evt) => {
+	var UserText = evt.results[0][0].transcript
+	alert(UserText)
+}) 
+
+VoiceRecognition.addEventListener('end', () => {
+	InputSwitch.checked = false
+}) 
 
 /*
 

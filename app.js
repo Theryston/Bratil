@@ -5,6 +5,7 @@ const path = require("path")
 const search = require('./routes/search');
 const user = require('./routes/user');
 const admin = require('./routes/admin');
+const MAI = require('./routes/MAI');
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 const url = require('url')
@@ -171,6 +172,7 @@ app.get('/404', (req, res) => {
 app.use('/search', search)
 app.use('/user', user)
 app.use('/admin', admin)
+app.use('/mai', MAI)
 
 app.get('*', function(req, res) {
 	res.redirect('/404')

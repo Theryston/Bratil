@@ -41,8 +41,8 @@
 	top: 0px;
 	left: -20px;
 	/*transform: translate(-0%, -50%);*/
-	width: 15px;
-	height: 15px;
+	width: 10px;
+	height: 10px;
 	appearance: none;
 	background: rgb(0, 140, 255);
 	border-radius: 100%;
@@ -56,8 +56,8 @@
 	top: 0px;
 	left: 20px;
 	/*transform: translate(-0%, -50%);*/
-	width: 15px;
-	height: 15px;
+	width: 10px;
+	height: 10px;
 	appearance: none;
 	background: rgb(0, 140, 255);
 	border-radius: 100%;

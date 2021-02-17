@@ -1,8 +1,22 @@
-<a href="/user/profile">
-	<div class="profile-container">
-		<img class="user-icon-profile" src="/img/profile_male.png">
+<div class="profile-container">
+	<img class="user-icon-profile-in-navbar" src="/img/profile_male.png">
+</div>
+<div class="popup-user-profile">
+	<img src="/img/logo.png" class="logo-in-popup-user-profile">
+	<p class="mycroway-text-in-popup-user-profile">
+		Conta da Mycroway
+	</p>
+	<i onclick="window.location = '/user/logout'" style="position:absolute; top:0px; right:10px; font-size:18pt;" class="bi bi-box-arrow-right"></i>
+	<hr>
+	<div class="section-in-popup-user-profile">
+		<img style="width:100px;" class="user-icon-profile-in-navbar" src="/img/profile_male.png">
+		<p class="username-in-popup-user-profile"></p>
+		<p class="useremail-in-popup-user-profile"></p>
+		<p onclick="window.location = '/user/profile'" class="userprofile-in-popup-user-profile">
+			Minha conta
+		</p>
 	</div>
-</a>
+</div>
 <style>
 	.profile-container {
 		z-index: 10;
@@ -13,7 +27,41 @@
 		height: 40px;
 	}
 
-	.user-icon-profile {
+	.logo-in-popup-user-profile {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.469));
+	}
+
+	.username-in-popup-user-profile {
+		margin-top: -68px;
+		margin-left: 93px;
+	}
+
+	.useremail-in-popup-user-profile {
+		margin-top: -20px;
+		margin-left: 95px;
+		font-size: 10pt;
+		font-family: 'main-font';
+	}
+
+	.userprofile-in-popup-user-profile {
+		margin-top: -15px;
+		margin-left: 95px;
+		font-size: 10pt;
+		color: rgb(0,140,255);
+	}
+
+	.mycroway-text-in-popup-user-profile {
+		margin-bottom: auto;
+		margin-left: 30px;
+	}
+
+	.user-icon-profile-in-navbar {
 		filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.469));
 		height: 100%;
 		width: 100%;
@@ -21,21 +69,63 @@
 		border-radius: 100%;
 	}
 
+	.popup-user-profile {
+		width: 65vw;
+		background: white;
+		min-height: 200px;
+		padding: 12px;
+		color: #333;
+		position: absolute;
+		right: 7px;
+		top: 50px;
+		z-index: 10;
+		box-shadow: 0px 0px 15px black;
+		font-family: 'font-medium';
+		font-size: 11pt;
+		display: none;
+	}
+
 </style>
 <script>
 
 	var ProfileContainer = document.querySelector('.profile-container')
-	var UserIconProfile = document.querySelector('.user-icon-profile')
+	var popupuserprofile = document.querySelector('.popup-user-profile')
+	var usernameinpopupuserprofile = document.querySelector('.username-in-popup-user-profile')
+	var useremailinpopupuserprofile = document.querySelector('.useremail-in-popup-user-profile')
+	var UserIconProfile = document.getElementsByClassName('user-icon-profile-in-navbar')
+	var popupuserprofileisopen = false
 
 	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
 		UserRaw.json().then(user => {
 			if (!user.error) {
 				if (user.user.gender == 'female') {
 					//ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
-					UserIconProfile.src = '/img/profile_female.png'
+					UserIconProfile[0].src = '/img/profile_female.png'
+					UserIconProfile[1].src = '/img/profile_female.png'
 				}
+
+				ProfileContainer.addEventListener('click', () => {
+					setTimeout(() => {
+						popupuserprofile.style.display = 'block'
+						popupuserprofileisopen = true
+					}, 1)
+				})
+
+				window.addEventListener('click',
+					() => {
+						if (popupuserprofile.style.display == 'block') {
+							popupuserprofile.style.display = 'none'
+							popupuserprofileisopen = false
+						}
+					})
+
+				usernameinpopupuserprofile.innerText = user.user.name
+				useremailinpopupuserprofile.innerText = user.user.email
 			} else {
-				UserIconProfile.src = '/img/user_avatar.png'
+				UserIconProfile[0].src = '/img/user_avatar.png'
+				ProfileContainer.addEventListener('click', () => {
+					window.location = '/user/profile'
+				})
 			}
 		})
 	})

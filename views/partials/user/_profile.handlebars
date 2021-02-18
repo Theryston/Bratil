@@ -21,10 +21,12 @@
 	.profile-container {
 		z-index: 10;
 		position: fixed;
-		top: 5px;
+		top: -1px;
 		right: 5px;
 		width: 40px;
 		height: 40px;
+		color: #333;
+		font-size: 25pt;
 	}
 
 	.logo-in-popup-user-profile {
@@ -122,7 +124,8 @@
 				usernameinpopupuserprofile.innerText = user.user.name
 				useremailinpopupuserprofile.innerText = user.user.email
 			} else {
-				UserIconProfile[0].src = '/img/user_avatar.png'
+				ProfileContainer.innerHTML = '<i class="bi bi-person-circle" class="user-icon-profile-in-navbar"></i>'
+				ProfileContainer.style.top = '-5px'
 				ProfileContainer.addEventListener('click', () => {
 					window.location = '/user/profile'
 				})

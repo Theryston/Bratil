@@ -17,34 +17,26 @@
 			border-radius: 20px;
 		}
 		
+		hr {
+			background: white;
+		}
+		
 		.container {
-			margin-top: 70px;
+			margin-top: 100px;
 		}
 		
 		h1 {
 			font-size: 25pt;
 		}
 		
-		.form-control {
-			box-shadow: 2px 2px 6px black;
-			border-radius: 8px;
-			border: none;
-			outline: none;
-			color: #333;
-		}
-		
-		.password {
-			width: 100%;
-			font-size: 15pt;
-			position: relative;
-		}
 		
 		.eye {
+			font-size: 1.1rem;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			color: #111;
-			right: 5px;
+			color: #eee;
+			right: 10px;
 		}
 		
 	</style>
@@ -61,27 +53,30 @@
 </script>
 {{/if}}
 	<div class="container">
-		<h1 class="mb-4">Fazer login:</h1>
-		<div class="container-form">
-			<h1 class="mb-5">Insira os dados abaixo:</h1>
+		<h1>Login</h1>
+		<br>
+		<div>
 			<form method="post" action="/user/login">
-				<label for="email">E-mail:</label>
-				<input id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
-				<label for="password">Senha: </label>
-				<div class="password mb-4">
-					<input placeholder="digite aqui a sua senha" id="password" type="password" class="form-control" name="password" required>
-					<input type="hidden" id="redirect" name="redirect">
+				<input type="hidden" id="redirect" name="redirect">
+				<div class="MycrowayInput">
+					<input autocomplete="off" id="email" type="email" name="email" required>
+					<p>E-mail</p>
+				</div><br>
+				<div class="MycrowayInput">
+					<input autocomplete="off" id="password" type="password" name="password" required>
+					<p>Senha</p>
 					<div class="EyeContainer">
 						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
 					</div>
 				</div>
+				<br>
 				<a href="/user/forgot">Esqueci minha senha!</a>
 				<button type="submit" class="MycrowayButton mt-5">Fazer login</button>
 			</form>
+			<hr class="mt-5">
+			<a href="/user/create"><button type="button" class="mt-5 MycrowayButton">Não tenho uma conta, criar agora!</button></a>
 		</div>
-		<a href="/user/create"><button type="button" class="mt-5 MycrowayButton">Não tenho uma conta, criar agora!</button></a>
 	</div>
-	{{>_footer}}
 	<script>
 		const eye = document.querySelector('.eye')
 		const EyeContainer = document.querySelector('.EyeContainer')

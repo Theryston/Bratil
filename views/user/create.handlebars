@@ -40,12 +40,30 @@
 		}
 		
 		.eye {
+			font-size: 1.1rem;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			color: #111;
-			right: 5px;
+			color: #eee;
+			right: 10px;
 		}
+		
+		.gendercon {
+			width: 100%;
+		}
+		
+		#gender {
+			width: 100%;
+			background: rgb(32,33,37);
+			color: #fff;
+			font-family: 'font-medium';
+			height: 60px;
+			border-radius: 0.2rem;
+			border: 2px solid #444;
+			outline: none;
+			padding-left: 1rem;
+		}
+		
 		
 	</style>
 </head>
@@ -61,33 +79,38 @@
 </script>
 {{/if}}
 	<div class="container">
-		<h1 class="mb-4">Crie sua conta:</h1>
-		<div class="container-form">
-			<h1 class="mb-5">Insira os dados abaixo:</h1>
+		<h1>Criar conta</h1>
+		<br>
+		<div>
 			<form method="post" action="/user/create">
-				<label for="name">Nome:</label>
-				<input id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
-				<label for="email">E-mail:</label>
-				<input id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
-				<label for="gender">Seu gênero:</label>
-				<select name="gender" id="gender" class="form-control">
-					<option value="male">masculino</option>
-					<option value="female">feminino</option>
-				</select><br>
-				<label for="password">Senha: </label>
-				<div class="password">
-					<input placeholder="digite aqui a sua senha" id="password" type="password" class="form-control" name="password" required>
-					<input type="hidden" id="redirect" name="redirect">
+				<input type="hidden" id="redirect" name="redirect">
+				<div class="MycrowayInput">
+					<input autocomplete="off" id="name" type="text" name="name" required>
+					<p>Nome</p>
+				</div><br>
+				<div class="MycrowayInput">
+					<input autocomplete="off" id="email" name="email" type="email" required>
+					<p>E-mail</p>
+				</div><br>
+				<div class="MycrowayInput">
+					<input autocomplete="off" id="password" type="password" name="password" required>
+					<p>Senha</p>
 					<div class="EyeContainer">
 						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
 					</div>
-				</div>
+				</div><br>
+				<div class="gendercon">
+					<select name="gender" id="gender">
+						<option value="male">masculino</option>
+						<option value="female">feminino</option>
+					</select>
+				</div> <br>
 				<button type="submit" class="MycrowayButton mt-5">Criar conta</button>
 			</form>
+			<hr class="mt-5">
+			<a href="/user/login"><button type="button" class="mt-5 MycrowayButton">Já tenho uma conta, fazer login!</button></a>
 		</div>
-		<a href="/user/login"><button type="button" class="mt-5 MycrowayButton">Já tenho uma conta, fazer login!</button></a>
 	</div>
-	{{>_footer}}
 	<script>
 		const eye = document.querySelector('.eye')
 		const EyeContainer = document.querySelector('.EyeContainer')

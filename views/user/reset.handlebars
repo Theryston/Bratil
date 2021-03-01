@@ -50,10 +50,14 @@
 		</div>
 		<div class="container mt-5">
 		<form action="/user/resetting" method="post">
-			<label for="password">Senha nova:</label>
-			<input type="password" autocomplete="off " class="form-control" id="password" name="password" placeholder="digite aqui a sua senha nova!"><br>
-			<label for="password2">Repita a senha:</label>
-			<input type="password" autocomplete="off" class="form-control" id="password2" name="password2" placeholder="digite aqui sua senha novamente!"><br>
+			<div class="MycrowayInput">
+				<input type="password" autocomplete="off" id="password" name="password">
+				<p>Nova senha</p>
+			</div><br>
+			<div class="MycrowayInput">
+				<input type="password" autocomplete="off" id="password2" name="password2">
+				<p>Repita a senha</p>
+			</div><br>
 			<input type="hidden" value="{{EmailUser}}" name="email">
 			<button type="submit" class="MycrowayButton mt-4">Redefinir senha</button>
 		</form>

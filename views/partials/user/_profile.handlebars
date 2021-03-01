@@ -25,7 +25,7 @@
 		right: 5px;
 		width: 40px;
 		height: 40px;
-		color: #333;
+		color: #eee;
 		font-size: 25pt;
 	}
 
@@ -94,16 +94,15 @@
 	var popupuserprofile = document.querySelector('.popup-user-profile')
 	var usernameinpopupuserprofile = document.querySelector('.username-in-popup-user-profile')
 	var useremailinpopupuserprofile = document.querySelector('.useremail-in-popup-user-profile')
-	var UserIconProfile = document.getElementsByClassName('user-icon-profile-in-navbar')
+	var UserIconProfileNavbar = document.getElementsByClassName('user-icon-profile-in-navbar')
 	var popupuserprofileisopen = false
 
 	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie)).then((UserRaw) => {
 		UserRaw.json().then(user => {
 			if (!user.error) {
 				if (user.user.gender == 'female') {
-					//ProfileContainer.innerHTML = `<img class="user-icon-profile" src="/img/profile_female.png">`
-					UserIconProfile[0].src = '/img/profile_female.png'
-					UserIconProfile[1].src = '/img/profile_female.png'
+					UserIconProfileNavbar[0].src = '/img/profile_female.png'
+					UserIconProfileNavbar[1].src = '/img/profile_female.png'
 				}
 
 				ProfileContainer.addEventListener('click', () => {
@@ -130,6 +129,7 @@
 					window.location = '/user/profile'
 				})
 			}
+			
 		})
 	})
 

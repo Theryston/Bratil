@@ -48,11 +48,11 @@ socket.on('responseToSearch', (responseToSearch) => {
 		res.innerHTML = ``
 		loading.style.display = 'block'
 
-		res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
+		/*res.innerHTML += `<div class="mt-4 card"><div class="card-body" style="background:rgb(32,33,37);">
 
 		<p>Continue digitando...</p>
 
-		</div></div>`
+		</div></div>`*/
 
 	}
 

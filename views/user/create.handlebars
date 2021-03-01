@@ -48,22 +48,6 @@
 			right: 10px;
 		}
 		
-		.gendercon {
-			width: 100%;
-		}
-		
-		#gender {
-			width: 100%;
-			background: rgb(32,33,37);
-			color: #fff;
-			font-family: 'font-medium';
-			height: 60px;
-			border-radius: 0.2rem;
-			border: 2px solid #444;
-			outline: none;
-			padding-left: 1rem;
-		}
-		
 		
 	</style>
 </head>
@@ -99,12 +83,11 @@
 						<i onclick="EyeFunc()" class="far eye fa-eye"></i>
 					</div>
 				</div><br>
-				<div class="gendercon">
-					<select name="gender" id="gender">
-						<option value="male">masculino</option>
-						<option value="female">feminino</option>
-					</select>
-				</div> <br>
+				<select name="gender" class="MycrowaySelect">
+					<option value="male">masculino</option>
+					<option value="female">feminino</option>
+				</select>
+				<br>
 				<button type="submit" class="MycrowayButton mt-5">Criar conta</button>
 			</form>
 			<hr class="mt-5">

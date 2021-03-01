@@ -6,7 +6,7 @@
 	</h1>
 	<div style="background:white; width:1.5px; height:50px; position:absolute; top:0px; left:175px;"></div>
 
-	<div onclick="DropDown()" class="PagesDrop">
+	<div style="color:white;" class="PagesDrop">
 		...
 	</div>
 
@@ -15,16 +15,23 @@
 	</div>
 </div>
 <div class="PagesOnNavbar">
-	<ul style="list-style:none;">
-		<hr>
-		<a href="/search">
-			<li>Search</li>
-		</a>
-		<hr>
-		<a href="/mai">
-			<li>M.A.I.</li>
-		</a>
-		<hr>
+	<ul class="PagesOnNavbarList" style="list-style:none;">
+		<div>
+			<a href="/search">
+				<li>Search</li>
+				<p>
+					Motor de buscas
+				</p>
+			</a>
+		</div>
+		<div>
+			<a href="/mai">
+				<li>M.A.I.</li>
+				<p>
+					Sua assistente virtual
+				</p>
+			</a>
+		</div>
 	</ul>
 </div>
 <style>
@@ -34,8 +41,6 @@
 
 	.profile-container {
 		position: relative;
-		/*width: 40px;
-		height: 40px;*/
 	}
 
 	.user-icon-profile-in-navbar {
@@ -53,8 +58,8 @@
 	.PagesOnNavbar {
 		width: 240px;
 		background: white;
+		border-radius: 0.2rem;
 		min-height: 100px;
-		/*border-radius: 5px;*/
 		padding: 12px;
 		color: #333;
 		margin-left: 163px;
@@ -62,7 +67,7 @@
 		position: absolute;
 		z-index: 10;
 		box-shadow: 0px 0px 15px black;
-		font-family: 'font-medium';
+		font-family: 'font-regular';
 		display: none;
 		font-size: 11pt;
 	}
@@ -74,8 +79,8 @@
 	.PagesOnNavbar a:link {
 		color: #333;
 	}
-/*
-	.PagesOnNavbar:before {
+
+	/*.PagesOnNavbar:before {
 		content: '';
 		position: absolute;
 		width: 20px;
@@ -84,32 +89,89 @@
 		top: -10px;
 		background: white;
 		transform: rotate(45deg);
+	}*/
+
+	.PagesOnNavbarList li {
+		font-family: 'font-medium';
+		position: absolute;
+		top: 0;
+		transform: translateY(-50%);
+		background: white;
+		padding: 2px;
 	}
-*/
+
+	.PagesOnNavbarList div {
+		position: relative;
+		margin-bottom: 20px;
+		padding: 10px;
+		border: 1px solid #444;
+		border-radius: 0.2rem;
+	}
+
+	.PagesOnNavbarList p {
+		margin: 0px;
+		margin-left: 10px;
+	}
+
 </style>
 <script>
-	var PagesOnNavbar = document.querySelector('.PagesOnNavbar')
-	var URL = document.URL
-	var URLC = URL.replace('http://', '').replace('https://', '')
-	var router = URLC.replace(URLC.substring(0, URLC.indexOf('/')), '')
+	void async function() {
+		var PagesOnNavbar = document.querySelector('.PagesOnNavbar')
+		var PagesDrop = document.querySelector('.PagesDrop')
+		var PagesOnNavbarList = document.querySelector('.PagesOnNavbarList')
+		var PagesOnNavbarListDiv = PagesOnNavbarList.getElementsByTagName('div')
+		var URL = document.URL
+		var URLC = URL.replace('http://', '').replace('https://', '')
+		var router = URLC.replace(URLC.substring(0, URLC.indexOf('/')), '')
 
-	function	DropDown() {
-		setTimeout(() => {
-			PagesOnNavbar.style.display = 'block'
-		}, 1)
-	}
+		var UserRaw = await	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie))
 
-	window.addEventListener('click', () => {
-		if (PagesOnNavbar.style.display == 'block') {
-			PagesOnNavbar.style.display = 'none'
+		var user = await UserRaw.json()
+
+		var BarnchApi = await fetch('/admin/branch/'+user.user.branch+'/api')
+
+		var {
+			router: RouterAdmin
+		} = await BarnchApi.json()
+
+		if (user.branch != 0) {
+			PagesOnNavbarList.innerHTML += `<div>
+			<a href="${RouterAdmin}">
+			<li>Administração</li>
+			<p>Seção de Administração</p>
+			</a>
+			</div>
+			`
 		}
-	})
 
-	var lis = PagesOnNavbar.getElementsByTagName('li')
-	for (let i = 0; i < lis.length; i++) {
-		if (router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != -1 && router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != 0) {
-			lis[i].style.color = 'rgb(0,140,255)'
+
+
+		PagesDrop.addEventListener('click', () => {
+			setTimeout(() => {
+				PagesOnNavbar.style.display = 'block'
+			},
+				1)
+		})
+
+		window.addEventListener('click', () => {
+			if (PagesOnNavbar.style.display == 'block') {
+				PagesOnNavbar.style.display = 'none'
+			}
+		})
+
+
+		var lis = PagesOnNavbar.getElementsByTagName('li')
+		for (let i = 0; i < lis.length; i++) {
+
+			/*if (lis[i].innerText == 'Administração' && router.indexOf('admin') != -1) {
+				router = lis[i].innerText
+			}*/
+
+			//if (router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != -1 && router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != 0 || router.indexOf(lis[i].innerText) != -1) {
+			if (URL.indexOf(PagesOnNavbarListDiv[i].getElementsByTagName('a')[0].href) != -1) {
+				PagesOnNavbarListDiv[i].style.borderColor = "rgb(0,140,255)"
+				lis[i].style.color = 'rgb(0,140,255)'
+			}
 		}
-	}
-
+	}()
 </script>

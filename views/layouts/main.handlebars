@@ -18,6 +18,11 @@
 				src: url('/css/fonts/Poppins-Medium.ttf');
 			}
 			
+			@font-face {
+				font-family: 'font-regular';
+				src: url('/css/fonts/Poppins-Regular.ttf');
+			}
+			
 	  .MycrowayButton {
       padding: 10px 10px 10px 10px;
       color: white;
@@ -100,6 +105,34 @@
 			font-size: 1.1rem;
 			color: #444;
 		}
+		
+				.MycrowaySelect {
+			width: 100%;
+			background: rgb(32,33,37);
+			color: #fff;
+			font-family: 'font-medium';
+			height: 60px;
+			border-radius: 0.2rem;
+			border: 2px solid #444;
+			outline: none;
+			padding-left: 1rem;
+		}
+</style>
+<style>
+	.MycrowayLoading {
+	width: 50px;
+	height: 50px;
+	border: 2px solid #008cff38;
+	border-top-color: #008cff;
+	border-radius: 100%;
+	animation: MycrowayLoading 1s linear infinite;
+}
+
+@keyframes MycrowayLoading {
+	to {
+		transform: rotate(360deg);
+	}
+}
 </style>
   <script src="/js/icons.js" crossorigin="anonymous"></script>
 
@@ -143,7 +176,7 @@
   {{{body}}}
   <script src="/js/bootstrap.bundle.js"></script>
 	<script>
-		//eruda.init()
+		eruda.init()
 		eruda.add(erudaDom);
 		eruda.add(erudaCode);
 	</script>

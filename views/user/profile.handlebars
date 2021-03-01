@@ -140,9 +140,7 @@
 		
 		<!--<img class="welcome-to-profile" src="/img/welcome.png">-->
 		<div class="welcome">
-			<a href="/user/photo">
-				<img class="user-icon-profile" src="/img/profile_male.png"> 
-			</a>
+			<img class="user-icon-profile" src="/img/profile_male.png"> 
 			<p class="UserName">
 				{{user.name}}
 			</p>
@@ -152,16 +150,19 @@
 	<section class="container mt-5">
 		<div id="UserData">
 			<form>
-				<h2 class="mb-3">Usuário:</h2>
-				<label for="name">Nome:</label>
-				<input value="{{user.name}}" id="name" placeholder="digite aqui o seu nome" type="text" name="name" class="form-control" required> <br>
-				<label for="email">E-mail:</label>
-				<input value="{{user.email}}" id="email" placeholder="digite aqui o seu e-mail" type="email" name="email" class="form-control" required> <br>
-				<label for="gender">Seu gênero:</label>
-				<select name="gender" id="gender" class="form-control">
+				<h2 class="mb-3">Usuário</h2>
+				<div class="MycrowayInput">
+					<input value="{{user.name}}" id="name" type="text" name="name" required>
+					<p>Nome</p>
+				</div><br>
+				<div class="MycrowayInput">
+					<input value="{{user.email}}" id="email" type="email" name="email" required>
+					<p>E-mail</p>
+				</div><br>
+				<select name="gender" id="gender" class="MycrowaySelect">
 					<option value="male">masculino</option>
 					<option value="female">feminino</option>
-				</select><br>
+				</select><br><br>
 				<a href="/user/forgot">Redefinir senha</a>
 				<button onclick="UpdateProfile()" type="button" class="MycrowayButton mt-4">Salvar</button>
 			</form>

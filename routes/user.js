@@ -237,7 +237,7 @@ router.delete('/delete', async (req, res) => {
 		if (login.user.branch == 1) {
 			res.json({
 				OK: false,
-				message: 'Você é o dono da Bratil, sua conta é tão valiosa que não pode ser excluída!'
+				message: 'Você é o dono da Mycroway, sua conta é tão valiosa que não pode ser excluída!'
 			})
 		} else {
 			UserModule.destroy({
@@ -341,9 +341,9 @@ router.post('/forgetting', async (req, res) => {
 			fs.writeFileSync('./tokens/reset_password.json', SaveToken)
 
 			nodemailer.transporter.sendMail({
-				from: "Bratil <baitthenew@gmail.com>",
+				from: "Mycroway <baitthenew@gmail.com>",
 				to: login.user.email,
-				subject: "Redefinir sua senha da Bratil!",
+				subject: "Redefinir sua senha da Mycroway!",
 				html: `
 				<div style="background:rgb(0,140,255); padding:20px; font-family:arial; border-radius:10px; color: white;">
 				<h1>aqui está o token para redefinir sua senha: </h1>

@@ -50,8 +50,10 @@
 		</div>
 		<div class="container mt-5">
 		<form action="/user/reset" method="post">
-			<label for="token">Token:</label>
-			<input type="text" autocomplete="off" class="form-control" id="token" name="token" placeholder="digite aqui o token que te enviamos!">
+			<div class="MycrowayInput">
+				<input type="text" autocomplete="off" id="token" name="token">
+				<p>Token</p>
+			</div>
 			<input type="hidden" value="{{EmailUser}}" name="email">
 			<button type="submit" class="MycrowayButton mt-4">Próximo passo</button>
 		</form>

@@ -126,24 +126,23 @@
 
 		var UserRaw = await	fetch('/user/profile/api?cookie='+encodeURIComponent(document.cookie))
 
-		var user = await UserRaw.json()
+		var login = await UserRaw.json()
 
-		var BarnchApi = await fetch('/admin/branch/'+user.user.branch+'/api')
+		if (!login.error) {
+			if (login.user.branch != 0) {
+				var BarnchApi = await fetch('/admin/branch/'+login.user.branch+'/api')
 
-		var {
-			router: RouterAdmin
-		} = await BarnchApi.json()
+				var { router: RouterAdmin } = await BarnchApi.json()
 
-		if (user.branch != 0) {
-			PagesOnNavbarList.innerHTML += `<div>
-			<a href="${RouterAdmin}">
-			<li>Administração</li>
-			<p>Seção de Administração</p>
-			</a>
-			</div>
-			`
+				PagesOnNavbarList.innerHTML += `<div>
+				<a href="${RouterAdmin}">
+				<li>Administração</li>
+				<p>Seção de Administração</p>
+				</a>
+				</div>
+				`
+			}
 		}
-
 
 
 		PagesDrop.addEventListener('click', () => {
@@ -162,12 +161,6 @@
 
 		var lis = PagesOnNavbar.getElementsByTagName('li')
 		for (let i = 0; i < lis.length; i++) {
-
-			/*if (lis[i].innerText == 'Administração' && router.indexOf('admin') != -1) {
-				router = lis[i].innerText
-			}*/
-
-			//if (router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != -1 && router.indexOf(lis[i].innerText.toLowerCase().replace('.', '').replace('.', '').replace('.', '')) != 0 || router.indexOf(lis[i].innerText) != -1) {
 			if (URL.indexOf(PagesOnNavbarListDiv[i].getElementsByTagName('a')[0].href) != -1) {
 				PagesOnNavbarListDiv[i].style.borderColor = "rgb(0,140,255)"
 				lis[i].style.color = 'rgb(0,140,255)'

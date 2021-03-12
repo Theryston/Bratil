@@ -18,7 +18,6 @@ const bcrypt = require('bcryptjs')
 const bodyParser = require('body-parser')
 const axios = require('axios')
 const fs = require('fs')
-
 /*
 var salt = bcrypt.genSaltSync(10)
 var hash = bcrypt.hashSync('ur87Yi6JgHuNUFF', salt)

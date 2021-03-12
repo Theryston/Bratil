@@ -1,4 +1,5 @@
 const db = require('./db')
+const User = require('./User')
 
 const Search = db.sequelize.define('searches', {
   title: {
@@ -14,6 +15,8 @@ const Search = db.sequelize.define('searches', {
     allowNull: false
   }
 })
+
+Search.belongsTo(User)
 
 
 Search.sync({ force: false })

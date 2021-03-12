@@ -18,6 +18,9 @@ const bcrypt = require('bcryptjs')
 const bodyParser = require('body-parser')
 const axios = require('axios')
 const fs = require('fs')
+const ResearchEngagementModule = require('./models/ResearchEngagement')
+
+
 /*
 var salt = bcrypt.genSaltSync(10)
 var hash = bcrypt.hashSync('ur87Yi6JgHuNUFF', salt)
@@ -135,8 +138,9 @@ io.on('connection', async (socket) => {
 			})
 		}
 
-		socket.on('UpdateMyUserAcount', async (user) => {
-			console.log(user.name)
+		socket.on('UpdateMyUserAcount',
+			async (user) => {
+				console.log(user.name)
 				var UserCreated = await UserModule.findOne({
 					where: {
 						email: user.email

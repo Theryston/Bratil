@@ -2,8 +2,19 @@ const express = require('express');
 const router = express.Router();
 const Search = require('../models/Search')
 const SearchInDatabase = require('../robots/search/SearchInDatabase')
+const ResearchEngagementModule = require('../models/ResearchEngagement')
+const axios = require('axios')
 
-router.get('/', function(req, res) {
+/*
+Search.create({
+	title: "jsjwj",
+	content: "ksjsj",
+	main: "jajsjjs",
+	ReadTime: 10,
+	userId: 1
+})*/
+
+router.get('/', (req, res) => {
 	res.render('search/index');
 });
 
@@ -67,6 +78,48 @@ router.get('/term/:id', (req, res) => {
 			req.flash('error_msg', 'Desculpe, não foi possível encontrar o termo de busca.')
 			res.redirect('/search')
 		}
+	}
+})
+
+router.get('/engagements', async (req, res) => {
+	const cookie = req.query["cookie"]
+	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data
+
+
+	if (!login.error) {
+		var engagements = await ResearchEngagementModule.findAll({
+			where: {
+				userId: login.user.id
+			}
+		})
+
+		res.json(engagements)
+
+	} else {
+		res.json({
+			error: 'você não está conectado a sua conta Mycroway'
+		})
+	}
+})
+
+router.post('/engagement/create', async (req, res) => {
+	const cookie = req.query["cookie"]
+	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data
+	
+	var searchId = Number(req.body.searchId)
+
+	if (!login.error) {
+		var engagement = await ResearchEngagementModule.create({
+			userId: login.user.id,
+			searchId: searchId
+		})
+		res.json(engagement)
+	} else {
+		res.json({
+			error: "você não está conectado a sua conta Mycroway"
+		})
 	}
 })
 

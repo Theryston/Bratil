@@ -1,5 +1,6 @@
 const db = require('./db')
 const Search = require('./Search')
+const User = require('./User')
 
 const ResearchEngagement = db.sequelize.define('researchengagements', {
 	like: {
@@ -17,6 +18,7 @@ const ResearchEngagement = db.sequelize.define('researchengagements', {
 })
 
 ResearchEngagement.belongsTo(Search)
+ResearchEngagement.belongsTo(User)
 
 ResearchEngagement.sync({
 	force: false

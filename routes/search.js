@@ -108,7 +108,7 @@ router.post('/engagement', async (req, res) => {
 	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
 	login = login.data
 
-	var searchId = Number(req.body.searchId)
+	var searchId = req.body.searchId
 
 	if (!login.error) {
 		var engagement = await ResearchEngagementModule.findOne({
@@ -132,10 +132,91 @@ router.post('/engagement', async (req, res) => {
 			error: "você não está conectado a sua conta Mycroway"
 		})
 	}
+
 })
 
-router.post('/engagement/update', (req, res) => {
-	res.send('ok')
+router.post('/engagement/update', async (req, res) => {
+	const cookie = req.query["cookie"]
+	var login = await axios(req.protocol+'://'+req.headers.host+'/user/profile/api?cookie='+encodeURIComponent(cookie))
+	login = login.data
+	var {
+		engagementId,
+		like,
+		dislike,
+		time
+	} = req.body
+	
+
+	if (!login.error) {
+		var update = {}
+		
+		if (time) {
+			time = Number(time)
+		}
+		if (engagementId) {
+			engagementId = Number(engagementId)
+		}
+
+		if (like == false) {
+			update.like = false
+		} else if (like) {
+			update.like = true
+		}
+		
+
+		if (!update.like && dislike) {
+			update.dislike = true
+		} else if (dislike != undefined) {
+			update.dislike = false
+		}
+
+		update.time = time
+
+		var engagement = await ResearchEngagementModule.findOne({
+			where: {
+				id: engagementId
+			}
+		})
+
+		if (engagement && engagement.userId == login.user.id) {
+
+			if (engagement.dislike && update.like) {
+				update.dislike = !update.like
+			} else if (engagement.like && update.dislike) {
+				update.like = !update.dislike
+			}
+
+			ResearchEngagementModule.update(update, {
+				where: {
+					id: engagementId
+				}
+			}).then(async() => {
+				var engagementUpdated = await ResearchEngagementModule.findOne({
+					where: {
+						id: engagementId
+					}
+				})
+
+				res.json({
+					error: false, engagementUpdated: engagementUpdated
+				})
+			}).catch(() => {
+				res.json({
+					error: true
+				})
+			})
+		} else {
+			res.json({
+				error: true
+			})
+		}
+
+	} else {
+		res.json({
+			error: true
+		})
+	}
+
 })
 
 

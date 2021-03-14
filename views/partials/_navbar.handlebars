@@ -131,6 +131,7 @@
 		if (!login.error) {
 			if (login.user.branch != 0) {
 				var BarnchApi = await fetch('/admin/branch/'+login.user.branch+'/api')
+				
 
 				var { router: RouterAdmin } = await BarnchApi.json()
 

@@ -62,8 +62,8 @@
 		<h1 style="float:left; font-size:25pt;">{{term.title}}</h1><br /><br />
 		
 		<div style="width:100px; height:40px; margin-left:auto; display: flex;">
-			<i style="font-size:18pt;" onclick="like()" class="bi bi-hand-thumbs-up "></i>
-			<i style="font-size:18pt;" onclick="dislike()" class="bi bi-hand-thumbs-down ml-5"></i>
+			<i style="font-size:18pt;" onclick="like()" class="bi bi-hand-thumbs-up like-icon"></i>
+			<i style="font-size:18pt;" onclick="dislike()" class="bi bi-hand-thumbs-down ml-5 dislike-icon"></i>
 		</div>
 		
 		<hr style="background-color:white;">
@@ -74,16 +74,141 @@
 		{{>_footer}}
 	</div>
 	<script>
+	var likeIcon = document.querySelector('.like-icon')
+	var dislikeIcon = document.querySelector('.dislike-icon')
+	var engagement;
 	
-	
+	void async function(){
+		engagement = await fetch("/search/engagement?cookie="+encodeURIComponent(document.cookie), {
+  		method: "POST",
+  		headers: {
+  			'content-type': 'application/json'
+  		},
+  		body: JSON.stringify({ searchId: {{term.id}} })
+		});
+		engagement = await engagement.json()
+		
+		if (engagement.like) {
+			likeIcon.classList.replace('bi-hand-thumbs-up', 'bi-hand-thumbs-up-fill')
+		}
+		if (engagement.dislike) {
+			dislikeIcon.classList.replace('bi-hand-thumbs-down', 'bi-hand-thumbs-down-fill')
+		}
+	}()
 	
 		async function like() {
-			_msg('houve um erro inesperado ao da o like!')
+			
+			if (likeIcon.className.indexOf('bi-hand-thumbs-up-fill') != -1) {
+				var resLike = await fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ like: false, engagementId: engagement.id })
+			});
+			
+			if (!resLike.error) {
+				likeIcon.classList.replace('bi-hand-thumbs-up-fill', 'bi-hand-thumbs-up')
+				_msg('O like foi removido com sucesso')
+			} else {
+				_msg('Houve um erro ou remover o like')
+			}
+			
+			} else {
+			
+		var resLike = await fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ like: true, engagementId: engagement.id })
+			});
+			resLike = await resLike.json()
+			
+			if (!resLike.error) {
+				_msg('você deu um like à este artigo')
+			} else {
+				_msg('Houve um erro ao dar o like')
+			}
+			
+			if (resLike.engagementUpdated.like) {
+				dislikeIcon.classList.replace('bi-hand-thumbs-down-fill', 'bi-hand-thumbs-down')
+				likeIcon.classList.replace('bi-hand-thumbs-up', 'bi-hand-thumbs-up-fill')
+			}
+			
+			if (resLike.engagementUpdated.dislike) {
+				likeIcon.classList.replace('bi-hand-thumbs-up-fill', 'bi-hand-thumbs-up')
+				dislikeIcon.classList.replace('bi-hand-thumbs-down', 'bi-hand-thumbs-down-fill')
+			}
+			}
 		}
 		
 		async function dislike() {
-			_msg('houve um erro inesperado ao da o dislike!')
+			/*var timeEngagement = 0
+			timeEngagement = timeEngagement+10000
+			fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ time: timeEngagement, engagementId: engagement.id })
+			})*/
+			
+			if (dislikeIcon.className.indexOf('bi-hand-thumbs-down-fill') != -1) {
+				var resDislike = await fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ dislike: false, engagementId: engagement.id })
+			});
+			
+			if (!resDislike.error) {
+				dislikeIcon.classList.replace('bi-hand-thumbs-down-fill', 'bi-hand-thumbs-down')
+				_msg('O dislike foi removido com sucesso')
+			} else {
+				_msg('Houve um erro ou remover o dislike')
+			}
+			
+			} else {
+		var resDislike	= await fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ dislike: true, engagementId: engagement.id })
+			});
+			resDislike = await resDislike.json()
+			
+			if (!resDislike.error) {
+				_msg('você deu um dislike à este artigo')
+			} else {
+				_msg('Houve um erro ao dar o dislike')
+			}
+			
+			if (resDislike.engagementUpdated.like) {
+				dislikeIcon.classList.replace('bi-hand-thumbs-down-fill', 'bi-hand-thumbs-down')
+				likeIcon.classList.replace('bi-hand-thumbs-up', 'bi-hand-thumbs-up-fill')
+			}
+			
+			if (resDislike.engagementUpdated.dislike) {
+				likeIcon.classList.replace('bi-hand-thumbs-up-fill', 'bi-hand-thumbs-up')
+				dislikeIcon.classList.replace('bi-hand-thumbs-down', 'bi-hand-thumbs-down-fill')
+			}
+			}
 		}
+		
+		var	timeEngagement = 0
+		setInterval(() => {
+			timeEngagement = timeEngagement+1000
+			fetch("/search/engagement/update?cookie="+encodeURIComponent(document.cookie), {
+	  		method: "POST",
+	  		headers: {
+	  			'content-type': 'application/json'
+	  		},
+	  		body: JSON.stringify({ time: timeEngagement, engagementId: engagement.id })
+			})
+		}, 1000)
 		
 	</script>
 </body> 
